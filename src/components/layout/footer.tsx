@@ -82,9 +82,9 @@ export function Footer() {
             &copy; 2026 ONFIT. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-background/30">
-            <Link href="#" className="hover:text-background/60 transition-colors">Điều khoản sử dụng</Link>
-            <Link href="#" className="hover:text-background/60 transition-colors">Chính sách bảo mật</Link>
-            <Link href="#" className="hover:text-background/60 transition-colors">Cookie</Link>
+            <Link href="/terms" className="hover:text-background/60 transition-colors">Điều khoản sử dụng</Link>
+            <Link href="/privacy-policy" className="hover:text-background/60 transition-colors">Chính sách bảo mật</Link>
+            <Link href="/faq" className="hover:text-background/60 transition-colors">FAQ</Link>
           </div>
         </div>
       </div>
