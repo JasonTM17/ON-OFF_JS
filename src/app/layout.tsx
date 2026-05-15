@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ChatWidget } from "@/components/chat/chat-widget";
+import { BackToTop } from "@/components/ui/back-to-top";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin", "vietnamese"], variable: "--font-serif" });
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <Toaster />
         <ChatWidget />
+        <BackToTop />
         <ScrollReveal />
       </body>
     </html>
