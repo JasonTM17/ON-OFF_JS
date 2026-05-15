@@ -148,8 +148,8 @@ async function getRecommendations(message: string): Promise<Product[]> {
   const isBestseller = /bán chạy|bestseller|phổ biến/i.test(message);
 
   const where: Record<string, unknown> = {};
-  if (isNam) where.category = { gender: "NAM" };
-  else if (isNu) where.category = { gender: "NU" };
+  if (isNam) where.category = { gender: "nam" };
+  else if (isNu) where.category = { gender: "nu" };
   if (isNew) where.isNew = true;
   if (isBestseller) where.isBestseller = true;
   if (!isNew && !isBestseller) where.isFeatured = true;
@@ -163,8 +163,8 @@ async function getRecommendations(message: string): Promise<Product[]> {
 
   if (!products.length) {
     const fallback: Record<string, unknown> = {};
-    if (isNam) fallback.category = { gender: "NAM" };
-    else if (isNu) fallback.category = { gender: "NU" };
+    if (isNam) fallback.category = { gender: "nam" };
+    else if (isNu) fallback.category = { gender: "nu" };
     products = await db.product.findMany({
       where: fallback,
       include: { category: true, variants: true },
