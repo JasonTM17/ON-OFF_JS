@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ChatWidget } from "@/components/chat/chat-widget";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { PromoBar } from "@/components/layout/promo-bar";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin", "vietnamese"], variable: "--font-serif" });
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" className={`${inter.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
+        <PromoBar />
         <Header />
         <main className="flex-1 page-enter">{children}</main>
         <Footer />
