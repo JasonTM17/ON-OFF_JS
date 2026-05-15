@@ -17,7 +17,7 @@ const FOOTER_LINKS = {
     { label: "Liên hệ", href: "#" },
   ],
   "Về ONFIT": [
-    { label: "Câu chuyện thương hiệu", href: "#" },
+    { label: "Câu chuyện thương hiệu", href: "/about" },
     { label: "Chất liệu", href: "#" },
     { label: "Phát triển bền vững", href: "#" },
     { label: "Tuyển dụng", href: "#" },
