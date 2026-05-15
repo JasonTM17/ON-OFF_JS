@@ -47,11 +47,42 @@ export default function CheckoutPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate network delay for UX
-    await new Promise((r) => setTimeout(r, 1200));
-    clearCart();
-    setIsLoading(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            productId: item.productId,
+            size: item.size,
+            color: item.color,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          address: {
+            fullName: form.fullName,
+            phone: form.phone,
+            province: form.province,
+            district: form.district,
+            ward: form.ward,
+            street: form.street,
+          },
+          paymentMethod: form.paymentMethod,
+          note: form.note,
+        }),
+      });
+      if (res.ok) {
+        clearCart();
+        setSubmitted(true);
+      } else {
+        const data = await res.json();
+        alert(data.error || "Đặt hàng thất bại. Vui lòng thử lại.");
+      }
+    } catch {
+      alert("Lỗi kết nối. Vui lòng thử lại.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
