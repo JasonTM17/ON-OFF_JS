@@ -79,7 +79,7 @@ export function Footer() {
       <div className="border-t border-background/10">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-background/30">
-            &copy; 2024 ONFIT. All rights reserved.
+            &copy; 2026 ONFIT. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-background/30">
             <Link href="#" className="hover:text-background/60 transition-colors">Điều khoản sử dụng</Link>

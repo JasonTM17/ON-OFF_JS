@@ -34,7 +34,7 @@ const CATEGORY_IMAGES = [
   "https://images.unsplash.com/photo-1617952236317-0bd127407984?w=800&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=800&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1594938298603-c8148c4b4f7b?w=800&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80&auto=format&fit=crop",
 ];
 
 export default async function HomePage() {

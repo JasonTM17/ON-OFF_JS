@@ -9,7 +9,7 @@ const SLIDES = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800&q=85&auto=format&fit=crop",
-    eyebrow: "Bộ sưu tập 2024",
+    eyebrow: "Bộ sưu tập 2026",
     heading: ["Thoải mái", "là sang trọng"],
     sub: "Đồ lót & đồ mặc nhà cao cấp. Chất liệu tự nhiên, thiết kế tối giản.",
     cta: { label: "Khám phá ngay", href: "/products" },

@@ -22,7 +22,7 @@ const PRODUCT_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=800&fit=crop",
   ],
   "ao-ba-lo-cotton-nam": [
-    "https://images.unsplash.com/photo-1503341504253-dff4f94032fc?w=600&h=800&fit=crop",
+    "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=800&fit=crop",
   ],
   "bra-khong-gong-tshirt": [
     "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop",
@@ -50,7 +50,7 @@ const PRODUCT_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1616627547584-bf28cee262db?w=600&h=800&fit=crop",
   ],
   "pyjama-lua-dai-tay": [
-    "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=800&fit=crop",
+    "https://images.unsplash.com/photo-1596783074918-c84cb06531ca?w=600&h=800&fit=crop",
     "https://images.unsplash.com/photo-1631947430066-48c30d57b943?w=600&h=800&fit=crop",
   ],
   "ao-thun-oversize-mac-nha": [
@@ -70,13 +70,13 @@ const PRODUCT_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=600&h=800&fit=crop",
   ],
   "tui-giat-do-lot": [
-    "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=800&fit=crop",
+    "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?w=600&h=800&fit=crop",
   ],
   "set-5-doi-tat-cong-so": [
     "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&h=800&fit=crop",
   ],
   "hop-qua-tang-onfit": [
-    "https://images.unsplash.com/photo-1549465220-1a8b9238f4e1?w=600&h=800&fit=crop",
+    "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=600&h=800&fit=crop",
     "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&h=800&fit=crop",
   ],
 };
