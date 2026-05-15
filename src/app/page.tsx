@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
@@ -8,6 +9,21 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { HeroSlider } from "@/components/home/hero-slider";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+  },
+  description:
+    "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
+  openGraph: {
+    title: "ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+    description:
+      "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
+    url: "https://onfit.vn",
+    type: "website",
+  },
+};
 
 async function getFeaturedProducts() {
   return db.product.findMany({

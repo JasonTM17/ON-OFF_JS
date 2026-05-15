@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { ProductCard } from "@/components/product/product-card";
@@ -5,6 +6,18 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { MobileFilterToggle } from "@/components/product/mobile-filter-toggle";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "Tất cả sản phẩm",
+  description:
+    "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Quần lót, áo lót, đồ mặc nhà cho nam và nữ. Chất liệu tự nhiên, thiết kế tối giản.",
+  openGraph: {
+    title: "Tất cả sản phẩm | ONFIT",
+    description:
+      "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Quần lót, áo lót, đồ mặc nhà cho nam và nữ.",
+    url: "https://onfit.vn/products",
+  },
+};
 
 interface Props {
   searchParams: Promise<{

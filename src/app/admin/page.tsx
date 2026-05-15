@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
@@ -6,6 +7,12 @@ import { formatPrice } from "@/lib/utils";
 import { Package, ShoppingBag, Users, TrendingUp } from "lucide-react";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "Quản trị",
+  description: "Trang quản trị ONFIT — Quản lý sản phẩm, đơn hàng và khách hàng.",
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminPage() {
   const session = await getSession();

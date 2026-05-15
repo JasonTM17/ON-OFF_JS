@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
@@ -5,6 +6,12 @@ import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "Tài khoản của tôi",
+  description: "Quản lý thông tin cá nhân và theo dõi đơn hàng của bạn tại ONFIT.",
+  robots: { index: false, follow: false },
+};
 
 export default async function AccountPage() {
   const session = await getSession();

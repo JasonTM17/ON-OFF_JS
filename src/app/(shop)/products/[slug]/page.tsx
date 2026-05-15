@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { db } from "@/lib/db";
@@ -9,6 +10,51 @@ export const dynamic = 'force-dynamic';
 
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const product = await db.product.findFirst({
+    where: { OR: [{ slug }, { id: slug }] },
+    include: { category: true },
+  });
+
+  if (!product) {
+    return { title: "Sản phẩm không tìm thấy" };
+  }
+
+  const images: string[] = (() => {
+    try {
+      return JSON.parse(product.images as unknown as string);
+    } catch {
+      return [];
+    }
+  })();
+
+  const description =
+    product.description ||
+    `Mua ${product.name} tại ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam. Chất liệu tự nhiên, thiết kế tối giản.`;
+
+  return {
+    title: product.name,
+    description,
+    openGraph: {
+      title: `${product.name} | ONFIT`,
+      description,
+      url: `https://onfit.vn/products/${product.slug}`,
+      type: "website",
+      images: images[0]
+        ? [{ url: images[0], alt: product.name, width: 800, height: 1067 }]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | ONFIT`,
+      description,
+      images: images[0] ? [images[0]] : [],
+    },
+  };
 }
 
 export default async function ProductDetailPage({ params }: Props) {
