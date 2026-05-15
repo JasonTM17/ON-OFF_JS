@@ -7,3 +7,4 @@ prisma/dev.db-journal
 .omc/
 docs/superpowers/
 /tmp/
+tsconfig.tsbuildinfo
