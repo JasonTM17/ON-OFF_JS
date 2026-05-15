@@ -5,6 +5,10 @@ import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ProductActions } from "@/components/product/product-actions";
+import { ProductGallery } from "@/components/product/product-gallery";
+import { ProductTabs, StarRating } from "@/components/product/product-tabs";
+import { RecentlyViewed } from "@/components/product/recently-viewed";
+import { RecentlyViewedTracker } from "@/components/product/recently-viewed-tracker";
 
 export const dynamic = 'force-dynamic';
 
@@ -76,8 +80,6 @@ export default async function ProductDetailPage({ params }: Props) {
   const images: string[] = (() => {
     try { return JSON.parse(product.images as unknown as string); } catch { return []; }
   })();
-  const mainImage = images[0] && !images[0].includes("placeholder") ? images[0] : null;
-  const thumbImages = images.slice(0, 3);
 
   const colors = [...new Map(product.variants.map((v) => [v.color, v.colorHex])).entries()];
   const sizes = [...new Set(product.variants.map((v) => v.size))];
@@ -86,14 +88,57 @@ export default async function ProductDetailPage({ params }: Props) {
     ? Math.round((1 - product.salePrice / product.price) * 100)
     : null;
 
-  const careInstructions = [
-    { icon: "○", label: "Giặt máy ở 30°C" },
-    { icon: "◇", label: "Không dùng chất tẩy" },
-    { icon: "△", label: "Phơi trong bóng râm" },
-  ];
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: product.name,
+    image: images,
+    description:
+      product.description ||
+      `Mua ${product.name} tại ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam.`,
+    brand: {
+      "@type": "Brand",
+      name: "ONFIT",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://onfit.vn/products/${product.slug}`,
+      priceCurrency: "VND",
+      price: product.salePrice ?? product.price,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "ONFIT",
+      },
+    },
+    ...(product.reviewCount > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: product.rating,
+        reviewCount: product.reviewCount,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }),
+  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FAF7F2" }}>
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Track this product as recently viewed */}
+      <RecentlyViewedTracker
+        slug={product.slug}
+        name={product.name}
+        image={images[0] || ""}
+        price={product.salePrice ?? product.price}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
 
         {/* Breadcrumb */}
@@ -142,88 +187,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
           {/* ── Image panel ── */}
           <div className="lg:sticky lg:top-24 self-start">
-            <div
-              className="aspect-[3/4] w-full overflow-hidden relative"
-              style={{ borderRadius: "2px" }}
-            >
-              {mainImage ? (
-                <img
-                  src={mainImage}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <>
-                  {/* Multi-layer gradient placeholder */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(160deg, #EDE3D8 0%, #D8C3A5 35%, #C4A882 65%, #B08F6A 100%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.35) 0%, transparent 60%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at 75% 80%, rgba(31,31,31,0.12) 0%, transparent 55%)",
-                    }}
-                  />
-                  {/* Subtle texture overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)",
-                    }}
-                  />
-                  {/* Brand watermark */}
-                  <div
-                    className="absolute bottom-6 right-6 font-serif text-xs tracking-[0.3em] uppercase select-none pointer-events-none"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
-                  >
-                    ONFIT
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Thumbnail strip */}
-            <div className="flex gap-2 mt-3">
-              {thumbImages.length > 0 ? thumbImages.map((img, i) => (
-                <div
-                  key={i}
-                  className="aspect-square w-16 flex-shrink-0 overflow-hidden"
-                  style={{
-                    opacity: i === 0 ? 1 : 0.6,
-                    borderRadius: "1px",
-                    outline: i === 0 ? "1.5px solid #1F1F1F" : "none",
-                    outlineOffset: "2px",
-                  }}
-                >
-                  <img src={img} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
-                </div>
-              )) : [0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="aspect-square w-16 flex-shrink-0 overflow-hidden"
-                  style={{
-                    background: `linear-gradient(135deg, #D8C3A5 ${i * 15}%, #B08F6A 100%)`,
-                    opacity: i === 0 ? 1 : 0.55,
-                    borderRadius: "1px",
-                    outline: i === 0 ? "1.5px solid #1F1F1F" : "none",
-                    outlineOffset: "2px",
-                  }}
-                />
-              ))}
-            </div>
+            <ProductGallery images={images} name={product.name} />
           </div>
 
           {/* ── Details panel ── */}
@@ -237,14 +201,19 @@ export default async function ProductDetailPage({ params }: Props) {
 
             {/* Product name */}
             <h1
-              className="font-serif font-light leading-tight mb-4"
+              className="font-serif font-light leading-tight mb-3"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", color: "#1F1F1F", letterSpacing: "-0.01em" }}
             >
               {product.name}
             </h1>
 
+            {/* Star rating */}
+            <div className="mb-4">
+              <StarRating rating={product.rating} count={product.reviewCount} />
+            </div>
+
             {/* Price row */}
-            <div className="flex items-baseline gap-3 mb-3">
+            <div className="flex items-baseline gap-3 mb-6">
               <span
                 className="font-serif text-2xl font-medium"
                 style={{ color: "#1F1F1F" }}
@@ -269,43 +238,8 @@ export default async function ProductDetailPage({ params }: Props) {
               )}
             </div>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2.5 mb-6">
-              <div className="flex items-center gap-0.5" aria-label={`${product.rating} sao`}>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <svg
-                    key={i}
-                    width="13"
-                    height="13"
-                    viewBox="0 0 13 13"
-                    fill={i < Math.round(product.rating) ? "#D8C3A5" : "none"}
-                    stroke="#D8C3A5"
-                    strokeWidth="1.2"
-                    aria-hidden="true"
-                  >
-                    <polygon points="6.5,1 8.2,4.5 12,5 9.25,7.7 9.9,11.5 6.5,9.7 3.1,11.5 3.75,7.7 1,5 4.8,4.5" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-xs" style={{ color: "#7A5C45" }}>
-                {product.rating.toFixed(1)}
-              </span>
-              <span className="text-xs" style={{ color: "#D8C3A5" }}>·</span>
-              <span className="text-xs" style={{ color: "#7A5C45" }}>
-                {product.reviewCount} đánh giá
-              </span>
-            </div>
-
             {/* Thin divider */}
             <div className="mb-6" style={{ height: "1px", backgroundColor: "#E8E0D8" }} />
-
-            {/* Description */}
-            <p
-              className="text-sm leading-relaxed mb-8"
-              style={{ color: "#7A5C45", lineHeight: "1.8" }}
-            >
-              {product.description}
-            </p>
 
             {/* Free shipping banner */}
             <div
@@ -338,47 +272,6 @@ export default async function ProductDetailPage({ params }: Props) {
               variants={product.variants}
             />
 
-            {/* Material */}
-            {product.material && (
-              <div className="mt-8 pt-6" style={{ borderTop: "1px solid #E8E0D8" }}>
-                <h3
-                  className="text-xs tracking-widest uppercase mb-2"
-                  style={{ color: "#7A5C45" }}
-                >
-                  Chất liệu
-                </h3>
-                <p className="text-sm" style={{ color: "#7A5C45" }}>
-                  {product.material}
-                </p>
-              </div>
-            )}
-
-            {/* Care instructions */}
-            <div className="mt-6 pt-6" style={{ borderTop: "1px solid #E8E0D8" }}>
-              <h3
-                className="text-xs tracking-widest uppercase mb-4"
-                style={{ color: "#7A5C45" }}
-              >
-                Hướng dẫn bảo quản
-              </h3>
-              <ul className="flex flex-col gap-2.5">
-                {careInstructions.map((item) => (
-                  <li key={item.label} className="flex items-center gap-3">
-                    <span
-                      className="text-xs w-4 text-center select-none"
-                      style={{ color: "#D8C3A5" }}
-                      aria-hidden="true"
-                    >
-                      {item.icon}
-                    </span>
-                    <span className="text-sm" style={{ color: "#7A5C45" }}>
-                      {item.label}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             {/* Shipping & returns */}
             <div className="mt-6 pt-6" style={{ borderTop: "1px solid #E8E0D8" }}>
               <h3
@@ -401,6 +294,14 @@ export default async function ProductDetailPage({ params }: Props) {
               </ul>
             </div>
           </div>
+        </div>
+
+        {/* ── Product tabs (description, material, care) ── */}
+        <div className="mt-16 pt-10" style={{ borderTop: "1px solid #E8E0D8" }}>
+          <ProductTabs
+            description={product.description || "Chưa có mô tả cho sản phẩm này."}
+            material={product.material ?? undefined}
+          />
         </div>
 
         {/* ── Related products ── */}
@@ -507,6 +408,9 @@ export default async function ProductDetailPage({ params }: Props) {
           </section>
         )}
       </div>
+
+      {/* ── Recently viewed ── */}
+      <RecentlyViewed />
     </div>
   );
 }
