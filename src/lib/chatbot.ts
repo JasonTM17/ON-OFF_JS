@@ -19,12 +19,18 @@ const PATTERNS: Record<Intent, RegExp[]> = {
     /^(xin chào|hello|hi|chào|hey|alo|helo)/i,
     /^(chào bạn|chào shop|xin chào shop)/i,
   ],
+  size_advice: [
+    /size|cỡ|kích thước|số đo|cm|kg|cân nặng|chiều cao|mặc size nào|chọn size/i,
+    /tư vấn.*(size|cỡ|áo|quần)|hướng dẫn.*(size|cỡ)/i,
+    /tư vấn/i,
+  ],
+  recommendation: [
+    /gợi ý|đề xuất|recommend|nên mua|phù hợp|cho (nam|nữ)|bộ sưu tập|mới nhất|bán chạy/i,
+    /sản phẩm.*(hot|nổi bật|tốt)|có gì.*mới|xem.*gì/i,
+  ],
   product_query: [
     /tìm|tìm kiếm|có bán|có không|sản phẩm|áo|quần|đồ lót|bra|brief|boxer|legging|tất|vớ/i,
     /giá|bao nhiêu tiền|mua|order/i,
-  ],
-  size_advice: [
-    /size|cỡ|kích thước|số đo|cm|kg|cân nặng|chiều cao|mặc size nào|chọn size/i,
   ],
   order_status: [
     /đơn hàng|đơn của tôi|theo dõi đơn|trạng thái đơn|mã đơn|order.*id|kiểm tra đơn/i,
@@ -37,9 +43,6 @@ const PATTERNS: Record<Intent, RegExp[]> = {
   ],
   faq_payment: [
     /thanh toán|payment|cod|chuyển khoản|bank|thẻ|momo|zalopay|phương thức/i,
-  ],
-  recommendation: [
-    /gợi ý|đề xuất|recommend|nên mua|phù hợp|cho (nam|nữ)|bộ sưu tập|mới nhất|bán chạy/i,
   ],
   unknown: [],
 };
@@ -151,12 +154,24 @@ async function getRecommendations(message: string): Promise<Product[]> {
   if (isBestseller) where.isBestseller = true;
   if (!isNew && !isBestseller) where.isFeatured = true;
 
-  const products = await db.product.findMany({
+  let products = await db.product.findMany({
     where,
     include: { category: true, variants: true },
     take: 4,
     orderBy: { rating: "desc" },
   });
+
+  if (!products.length) {
+    const fallback: Record<string, unknown> = {};
+    if (isNam) fallback.category = { gender: "NAM" };
+    else if (isNu) fallback.category = { gender: "NU" };
+    products = await db.product.findMany({
+      where: fallback,
+      include: { category: true, variants: true },
+      take: 4,
+      orderBy: { createdAt: "desc" },
+    });
+  }
 
   return products.map((p) => ({ ...p, images: JSON.parse(p.images) })) as Product[];
 }
