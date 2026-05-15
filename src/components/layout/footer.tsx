@@ -11,16 +11,16 @@ const FOOTER_LINKS = {
   ],
   "Hỗ trợ": [
     { label: "Hướng dẫn chọn size", href: "/size-guide" },
-    { label: "Chính sách đổi trả", href: "#" },
-    { label: "Chính sách vận chuyển", href: "#" },
-    { label: "Câu hỏi thường gặp", href: "#" },
-    { label: "Liên hệ", href: "#" },
+    { label: "Chính sách đổi trả", href: "/return-policy" },
+    { label: "Chính sách vận chuyển", href: "/shipping-policy" },
+    { label: "Câu hỏi thường gặp", href: "/faq" },
+    { label: "Liên hệ", href: "/contact" },
   ],
   "Về ONFIT": [
     { label: "Câu chuyện thương hiệu", href: "/about" },
-    { label: "Chất liệu", href: "#" },
-    { label: "Phát triển bền vững", href: "#" },
-    { label: "Tuyển dụng", href: "#" },
+    { label: "Chất liệu", href: "/about" },
+    { label: "Phát triển bền vững", href: "/about" },
+    { label: "Tuyển dụng", href: "/about" },
   ],
 };
 
