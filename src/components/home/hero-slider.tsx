@@ -8,7 +8,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 const SLIDES = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800&q=85&auto=format&fit=crop",
+    image: "https://2885966831.e.cdneverest.net/Simiconnector/BannerSlider/d/e/desktop_2.webp",
     eyebrow: "Bộ sưu tập 2026",
     heading: ["Thoải mái", "là sang trọng"],
     sub: "Đồ lót & đồ mặc nhà cao cấp. Chất liệu tự nhiên, thiết kế tối giản.",
@@ -17,7 +17,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1800&q=85&auto=format&fit=crop",
+    image: "https://2885966831.e.cdneverest.net//catalog/category/nam-all_1.webp",
     eyebrow: "BASIC Collection",
     heading: ["Đơn giản", "tinh tế"],
     sub: "Những thiết kế cơ bản không bao giờ lỗi thời — dành cho mọi ngày.",
@@ -26,7 +26,7 @@ const SLIDES = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=1800&q=85&auto=format&fit=crop",
+    image: "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
     eyebrow: "LOUNGE Collection",
     heading: ["Thư giãn", "theo phong cách"],
     sub: "Đồ mặc nhà sang trọng — từ sáng sớm đến tối muộn.",

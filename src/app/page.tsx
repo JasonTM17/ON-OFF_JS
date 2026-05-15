@@ -31,10 +31,10 @@ async function getCategories() {
 
 // Curated lifestyle images for category cards
 const CATEGORY_IMAGES = [
-  "https://images.unsplash.com/photo-1617952236317-0bd127407984?w=800&q=80&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=800&q=80&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80&auto=format&fit=crop",
+  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
 ];
 
 export default async function HomePage() {
@@ -348,7 +348,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1800&q=80&auto=format&fit=crop"
+          src="https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
