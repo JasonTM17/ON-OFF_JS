@@ -14,10 +14,12 @@ import {
   Plus,
   Trash2,
   ArrowRight,
+  Heart,
 } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCartStore } from "@/store/cart";
+import { useWishlistStore } from "@/store/wishlist";
 
 // ─── Brand tabs ────────────────────────────────────────────────────────────────
 const BRAND_TABS = [
@@ -360,6 +362,7 @@ export function Header() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const totalItems = useCartStore((s) => s.totalItems());
+  const wishlistCount = useWishlistStore((s) => s.items.length);
 
   const handleNavEnter = (label: string) => {
     if (leaveTimer.current) clearTimeout(leaveTimer.current);
@@ -509,6 +512,26 @@ export function Header() {
               aria-label="Tài khoản"
             >
               <User size={18} />
+            </Link>
+            <Link
+              href="/account"
+              className="p-2 rounded-full text-muted hover:text-foreground hover:bg-accent/20 transition-colors duration-200 relative"
+              aria-label="Yêu thích"
+            >
+              <Heart size={18} />
+              <AnimatePresence>
+                {wishlistCount > 0 && (
+                  <motion.span
+                    key="wl-badge"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-foreground text-background text-[10px] rounded-full flex items-center justify-center font-medium leading-none"
+                  >
+                    {wishlistCount > 9 ? "9+" : wishlistCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </Link>
             <button
               onClick={() => setCartOpen(true)}
