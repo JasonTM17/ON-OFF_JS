@@ -100,7 +100,7 @@ const FAQ = {
 - Thời gian đổi trả: **30 ngày** kể từ ngày nhận hàng
 - Điều kiện: Sản phẩm còn nguyên tem, chưa qua sử dụng
 - Lý do chấp nhận: Lỗi sản xuất, sai size, sai màu
-- Liên hệ: Nhắn tin fanpage hoặc gọi hotline **1800-xxxx**
+- Liên hệ: Nhắn tin fanpage hoặc gọi hotline **1900 272 737**
 - Hoàn tiền trong vòng **3-5 ngày làm việc**`,
 
   payment: `💳 **Phương thức thanh toán:**
