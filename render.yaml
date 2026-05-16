@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: onoff-frontend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: file:/app/prisma/dev.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+    healthCheckPath: /
+    autoDeploy: true
+    plan: starter
+    branch: main
+    region: singapore
