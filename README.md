@@ -1,4 +1,10 @@
 <p align="center">
+  🌐 <strong>English</strong> | <a href="docs/README.vi.md">Tiếng Việt</a>
+</p>
+
+---
+
+<p align="center">
   <img src="public/icons/icon-192x192.svg" width="80" alt="ON/OFF Logo" />
 </p>
 
@@ -18,6 +24,8 @@
 </p>
 
 <p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" />
   <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss" alt="Tailwind CSS" />
