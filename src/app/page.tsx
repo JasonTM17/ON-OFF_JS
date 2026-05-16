@@ -109,26 +109,6 @@ export default async function HomePage() {
       {/* ─── HERO SLIDER ──────────────────────────────────────────────────── */}
       <HeroSlider />
 
-      {/* ─── BRAND STRIP ──────────────────────────────────────────────────── */}
-      <div className="border-b border-border overflow-x-auto">
-        <div className="flex min-w-max mx-auto">
-          {[
-            { label: "ONOFF", href: "/products?brand=onoff" },
-            { label: "BASICON", href: "/products?brand=basicon" },
-            { label: "RE:ON", href: "/products?brand=reon" },
-          ].map((brand, i) => (
-            <Link
-              key={brand.label}
-              href={brand.href}
-              className={`flex-1 min-w-[200px] flex items-center justify-center py-8 hover:bg-accent/10 transition-colors duration-200 ${
-                i < 2 ? "border-r border-border" : ""
-              }`}
-            >
-              <span className="font-serif text-2xl tracking-[0.2em] text-foreground">{brand.label}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
 
       {/* ─── SẢN PHẨM BÁN CHẠY ───────────────────────────────────────────── */}
       {bestsellers.length > 0 && (

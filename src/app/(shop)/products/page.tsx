@@ -67,9 +67,9 @@ const PRICE_RANGES = [
 
 const BRAND_OPTIONS = [
   { label: "Tất cả", value: "" },
-  { label: "ON/OFF", value: "onoff" },
-  { label: "Basicon", value: "basicon" },
-  { label: "Reon", value: "reon" },
+  { label: "ONOFF", value: "onoff" },
+  { label: "BASICON", value: "basicon" },
+  { label: "RE:ON", value: "reon" },
 ];
 
 const GENDER_OPTIONS = [
