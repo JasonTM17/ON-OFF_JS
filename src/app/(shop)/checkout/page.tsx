@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Loader2, CheckCircle, ChevronDown, Tag, X } from "lucide-react";
+import { PaymentSelector } from "@/components/checkout/payment-selector";
 
 interface AppliedCoupon {
   code: string;
@@ -23,7 +24,7 @@ export default function CheckoutPage() {
   const [form, setForm] = useState({
     fullName: "", phone: "", email: "",
     province: "", district: "", ward: "", street: "",
-    paymentMethod: "COD" as "COD" | "BANK_TRANSFER",
+    paymentMethod: "cod",
     note: "",
   });
 
@@ -159,17 +160,7 @@ export default function CheckoutPage() {
           {/* Payment */}
           <section>
             <h2 className="text-sm font-medium tracking-wider uppercase mb-4">Phương thức thanh toán</h2>
-            <div className="space-y-3">
-              {[
-                { value: "COD" as const, label: "Thanh toán khi nhận hàng (COD)" },
-                { value: "BANK_TRANSFER" as const, label: "Chuyển khoản ngân hàng" },
-              ].map((method) => (
-                <label key={method.value} className={`flex items-center gap-3 p-4 border cursor-pointer transition-colors ${form.paymentMethod === method.value ? "border-foreground" : "border-border hover:border-muted"}`}>
-                  <input type="radio" name="payment" value={method.value} checked={form.paymentMethod === method.value} onChange={() => setForm({ ...form, paymentMethod: method.value })} className="accent-foreground" />
-                  <span className="text-sm">{method.label}</span>
-                </label>
-              ))}
-            </div>
+            <PaymentSelector selected={form.paymentMethod} onChange={(method) => setForm({ ...form, paymentMethod: method })} />
           </section>
 
           {/* Note */}
