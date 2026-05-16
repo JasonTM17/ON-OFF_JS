@@ -63,6 +63,48 @@ export default async function HomePage() {
 
   return (
     <div className="bg-background">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "ON/OFF",
+            url: "https://onoff.vn",
+            description: "Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://onoff.vn/products?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "ON/OFF",
+            url: "https://onoff.vn",
+            logo: "https://onoff.vn/icons/icon-512x512.svg",
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+84-1900-272-737",
+              contactType: "customer service",
+              availableLanguage: "Vietnamese",
+            },
+            sameAs: [
+              "https://facebook.com/onoff.vn",
+              "https://instagram.com/onoff.vn",
+              "https://tiktok.com/@onoff.vn",
+            ],
+          }),
+        }}
+      />
+
       {/* ─── HERO SLIDER ──────────────────────────────────────────────────── */}
       <HeroSlider />
 

@@ -69,19 +69,55 @@ export function ProductActions({ productId, productName, productSlug, price, ima
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <p className="text-xs tracking-wider uppercase text-muted">Size</p>
+          <Link
+            href="/size-guide"
+            className="text-xs tracking-wide underline underline-offset-2 transition-opacity hover:opacity-60"
+            style={{ color: "#7A5C45" }}
+          >
+            Hướng dẫn chọn size
+          </Link>
         </div>
         <div className="flex flex-wrap gap-2">
-          {sizes.map((size) => (
-            <button
-              key={size}
-              onClick={() => setSelectedSize(size)}
-              className={`min-w-[48px] h-10 px-3 border text-sm transition-all ${selectedSize === size ? "bg-foreground text-background border-foreground" : "border-border hover:border-foreground"}`}
-            >
-              {size}
-            </button>
-          ))}
+          {sizes.map((size) => {
+            const variantForSize = variants.find((v) => v.color === selectedColor && v.size === size);
+            const sizeOutOfStock = variantForSize ? variantForSize.stock === 0 : false;
+            return (
+              <button
+                key={size}
+                onClick={() => !sizeOutOfStock && setSelectedSize(size)}
+                disabled={sizeOutOfStock}
+                className={`min-w-[48px] h-10 px-3 border text-sm transition-all relative ${
+                  selectedSize === size
+                    ? "bg-foreground text-background border-foreground"
+                    : sizeOutOfStock
+                    ? "border-border text-muted cursor-not-allowed opacity-40"
+                    : "border-border hover:border-foreground"
+                }`}
+              >
+                {size}
+                {sizeOutOfStock && (
+                  <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span className="absolute w-full h-px bg-current opacity-40 rotate-45" />
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
+
+      {/* Stock status */}
+      {selectedVariant && (
+        <div className="mb-4 flex items-center gap-2">
+          <span
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: inStock ? "#4A7C59" : "#C0392B" }}
+          />
+          <span className="text-xs tracking-wide" style={{ color: inStock ? "#4A7C59" : "#C0392B" }}>
+            {inStock ? `Còn hàng${selectedVariant.stock <= 5 ? ` — chỉ còn ${selectedVariant.stock}` : ""}` : "Hết hàng"}
+          </span>
+        </div>
+      )}
 
       {/* Quantity */}
       <div className="mb-6">

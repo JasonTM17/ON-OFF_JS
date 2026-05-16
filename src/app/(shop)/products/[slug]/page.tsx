@@ -106,7 +106,9 @@ export default async function ProductDetailPage({ params }: Props) {
       url: `https://onoff.vn/products/${product.slug}`,
       priceCurrency: "VND",
       price: product.salePrice ?? product.price,
-      availability: "https://schema.org/InStock",
+      availability: product.variants.some((v) => v.stock > 0)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
         name: "ON/OFF",
