@@ -126,7 +126,7 @@ export default async function ProductDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FAF7F2" }}>
+    <div className="min-h-screen bg-background">
       {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
@@ -149,13 +149,12 @@ export default async function ProductDetailPage({ params }: Props) {
             <li>
               <Link
                 href="/"
-                className="transition-colors duration-200"
-                style={{ color: "#7A5C45" }}
+                className="transition-colors duration-200 text-muted"
               >
                 Trang chủ
               </Link>
             </li>
-            <li style={{ color: "#D8C3A5" }}>
+            <li className="text-accent">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M4.5 2.5L7.5 6L4.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -163,20 +162,18 @@ export default async function ProductDetailPage({ params }: Props) {
             <li>
               <Link
                 href="/products"
-                className="transition-colors duration-200 uppercase tracking-widest"
-                style={{ color: "#7A5C45" }}
+                className="transition-colors duration-200 uppercase tracking-widest text-muted"
               >
                 Sản phẩm
               </Link>
             </li>
-            <li style={{ color: "#D8C3A5" }}>
+            <li className="text-accent">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M4.5 2.5L7.5 6L4.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </li>
             <li
-              className="font-medium truncate max-w-[180px]"
-              style={{ color: "#1F1F1F" }}
+              className="font-medium truncate max-w-[180px] text-foreground"
               aria-current="page"
             >
               {product.name}
@@ -203,8 +200,8 @@ export default async function ProductDetailPage({ params }: Props) {
 
             {/* Product name */}
             <h1
-              className="font-serif font-light leading-tight mb-3"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", color: "#1F1F1F", letterSpacing: "-0.01em" }}
+              className="font-serif font-light leading-tight mb-3 text-foreground"
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.01em" }}
             >
               {product.name}
             </h1>
@@ -217,22 +214,19 @@ export default async function ProductDetailPage({ params }: Props) {
             {/* Price row */}
             <div className="flex items-baseline gap-3 mb-6">
               <span
-                className="font-serif text-2xl font-medium"
-                style={{ color: "#1F1F1F" }}
+                className="font-serif text-2xl font-medium text-foreground"
               >
                 {formatPrice(product.salePrice || product.price)}
               </span>
               {product.salePrice && (
                 <>
                   <span
-                    className="text-base line-through"
-                    style={{ color: "#D8C3A5" }}
+                    className="text-base line-through text-accent"
                   >
                     {formatPrice(product.price)}
                   </span>
                   <span
-                    className="text-xs font-medium px-1.5 py-0.5 tracking-wide"
-                    style={{ backgroundColor: "#1F1F1F", color: "#FAF7F2", borderRadius: "1px" }}
+                    className="text-xs font-medium px-1.5 py-0.5 tracking-wide bg-foreground text-background rounded-[1px]"
                   >
                     -{discountPercent}%
                   </span>
@@ -241,24 +235,19 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
 
             {/* Thin divider */}
-            <div className="mb-6" style={{ height: "1px", backgroundColor: "#E8E0D8" }} />
+            <div className="mb-6 h-px bg-border" />
 
             {/* Free shipping banner */}
             <div
-              className="flex items-center gap-3 px-4 py-3 mb-8"
-              style={{
-                backgroundColor: "#F0EAE0",
-                borderLeft: "2px solid #D8C3A5",
-                borderRadius: "1px",
-              }}
+              className="flex items-center gap-3 px-4 py-3 mb-8 bg-accent/20 border-l-2 border-accent rounded-[1px]"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-                <path d="M1 4h9v7H1zM10 6l3 1.5V11h-3V6z" stroke="#7A5C45" strokeWidth="1.2" strokeLinejoin="round" />
-                <circle cx="3.5" cy="11.5" r="1" stroke="#7A5C45" strokeWidth="1.2" />
-                <circle cx="11.5" cy="11.5" r="1" stroke="#7A5C45" strokeWidth="1.2" />
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0 text-muted">
+                <path d="M1 4h9v7H1zM10 6l3 1.5V11h-3V6z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+                <circle cx="3.5" cy="11.5" r="1" stroke="currentColor" strokeWidth="1.2" />
+                <circle cx="11.5" cy="11.5" r="1" stroke="currentColor" strokeWidth="1.2" />
               </svg>
-              <span className="text-xs tracking-wide" style={{ color: "#7A5C45" }}>
-                Miễn phí vận chuyển đơn từ <strong style={{ color: "#1F1F1F" }}>499.000đ</strong>
+              <span className="text-xs tracking-wide text-muted">
+                Miễn phí vận chuyển đơn từ <strong className="text-foreground">500.000đ</strong>
               </span>
             </div>
 
@@ -275,21 +264,20 @@ export default async function ProductDetailPage({ params }: Props) {
             />
 
             {/* Shipping & returns */}
-            <div className="mt-6 pt-6" style={{ borderTop: "1px solid #E8E0D8" }}>
+            <div className="mt-6 pt-6 border-t border-border">
               <h3
-                className="text-xs tracking-widest uppercase mb-4"
-                style={{ color: "#7A5C45" }}
+                className="text-xs tracking-widest uppercase mb-4 text-muted"
               >
                 Vận chuyển &amp; Đổi trả
               </h3>
               <ul className="flex flex-col gap-2">
                 {[
-                  "Miễn phí vận chuyển đơn từ 499.000đ",
+                  "Miễn phí vận chuyển đơn từ 500.000đ",
                   "Đổi trả trong 30 ngày",
                   "Giao hàng 2–5 ngày làm việc",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#7A5C45" }}>
-                    <span style={{ color: "#D8C3A5", marginTop: "2px" }} aria-hidden="true">—</span>
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted">
+                    <span className="text-accent mt-[2px]" aria-hidden="true">—</span>
                     {item}
                   </li>
                 ))}
@@ -299,7 +287,7 @@ export default async function ProductDetailPage({ params }: Props) {
         </div>
 
         {/* ── Product tabs (description, material, care) ── */}
-        <div className="mt-16 pt-10" style={{ borderTop: "1px solid #E8E0D8" }}>
+        <div className="mt-16 pt-10 border-t border-border">
           <ProductTabs
             description={product.description || "Chưa có mô tả cho sản phẩm này."}
             material={product.material ?? undefined}
@@ -311,15 +299,14 @@ export default async function ProductDetailPage({ params }: Props) {
           <section className="mt-24" aria-labelledby="related-heading">
             {/* Section divider */}
             <div className="flex items-center gap-6 mb-10">
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E0D8" }} />
+              <div className="flex-1 h-px bg-border" />
               <h2
                 id="related-heading"
-                className="font-serif font-light text-xl tracking-wide whitespace-nowrap"
-                style={{ color: "#1F1F1F" }}
+                className="font-serif font-light text-xl tracking-wide whitespace-nowrap text-foreground"
               >
                 Sản phẩm liên quan
               </h2>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E0D8" }} />
+              <div className="flex-1 h-px bg-border" />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
@@ -340,8 +327,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   >
                     {/* Image */}
                     <div
-                      className="aspect-[2/3] mb-3 overflow-hidden relative bg-card"
-                      style={{ borderRadius: "1px" }}
+                      className="aspect-[2/3] mb-3 overflow-hidden relative bg-card rounded-[1px]"
                     >
                       {pImages[0] ? (
                         <img
@@ -351,21 +337,12 @@ export default async function ProductDetailPage({ params }: Props) {
                         />
                       ) : (
                         <div
-                          className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
-                          style={{
-                            background:
-                              "linear-gradient(150deg, #EDE3D8 0%, #D8C3A5 50%, #B08F6A 100%)",
-                          }}
+                          className="absolute inset-0 transition-transform duration-500 group-hover:scale-105 bg-gradient-to-br from-accent/40 via-accent to-muted"
                         />
                       )}
                       {pDiscount && (
                         <div
-                          className="absolute top-2.5 left-2.5 text-xs font-medium px-1.5 py-0.5"
-                          style={{
-                            backgroundColor: "#1F1F1F",
-                            color: "#FAF7F2",
-                            borderRadius: "1px",
-                          }}
+                          className="absolute top-2.5 left-2.5 text-xs font-medium px-1.5 py-0.5 bg-foreground text-background rounded-[1px]"
                         >
                           -{pDiscount}%
                         </div>
@@ -374,18 +351,17 @@ export default async function ProductDetailPage({ params }: Props) {
 
                     {/* Info */}
                     <h3
-                      className="text-sm font-medium line-clamp-1 mb-1 transition-colors duration-200 group-hover:opacity-70"
-                      style={{ color: "#1F1F1F" }}
+                      className="text-sm font-medium line-clamp-1 mb-1 transition-colors duration-200 group-hover:opacity-70 text-foreground"
                     >
                       {p.name}
                     </h3>
 
                     <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-sm font-medium" style={{ color: "#1F1F1F" }}>
+                      <span className="text-sm font-medium text-foreground">
                         {formatPrice(p.salePrice || p.price)}
                       </span>
                       {p.salePrice && (
-                        <span className="text-xs line-through" style={{ color: "#D8C3A5" }}>
+                        <span className="text-xs line-through text-accent">
                           {formatPrice(p.price)}
                         </span>
                       )}

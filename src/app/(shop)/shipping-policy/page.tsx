@@ -76,11 +76,11 @@ export default function ShippingPolicyPage() {
             <div className="space-y-3 text-sm text-muted leading-relaxed">
               <div className="flex items-start gap-2">
                 <span className="text-foreground mt-0.5">•</span>
-                <p><strong className="text-foreground">Miễn phí ship</strong> cho đơn hàng từ 499.000đ</p>
+                <p><strong className="text-foreground">Miễn phí ship</strong> cho đơn hàng từ 500.000đ</p>
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-foreground mt-0.5">•</span>
-                <p>Đơn hàng dưới 499.000đ: phí ship <strong className="text-foreground">30.000đ</strong> (toàn quốc)</p>
+                <p>Đơn hàng dưới 500.000đ: phí ship <strong className="text-foreground">30.000đ</strong> (toàn quốc)</p>
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-foreground mt-0.5">•</span>

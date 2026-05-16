@@ -90,7 +90,7 @@ function CartDrawer({
         {/* Panel */}
         <Dialog.Content asChild aria-describedby={undefined}>
           <motion.div
-            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-background flex flex-col shadow-2xl"
+            className="fixed right-0 top-0 bottom-0 z-50 w-full sm:max-w-md bg-background flex flex-col shadow-2xl"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -392,13 +392,6 @@ export function Header() {
           <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
         )}
       </AnimatePresence>
-
-      {/* ── Announcement bar ── */}
-      <div className="bg-foreground text-background text-center py-2 px-4">
-        <p className="text-[11px] tracking-wide">
-          Miễn phí vận chuyển cho đơn hàng từ <strong>500.000đ</strong> | Đổi trả trong <strong>30 ngày</strong>
-        </p>
-      </div>
 
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-md border-b border-border">
         {/* ── Brand tabs bar ── */}

@@ -6,7 +6,14 @@ import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, CheckCircle, ChevronDown, Tag, X } from "lucide-react";
+
+interface AppliedCoupon {
+  code: string;
+  discount: number;
+  type: string;
+  discountAmount: number;
+}
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCartStore();
@@ -20,8 +27,17 @@ export default function CheckoutPage() {
     note: "",
   });
 
+  // Coupon state
+  const [couponOpen, setCouponOpen] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+  const [couponLoading, setCouponLoading] = useState(false);
+  const [couponError, setCouponError] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
+
   const total = totalPrice();
   const shipping = total >= 500000 ? 0 : 30000;
+  const discount = appliedCoupon?.discountAmount ?? 0;
+  const grandTotal = total + shipping - discount;
 
   if (items.length === 0 && !submitted) {
     return (
@@ -45,7 +61,32 @@ export default function CheckoutPage() {
     );
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleApplyCoupon() {
+    if (!couponInput.trim()) return;
+    setCouponLoading(true);
+    setCouponError("");
+    try {
+      const res = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponInput.trim(), orderTotal: total }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setAppliedCoupon(data as AppliedCoupon);
+        setCouponInput("");
+        setCouponOpen(false);
+      } else {
+        setCouponError(data.error || "Mã giảm giá không hợp lệ");
+      }
+    } catch {
+      setCouponError("Lỗi kết nối. Vui lòng thử lại.");
+    } finally {
+      setCouponLoading(false);
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
     setError("");
@@ -163,10 +204,82 @@ export default function CheckoutPage() {
               </div>
             ))}
           </div>
+          {/* Coupon section */}
+          <div className="border-t border-border pt-4">
+            {appliedCoupon ? (
+              <div className="flex items-center justify-between text-sm py-2 px-3 bg-accent/10 border border-border">
+                <div className="flex items-center gap-2">
+                  <Tag size={14} className="text-foreground" />
+                  <span className="font-medium">{appliedCoupon.code}</span>
+                  <span className="text-muted">
+                    {appliedCoupon.type === "PERCENT"
+                      ? `(-${appliedCoupon.discount}%)`
+                      : ""}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-foreground">-{formatPrice(appliedCoupon.discountAmount)}</span>
+                  <button
+                    type="button"
+                    onClick={() => setAppliedCoupon(null)}
+                    className="text-muted hover:text-foreground transition-colors"
+                    aria-label="Xóa mã giảm giá"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <button
+                  type="button"
+                  onClick={() => { setCouponOpen((o) => !o); setCouponError(""); }}
+                  className="flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors w-full py-2"
+                >
+                  <Tag size={14} />
+                  <span>Mã giảm giá</span>
+                  <ChevronDown
+                    size={14}
+                    className={`ml-auto transition-transform duration-200 ${couponOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {couponOpen && (
+                  <div className="mt-2 space-y-2">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Nhập mã giảm giá"
+                        value={couponInput}
+                        onChange={(e) => { setCouponInput(e.target.value.toUpperCase()); setCouponError(""); }}
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleApplyCoupon(); } }}
+                        className="flex-1 h-9 text-sm"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={couponLoading || !couponInput.trim()}
+                        onClick={handleApplyCoupon}
+                        className="h-9 px-4 shrink-0"
+                      >
+                        {couponLoading ? <Loader2 size={14} className="animate-spin" /> : "Áp dụng"}
+                      </Button>
+                    </div>
+                    {couponError && (
+                      <p className="text-xs text-red-600">{couponError}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
           <div className="border-t border-border pt-4 space-y-2 text-sm">
             <div className="flex justify-between text-muted"><span>Tạm tính</span><span>{formatPrice(total)}</span></div>
             <div className="flex justify-between text-muted"><span>Vận chuyển</span><span>{shipping === 0 ? "Miễn phí" : formatPrice(shipping)}</span></div>
-            <div className="border-t border-border pt-3 flex justify-between font-serif text-lg"><span>Tổng</span><span>{formatPrice(total + shipping)}</span></div>
+            {discount > 0 && (
+              <div className="flex justify-between text-muted"><span>Giảm giá</span><span>-{formatPrice(discount)}</span></div>
+            )}
+            <div className="border-t border-border pt-3 flex justify-between font-serif text-lg"><span>Tổng</span><span>{formatPrice(grandTotal)}</span></div>
           </div>
           <Button type="submit" disabled={isLoading} className="w-full mt-6 h-12 flex items-center justify-center gap-2">
             {isLoading ? (

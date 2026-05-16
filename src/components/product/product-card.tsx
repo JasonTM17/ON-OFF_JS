@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -82,14 +83,14 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="relative aspect-[2/3] bg-card overflow-hidden mb-4">
         {/* Primary image */}
         {img1 ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={img1}
             alt={product.name}
-            className={`img-zoom absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            className={`object-cover transition-opacity duration-500 ${
               hovered && hasSecondImage ? "opacity-0" : "opacity-100"
             }`}
-            loading="lazy"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/40" />
@@ -97,15 +98,15 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Secondary image on hover */}
         {hasSecondImage && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={img2}
             alt=""
             aria-hidden="true"
-            className={`img-zoom absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            className={`object-cover transition-opacity duration-500 ${
               hovered ? "opacity-100" : "opacity-0"
             }`}
-            loading="lazy"
           />
         )}
 
@@ -116,7 +117,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <Badge variant="bestseller">Bán chạy</Badge>
           )}
           {salePercent > 0 && (
-            <span className="inline-block bg-red-600 text-white text-[10px] tracking-wider uppercase font-medium px-2 py-0.5 leading-tight">
+            <span className="inline-block bg-red-600 text-white text-xs tracking-wider uppercase font-medium px-2 py-0.5 leading-tight">
               -{salePercent}%
             </span>
           )}
@@ -125,7 +126,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Wishlist button — top right */}
         <button
           onClick={handleWishlist}
-          className={`absolute top-3 right-3 z-20 p-1.5 transition-all duration-300 ${
+          className={`absolute top-3 right-3 z-20 min-w-[44px] min-h-[44px] flex items-center justify-center transition-all duration-300 ${
             hovered || wishlisted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
           }`}
           aria-label={wishlisted ? "Bỏ yêu thích" : "Thêm vào yêu thích"}

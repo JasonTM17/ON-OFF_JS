@@ -27,11 +27,22 @@ const FOOTER_LINKS = {
 
 const SOCIALS = [
   { label: "Facebook", href: "https://facebook.com/onoff.vn", icon: "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" },
-  { label: "Instagram", href: "https://instagram.com/onoff.vn", icon: "M16 4H8a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4V8a4 4 0 00-4-4zm-4 10a2 2 0 110-4 2 2 0 010 4zm4.5-6a.5.5 0 110-1 .5.5 0 010 1z" },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/onoff.vn",
+    // Outer rounded rect + inner circle + top-right dot
+    icon: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z",
+  },
   { label: "TikTok", href: "https://tiktok.com/@onoff.vn", icon: "M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.88 2.89 2.89 0 01-2.88-2.88 2.89 2.89 0 012.88-2.88c.28 0 .55.04.81.1v-3.5a6.37 6.37 0 00-.81-.05A6.34 6.34 0 003.15 15.7a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.4a8.16 8.16 0 003.76.92V6.87a4.85 4.85 0 01-.01-.18z" },
 ];
 
-const PAYMENT_METHODS = ["VISA", "MasterCard", "Momo", "ZaloPay", "COD"];
+const PAYMENT_METHODS = [
+  { label: "VISA", path: "M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 0v4h16V6H4zm3 8h2v2H7v-2zm4 0h2v2h-2v-2z" },
+  { label: "MC", path: "M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zM2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm10 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" },
+  { label: "Momo", path: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" },
+  { label: "ZaloPay", path: "M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6zm2 0v12h14V6H5zm2 2h10v2H7V8zm0 4h6v2H7v-2z" },
+  { label: "COD", path: "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" },
+];
 
 export function Footer() {
   return (
@@ -119,10 +130,17 @@ export function Footer() {
           <p className="text-xs text-background/30">
             &copy; 2026 ON/OFF. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {PAYMENT_METHODS.map((m) => (
-              <span key={m} className="text-[10px] tracking-wide text-background/40 border border-background/15 px-2 py-0.5 rounded">
-                {m}
+              <span
+                key={m.label}
+                className="flex items-center justify-center w-10 h-7 border border-background/15 text-background/50"
+                title={m.label}
+                aria-label={m.label}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={m.path} />
+                </svg>
               </span>
             ))}
           </div>

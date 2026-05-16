@@ -1,10 +1,3 @@
-export function reportWebVitals(_metric: {
-  name: string;
-  value: number;
-  id: string;
-  rating?: string;
-}): void {}
-
 export async function measurePerformance<T>(
   name: string,
   fn: () => Promise<T>

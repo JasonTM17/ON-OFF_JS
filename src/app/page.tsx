@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Truck, RotateCcw, Gem, ShieldCheck, ArrowRight } from "lucide-react";
@@ -192,11 +193,12 @@ export default async function HomePage() {
                 href={`/products?category=${cat.slug}`}
                 className="group relative aspect-[2/3] overflow-hidden bg-accent/20"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={CATEGORY_IMAGES[i % CATEGORY_IMAGES.length]}
                   alt={cat.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
 
@@ -283,12 +285,13 @@ export default async function HomePage() {
 
       {/* ─── EDITORIAL BANNER ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="https://2885966831.e.cdneverest.net/catalog/category/nu-aolot_2.webp"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-foreground/60" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-28 flex flex-col md:flex-row items-center justify-between gap-10">
@@ -326,7 +329,7 @@ export default async function HomePage() {
               {
                 icon: Truck,
                 title: "Miễn phí vận chuyển",
-                desc: "Đơn hàng từ 499.000đ",
+                desc: "Đơn hàng từ 500.000đ",
               },
               {
                 icon: RotateCcw,

@@ -22,7 +22,7 @@ const PROMOTIONS: Promotion[] = [
   },
   {
     id: "freeship",
-    title: "Miễn phí ship từ 499.000đ",
+    title: "Miễn phí ship từ 500.000đ",
     description: "Áp dụng cho tất cả đơn hàng",
     href: "/products",
   },

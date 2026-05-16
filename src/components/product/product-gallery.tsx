@@ -81,7 +81,7 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`shrink-0 w-16 h-20 overflow-hidden border-2 transition-colors ${
+              className={`shrink-0 w-20 h-24 overflow-hidden border-2 transition-colors ${
                 i === current ? "border-foreground" : "border-transparent hover:border-border"
               }`}
             >

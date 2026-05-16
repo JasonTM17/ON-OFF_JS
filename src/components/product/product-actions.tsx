@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Heart } from "lucide-react";
+import { Heart, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
@@ -131,9 +131,13 @@ export function ProductActions({ productId, productName, productSlug, price, ima
       <div className="mb-6">
         <p className="text-xs tracking-wider uppercase text-muted mb-3">Số lượng</p>
         <div className="flex items-center">
-          <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-10 border border-border text-lg hover:border-foreground transition-colors">−</button>
+          <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-10 border border-border flex items-center justify-center hover:border-foreground transition-colors" aria-label="Giảm">
+            <Minus size={14} />
+          </button>
           <span className="w-12 h-10 border-t border-b border-border flex items-center justify-center text-sm">{quantity}</span>
-          <button onClick={() => setQuantity(quantity + 1)} className="w-10 h-10 border border-border text-lg hover:border-foreground transition-colors">+</button>
+          <button onClick={() => setQuantity(quantity + 1)} className="w-10 h-10 border border-border flex items-center justify-center hover:border-foreground transition-colors" aria-label="Tăng">
+            <Plus size={14} />
+          </button>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -91,11 +92,13 @@ export function HeroSlider() {
           className="absolute inset-0"
         >
           {/* Background image */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={slide.image}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            priority={current === 0}
+            className="object-cover"
             aria-hidden="true"
           />
           {/* Gradient overlay */}

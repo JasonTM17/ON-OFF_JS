@@ -232,7 +232,6 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </p>
               )}
             </div>
-            <p className="text-sm text-muted shrink-0">{totalCount} sản phẩm</p>
           </div>
 
           {/* Active filter chips */}
@@ -483,44 +482,43 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </div>
 
                 <div className="h-px bg-border" />
-                <div>
-                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-muted mb-4 font-medium">
-                    Sắp xếp
-                  </h3>
-                  <ul className="space-y-2">
-                    {SORT_OPTIONS.map((s) => {
-                      const href = `/products?${new URLSearchParams({
-                        ...(params.category ? { category: params.category } : {}),
-                        ...(params.gender   ? { gender:   params.gender   } : {}),
-                        ...(s.value         ? { sort:     s.value         } : {}),
-                      })}`;
-                      const isActive = params.sort === s.value || (!params.sort && !s.value);
-                      return (
-                        <li key={s.value}>
-                          <Link
-                            href={href}
-                            className={`text-sm transition-colors duration-150 flex items-center justify-between ${
-                              isActive
-                                ? "font-medium text-foreground"
-                                : "text-muted hover:text-foreground"
-                            }`}
-                          >
-                            <span>{s.label}</span>
-                            {isActive && (
-                              <span className="w-1 h-1 rounded-full bg-foreground" />
-                            )}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
               </div>
             </MobileFilterToggle>
           </aside>
 
           {/* ── Product grid ── */}
           <div className="flex-1 min-w-0">
+            {/* Sort bar */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+              <p className="text-xs text-muted tracking-wide">{totalCount} sản phẩm</p>
+              <div className="flex items-center gap-1">
+                {SORT_OPTIONS.map((s) => {
+                  const isActive = params.sort === s.value || (!params.sort && !s.value);
+                  const href = `/products?${new URLSearchParams({
+                    ...(params.category ? { category: params.category } : {}),
+                    ...(params.gender   ? { gender:   params.gender   } : {}),
+                    ...(params.brand    ? { brand:    params.brand    } : {}),
+                    ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+                    ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
+                    ...(params.q        ? { q:        params.q        } : {}),
+                    ...(s.value         ? { sort:     s.value         } : {}),
+                  })}`;
+                  return (
+                    <Link
+                      key={s.value}
+                      href={href}
+                      className={`text-xs px-3 py-1.5 transition-colors duration-150 ${
+                        isActive
+                          ? "bg-foreground text-background"
+                          : "text-muted hover:text-foreground"
+                      }`}
+                    >
+                      {s.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
             {products.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-32 text-center">
                 <p className="font-serif text-3xl font-light mb-3 text-foreground">
