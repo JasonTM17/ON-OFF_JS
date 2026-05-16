@@ -130,8 +130,8 @@ This starts the app on port `3000` behind an Nginx reverse proxy on port `80`.
 ### Docker Hub
 
 ```bash
-docker pull jasontm17/onoff:latest
-docker run -p 3000:3000 jasontm17/onoff:latest
+docker pull nguyenson1710/onoff:latest
+docker run -p 3000:3000 nguyenson1710/onoff:latest
 ```
 
 ### Manual

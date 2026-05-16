@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: jasontm17/onoff
+  IMAGE_NAME: nguyenson1710/onoff
 
 jobs:
   build-and-push:

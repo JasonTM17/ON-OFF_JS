@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onoff.vn";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
