@@ -57,7 +57,7 @@ const FAQ_SECTIONS = [
       },
       {
         q: "Phí ship bao nhiêu?",
-        a: "Miễn phí ship cho đơn từ 500.000₫. Đơn dưới 500.000₫ phí ship 30.000₫ toàn quốc.",
+        a: "Miễn phí ship cho đơn từ 499.000đ. Đơn dưới 499.000đ phí ship 30.000đ toàn quốc.",
       },
       {
         q: "Tôi có thể theo dõi đơn hàng ở đâu?",

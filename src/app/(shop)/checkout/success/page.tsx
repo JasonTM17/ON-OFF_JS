@@ -7,11 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export default function OrderSuccessPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ orderId?: string }>;
-}) {
+export default function OrderSuccessPage() {
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center">
       <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6">

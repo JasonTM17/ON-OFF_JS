@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Package, Truck, CheckCircle, Clock } from "lucide-react";
 

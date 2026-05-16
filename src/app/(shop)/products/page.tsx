@@ -44,6 +44,8 @@ interface Props {
     sort?: string;
     q?: string;
     brand?: string;
+    minPrice?: string;
+    maxPrice?: string;
     page?: string;
   }>;
 }
@@ -53,6 +55,21 @@ const SORT_OPTIONS = [
   { label: "Giá thấp → cao", value: "price-asc" },
   { label: "Giá cao → thấp", value: "price-desc" },
   { label: "Đánh giá cao", value: "rating" },
+  { label: "Bán chạy", value: "bestseller" },
+];
+
+const PRICE_RANGES = [
+  { label: "Tất cả giá", min: undefined, max: undefined },
+  { label: "Dưới 200K", min: 0, max: 200000 },
+  { label: "200K - 500K", min: 200000, max: 500000 },
+  { label: "Trên 500K", min: 500000, max: undefined },
+];
+
+const BRAND_OPTIONS = [
+  { label: "Tất cả", value: "" },
+  { label: "ON/OFF", value: "onoff" },
+  { label: "Basicon", value: "basicon" },
+  { label: "Reon", value: "reon" },
 ];
 
 const GENDER_OPTIONS = [
@@ -66,6 +83,9 @@ export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
   const currentPage = Math.max(1, parseInt(params.page ?? "1", 10));
 
+  const minPrice = params.minPrice ? parseInt(params.minPrice, 10) : undefined;
+  const maxPrice = params.maxPrice ? parseInt(params.maxPrice, 10) : undefined;
+
   const where: Record<string, unknown> = {};
   if (params.category) {
     where.category = { slug: params.category };
@@ -73,19 +93,34 @@ export default async function ProductsPage({ searchParams }: Props) {
   if (params.gender) {
     where.category = { ...(where.category as object || {}), gender: params.gender };
   }
+  // Brand → category slug mapping (no brand field on Product)
+  if (params.brand && params.brand !== "onoff") {
+    if (params.brand === "basicon") {
+      where.category = { ...(where.category as object || {}), slug: { contains: "nam" } };
+    } else if (params.brand === "reon") {
+      where.category = { ...(where.category as object || {}), slug: "do-mac-nha" };
+    }
+  }
   if (params.q) {
     where.OR = [
       { name: { contains: params.q } },
       { description: { contains: params.q } },
     ];
   }
+  if (minPrice !== undefined || maxPrice !== undefined) {
+    where.price = {
+      ...(minPrice !== undefined ? { gte: minPrice } : {}),
+      ...(maxPrice !== undefined ? { lte: maxPrice } : {}),
+    };
+  }
 
-  const orderBy: Record<string, string> = {};
+  let orderBy: Record<string, string> | Record<string, string>[];
   switch (params.sort) {
-    case "price-asc":  orderBy.price    = "asc";  break;
-    case "price-desc": orderBy.price    = "desc"; break;
-    case "rating":     orderBy.rating   = "desc"; break;
-    default:           orderBy.createdAt = "desc";
+    case "price-asc":   orderBy = { price: "asc" };  break;
+    case "price-desc":  orderBy = { price: "desc" }; break;
+    case "rating":      orderBy = { rating: "desc" }; break;
+    case "bestseller":  orderBy = [{ isBestseller: "desc" }, { reviewCount: "desc" }]; break;
+    default:            orderBy = { createdAt: "desc" };
   }
 
   const [products, totalCount, categories] = await Promise.all([
@@ -112,6 +147,9 @@ export default async function ProductsPage({ searchParams }: Props) {
     ...(params.gender   ? { gender:   params.gender   } : {}),
     ...(params.sort     ? { sort:     params.sort     } : {}),
     ...(params.q        ? { q:        params.q        } : {}),
+    ...(params.brand    ? { brand:    params.brand    } : {}),
+    ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+    ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
     page: String(currentPage + 1),
   });
 
@@ -119,9 +157,12 @@ export default async function ProductsPage({ searchParams }: Props) {
   const activeFilters: { label: string; removeHref: string }[] = [];
   if (params.category && activeCategory) {
     const sp = new URLSearchParams({
-      ...(params.gender ? { gender: params.gender } : {}),
-      ...(params.sort   ? { sort:   params.sort   } : {}),
-      ...(params.q      ? { q:      params.q      } : {}),
+      ...(params.gender   ? { gender:   params.gender   } : {}),
+      ...(params.sort     ? { sort:     params.sort     } : {}),
+      ...(params.q        ? { q:        params.q        } : {}),
+      ...(params.brand    ? { brand:    params.brand    } : {}),
+      ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+      ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
     });
     activeFilters.push({ label: activeCategory.name, removeHref: `/products?${sp}` });
   }
@@ -130,11 +171,42 @@ export default async function ProductsPage({ searchParams }: Props) {
       ...(params.category ? { category: params.category } : {}),
       ...(params.sort     ? { sort:     params.sort     } : {}),
       ...(params.q        ? { q:        params.q        } : {}),
+      ...(params.brand    ? { brand:    params.brand    } : {}),
+      ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+      ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
     });
     activeFilters.push({
       label: params.gender === "nam" ? "Nam" : params.gender === "nu" ? "Nữ" : params.gender,
       removeHref: `/products?${sp}`,
     });
+  }
+  if (params.brand && params.brand !== "onoff") {
+    const brandLabel = BRAND_OPTIONS.find((b) => b.value === params.brand)?.label ?? params.brand;
+    const sp = new URLSearchParams({
+      ...(params.category ? { category: params.category } : {}),
+      ...(params.gender   ? { gender:   params.gender   } : {}),
+      ...(params.sort     ? { sort:     params.sort     } : {}),
+      ...(params.q        ? { q:        params.q        } : {}),
+      ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+      ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
+    });
+    activeFilters.push({ label: brandLabel, removeHref: `/products?${sp}` });
+  }
+  if (params.minPrice || params.maxPrice) {
+    const priceLabel =
+      PRICE_RANGES.find(
+        (r) =>
+          String(r.min ?? "") === (params.minPrice ?? "") &&
+          String(r.max ?? "") === (params.maxPrice ?? "")
+      )?.label ?? "Lọc giá";
+    const sp = new URLSearchParams({
+      ...(params.category ? { category: params.category } : {}),
+      ...(params.gender   ? { gender:   params.gender   } : {}),
+      ...(params.sort     ? { sort:     params.sort     } : {}),
+      ...(params.q        ? { q:        params.q        } : {}),
+      ...(params.brand    ? { brand:    params.brand    } : {}),
+    });
+    activeFilters.push({ label: priceLabel, removeHref: `/products?${sp}` });
   }
 
   return (
@@ -340,7 +412,77 @@ export default async function ProductsPage({ searchParams }: Props) {
 
                 <div className="h-px bg-border" />
 
-                {/* Sort */}
+                {/* Brand */}
+                <div>
+                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-muted mb-4 font-medium">
+                    Thương hiệu
+                  </h3>
+                  <ul className="space-y-2">
+                    {BRAND_OPTIONS.map((b) => (
+                      <li key={b.value}>
+                        <Link
+                          href={`/products?${new URLSearchParams({
+                            ...(params.category ? { category: params.category } : {}),
+                            ...(params.gender   ? { gender:   params.gender   } : {}),
+                            ...(params.sort     ? { sort:     params.sort     } : {}),
+                            ...(b.value         ? { brand:    b.value         } : {}),
+                            ...(params.minPrice ? { minPrice: params.minPrice } : {}),
+                            ...(params.maxPrice ? { maxPrice: params.maxPrice } : {}),
+                          })}`}
+                          className={`text-sm transition-colors duration-150 flex items-center justify-between ${
+                            params.brand === b.value || (!params.brand && !b.value)
+                              ? "font-medium text-foreground"
+                              : "text-muted hover:text-foreground"
+                          }`}
+                        >
+                          <span>{b.label}</span>
+                          {(params.brand === b.value || (!params.brand && !b.value)) && (
+                            <span className="w-1 h-1 rounded-full bg-foreground" />
+                          )}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="h-px bg-border" />
+
+                {/* Price range */}
+                <div>
+                  <h3 className="text-[10px] tracking-[0.2em] uppercase text-muted mb-4 font-medium">
+                    Khoảng giá
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {PRICE_RANGES.map((r) => {
+                      const isActive =
+                        String(r.min ?? "") === (params.minPrice ?? "") &&
+                        String(r.max ?? "") === (params.maxPrice ?? "");
+                      const href = `/products?${new URLSearchParams({
+                        ...(params.category ? { category: params.category } : {}),
+                        ...(params.gender   ? { gender:   params.gender   } : {}),
+                        ...(params.sort     ? { sort:     params.sort     } : {}),
+                        ...(params.brand    ? { brand:    params.brand    } : {}),
+                        ...(r.min !== undefined ? { minPrice: String(r.min) } : {}),
+                        ...(r.max !== undefined ? { maxPrice: String(r.max) } : {}),
+                      })}`;
+                      return (
+                        <Link
+                          key={r.label}
+                          href={href}
+                          className={`text-xs tracking-wide px-3 py-1.5 border transition-colors duration-150 text-center ${
+                            isActive
+                              ? "border-foreground bg-foreground text-background"
+                              : "border-border text-muted hover:border-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {r.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="h-px bg-border" />
                 <div>
                   <h3 className="text-[10px] tracking-[0.2em] uppercase text-muted mb-4 font-medium">
                     Sắp xếp

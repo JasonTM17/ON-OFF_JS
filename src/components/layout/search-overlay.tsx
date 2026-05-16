@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, X, TrendingUp, Clock } from "lucide-react";
-import Link from "next/link";
 
 const TRENDING_SEARCHES = [
   "Áo thun nam",

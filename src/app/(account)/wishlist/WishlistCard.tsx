@@ -21,7 +21,7 @@ interface WishlistCardProps {
   };
 }
 
-export function WishlistCard({ itemId, productId, product }: WishlistCardProps) {
+export function WishlistCard({ productId, product }: WishlistCardProps) {
   const router = useRouter();
   const addItem = useCartStore((s) => s.addItem);
   const [removing, setRemoving] = useState(false);

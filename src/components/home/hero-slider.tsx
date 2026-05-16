@@ -18,19 +18,19 @@ const SLIDES = [
   {
     id: 2,
     image: "https://2885966831.e.cdneverest.net/catalog/category/nam-all_1.webp",
-    eyebrow: "BASIC Collection",
+    eyebrow: "BASICON Collection",
     heading: ["Đơn giản", "tinh tế"],
     sub: "Những thiết kế cơ bản không bao giờ lỗi thời — dành cho mọi ngày.",
-    cta: { label: "Xem BASIC", href: "/products?brand=basic" },
+    cta: { label: "Xem BASICON", href: "/products?brand=basicon" },
     align: "center" as const,
   },
   {
     id: 3,
     image: "https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp",
-    eyebrow: "LOUNGE Collection",
+    eyebrow: "RE:ON Collection",
     heading: ["Thư giãn", "theo phong cách"],
     sub: "Đồ mặc nhà sang trọng — từ sáng sớm đến tối muộn.",
-    cta: { label: "Xem LOUNGE", href: "/products?brand=lounge" },
+    cta: { label: "Xem RE:ON", href: "/products?brand=reon" },
     align: "right" as const,
   },
 ];

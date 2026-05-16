@@ -10,7 +10,7 @@ interface PromoBarProps {
   link?: { label: string; href: string };
 }
 
-const DEFAULT_MESSAGE = "Miễn phí vận chuyển cho đơn hàng từ 500.000₫";
+const DEFAULT_MESSAGE = "Miễn phí vận chuyển cho đơn hàng từ 499.000đ";
 const DEFAULT_LINK = { label: "Mua ngay", href: "/products" };
 
 export function PromoBar({ message = DEFAULT_MESSAGE, link = DEFAULT_LINK }: PromoBarProps) {

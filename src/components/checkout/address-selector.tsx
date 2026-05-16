@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { MapPin, Plus, Check, Trash2 } from "lucide-react";
+import { MapPin, Plus, Check } from "lucide-react";
 
 interface Address {
   id: string;

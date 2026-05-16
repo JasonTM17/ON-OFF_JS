@@ -60,6 +60,7 @@ export default function CheckoutPage() {
             color: item.color,
             quantity: item.quantity,
           })),
+          email: form.email,
           address: {
             fullName: form.fullName,
             phone: form.phone,
@@ -148,7 +149,12 @@ export default function CheckoutPage() {
           <div className="space-y-4 mb-6">
             {items.map((item) => (
               <div key={`${item.productId}-${item.size}-${item.color}`} className="flex gap-3">
-                <div className="w-14 h-18 bg-accent/20 shrink-0" />
+                <div className="w-14 h-[84px] bg-accent/20 shrink-0 overflow-hidden">
+                  {item.image && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                  )}
+                </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm line-clamp-1">{item.name}</p>
                   <p className="text-xs text-muted">{item.color} · {item.size} · x{item.quantity}</p>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Star, Camera } from "lucide-react";
+import { Star } from "lucide-react";
 
 interface WriteReviewFormProps {
   productId: string;
@@ -11,7 +11,7 @@ interface WriteReviewFormProps {
   onCancel: () => void;
 }
 
-export function WriteReviewForm({ productId, productName, onSubmit, onCancel }: WriteReviewFormProps) {
+export function WriteReviewForm({ productName, onSubmit, onCancel }: WriteReviewFormProps) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { CreditCard, Banknote, Smartphone, Building2 } from "lucide-react";
 

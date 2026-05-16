@@ -92,7 +92,7 @@ const FAQ = {
 - Thời gian giao hàng: **2-5 ngày làm việc**
 - Nội thành TP.HCM & Hà Nội: 1-2 ngày
 - Tỉnh thành khác: 3-5 ngày
-- **Miễn phí ship** cho đơn hàng từ **500.000đ**
+- **Miễn phí ship** cho đơn hàng từ **499.000đ**
 - Phí ship tiêu chuẩn: 30.000đ`,
 
   returns: `🔄 **Chính sách đổi trả:**

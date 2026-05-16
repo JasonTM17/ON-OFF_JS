@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Truck, MapPin, Clock, CheckCircle } from "lucide-react";
+import { Truck } from "lucide-react";
 
 interface ShippingOption {
   id: string;

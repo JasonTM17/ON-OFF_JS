@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Clock, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { MapPin, Phone } from "lucide-react";
 
 interface AddressCardProps {
   id: string;

@@ -114,7 +114,7 @@ export default function CartPage() {
 
         {/* Summary */}
         <div className="lg:sticky lg:top-24 self-start">
-          <div className="bg-white p-6 border border-border">
+          <div className="bg-card p-6 border border-border">
             <h2 className="font-serif text-xl mb-6">Tóm tắt đơn hàng</h2>
 
             <div className="space-y-3 text-sm">

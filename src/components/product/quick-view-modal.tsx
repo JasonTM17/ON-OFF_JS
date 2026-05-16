@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ShoppingBag, Eye } from "lucide-react";
+import { ShoppingBag, Eye } from "lucide-react";
 import Link from "next/link";
 
 interface QuickViewProduct {

@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart";
+import { useWishlistStore } from "@/store/wishlist";
 
 interface Props {
   productId: string;
@@ -22,6 +24,12 @@ export function ProductActions({ productId, productName, productSlug, price, ima
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const { isInWishlist, addItem: addToWishlist, removeItem: removeFromWishlist, fetchWishlist } = useWishlistStore();
+  const inWishlist = isInWishlist(productId);
+
+  useEffect(() => {
+    fetchWishlist();
+  }, [fetchWishlist]);
 
   const selectedVariant = variants.find((v) => v.color === selectedColor && v.size === selectedSize);
   const inStock = selectedVariant ? selectedVariant.stock > 0 : true;
@@ -129,14 +137,26 @@ export function ProductActions({ productId, productName, productSlug, price, ima
         </div>
       </div>
 
-      {/* Add to cart */}
-      <Button
-        onClick={handleAdd}
-        disabled={!selectedSize || !inStock}
-        className={`w-full h-12 ${added ? "bg-emerald-700 hover:bg-emerald-700" : ""}`}
-      >
-        {added ? "Đã thêm vào giỏ ✓" : !selectedSize ? "Chọn size" : !inStock ? "Hết hàng" : "Thêm vào giỏ"}
-      </Button>
+      {/* Add to cart + Wishlist */}
+      <div className="flex gap-3">
+        <Button
+          onClick={handleAdd}
+          disabled={!selectedSize || !inStock}
+          className={`flex-1 h-12 ${added ? "bg-emerald-700 hover:bg-emerald-700" : ""}`}
+        >
+          {added ? "Đã thêm vào giỏ ✓" : !selectedSize ? "Chọn size" : !inStock ? "Hết hàng" : "Thêm vào giỏ"}
+        </Button>
+        <button
+          onClick={() => inWishlist ? removeFromWishlist(productId) : addToWishlist(productId)}
+          className="w-12 h-12 border border-border flex items-center justify-center transition-colors hover:border-foreground"
+          aria-label={inWishlist ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích"}
+        >
+          <Heart
+            size={18}
+            className={inWishlist ? "fill-foreground text-foreground" : "text-foreground"}
+          />
+        </button>
+      </div>
     </div>
   );
 }

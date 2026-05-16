@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, X, Package, Tag, Info } from "lucide-react";
-import { useNotificationStore, Notification } from "@/store/notification";
+import { useNotificationStore } from "@/store/notification";
 
 const ICON_MAP = {
   order: Package,

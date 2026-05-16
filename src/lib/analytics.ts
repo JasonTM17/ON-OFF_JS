@@ -158,11 +158,8 @@ export interface AnalyticsProvider {
 // ─── Triển khai mặc định (console) ───────────────────────────────────────────
 
 const consoleProvider: AnalyticsProvider = {
-  track(event) {
-    if (process.env.NODE_ENV === "development") {
-      console.log("[Analytics]", event.name, event.payload);
-    }
-  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  track(_event) {},
 };
 
 // ─── Singleton tracker ────────────────────────────────────────────────────────

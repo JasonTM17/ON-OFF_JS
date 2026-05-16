@@ -1,13 +1,9 @@
-export function reportWebVitals(metric: {
+export function reportWebVitals(_metric: {
   name: string;
   value: number;
   id: string;
   rating?: string;
-}): void {
-  if (process.env.NODE_ENV === "development") {
-    console.log(`[Web Vitals] ${metric.name}: ${Math.round(metric.value)} (${metric.rating ?? "—"}) id=${metric.id}`);
-  }
-}
+}): void {}
 
 export async function measurePerformance<T>(
   name: string,

@@ -23,9 +23,9 @@ import { useWishlistStore } from "@/store/wishlist";
 
 // ─── Brand tabs ────────────────────────────────────────────────────────────────
 const BRAND_TABS = [
-  { label: "ON/OFF", href: "/products?brand=onoff" },
-  { label: "BASIC", href: "/products?brand=basic" },
-  { label: "LOUNGE", href: "/products?brand=lounge" },
+  { label: "ONOFF", href: "/products?brand=onoff" },
+  { label: "BASICON", href: "/products?brand=basicon" },
+  { label: "RE:ON", href: "/products?brand=reon" },
 ];
 
 // ─── Nav links with mega-menu ──────────────────────────────────────────────────
@@ -276,7 +276,7 @@ function SearchOverlay({
     }
   }, [open]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query.trim()) {
       router.push(`/products?q=${encodeURIComponent(query.trim())}`);
@@ -396,7 +396,7 @@ export function Header() {
       {/* ── Announcement bar ── */}
       <div className="bg-foreground text-background text-center py-2 px-4">
         <p className="text-[11px] tracking-wide">
-          Miễn phí vận chuyển cho đơn hàng từ <strong>499.000đ</strong> | Đổi trả trong <strong>30 ngày</strong>
+          Miễn phí vận chuyển cho đơn hàng từ <strong>500.000đ</strong> | Đổi trả trong <strong>30 ngày</strong>
         </p>
       </div>
 

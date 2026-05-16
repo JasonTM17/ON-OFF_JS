@@ -112,19 +112,18 @@ export default async function HomePage() {
       <div className="border-b border-border overflow-x-auto">
         <div className="flex min-w-max mx-auto">
           {[
-            { label: "ON/OFF", sub: "Premium Collection", href: "/products?brand=onfit" },
-            { label: "BASIC", sub: "Everyday Essentials", href: "/products?brand=basic" },
-            { label: "LOUNGE", sub: "Comfort Wear", href: "/products?brand=lounge" },
+            { label: "ONOFF", href: "/products?brand=onoff" },
+            { label: "BASICON", href: "/products?brand=basicon" },
+            { label: "RE:ON", href: "/products?brand=reon" },
           ].map((brand, i) => (
             <Link
               key={brand.label}
               href={brand.href}
-              className={`flex-1 min-w-[200px] flex flex-col items-center justify-center py-8 gap-1 hover:bg-accent/10 transition-colors duration-200 ${
+              className={`flex-1 min-w-[200px] flex items-center justify-center py-8 hover:bg-accent/10 transition-colors duration-200 ${
                 i < 2 ? "border-r border-border" : ""
               }`}
             >
               <span className="font-serif text-2xl tracking-[0.2em] text-foreground">{brand.label}</span>
-              <span className="text-[10px] tracking-[0.2em] uppercase text-muted">{brand.sub}</span>
             </Link>
           ))}
         </div>
@@ -228,16 +227,16 @@ export default async function HomePage() {
       {/* ─── PROMOTIONAL BANNER ────────────────────────────────────────── */}
       <section className="px-6 lg:px-12 py-8">
         <div className="max-w-7xl mx-auto">
-          <Link href="/sale" className="block group relative overflow-hidden rounded-lg">
-            <div className="bg-gradient-to-r from-rose-50 to-amber-50 dark:from-rose-950/30 dark:to-amber-950/30 p-8 md:p-12 flex items-center justify-between">
+          <Link href="/sale" className="block group relative overflow-hidden">
+            <div className="bg-card border border-border p-8 md:p-12 flex items-center justify-between">
               <div>
-                <p className="text-[10px] tracking-[0.4em] uppercase text-rose-600 dark:text-rose-400 mb-2">Ưu đãi đặc biệt</p>
+                <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-2">Ưu đãi đặc biệt</p>
                 <h3 className="font-serif text-2xl md:text-3xl font-light text-foreground mb-2">
                   Summer Essential Pack
                 </h3>
-                <p className="text-sm text-muted max-w-md">Mua 3 tặng 1 — Áp dụng cho tất cả sản phẩm Basic Collection</p>
+                <p className="text-sm text-muted max-w-md">Mua 3 tặng 1 — Áp dụng cho tất cả sản phẩm BASICON Collection</p>
               </div>
-              <div className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-rose-600 dark:text-rose-400 group-hover:gap-3 transition-all">
+              <div className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-accent group-hover:gap-3 transition-all">
                 Mua ngay
                 <ArrowRight size={14} />
               </div>
@@ -327,7 +326,7 @@ export default async function HomePage() {
               {
                 icon: Truck,
                 title: "Miễn phí vận chuyển",
-                desc: "Đơn hàng từ 500.000₫",
+                desc: "Đơn hàng từ 499.000đ",
               },
               {
                 icon: RotateCcw,

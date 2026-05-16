@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Copy, Facebook, MessageCircle, Link as LinkIcon } from "lucide-react";
+import { Check, Copy, Facebook, MessageCircle } from "lucide-react";
 
 interface ShareModalProps {
   url: string;

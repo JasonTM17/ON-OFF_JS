@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, ChevronUp, Trash2, Minus, Plus } from "lucide-react";
+import { Trash2, Minus, Plus } from "lucide-react";
 import Link from "next/link";
 
 interface CartItem {

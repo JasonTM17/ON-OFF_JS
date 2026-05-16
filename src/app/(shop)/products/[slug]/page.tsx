@@ -258,7 +258,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 <circle cx="11.5" cy="11.5" r="1" stroke="#7A5C45" strokeWidth="1.2" />
               </svg>
               <span className="text-xs tracking-wide" style={{ color: "#7A5C45" }}>
-                Miễn phí vận chuyển đơn từ <strong style={{ color: "#1F1F1F" }}>500K</strong>
+                Miễn phí vận chuyển đơn từ <strong style={{ color: "#1F1F1F" }}>499.000đ</strong>
               </span>
             </div>
 
@@ -284,7 +284,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </h3>
               <ul className="flex flex-col gap-2">
                 {[
-                  "Miễn phí vận chuyển đơn từ 500.000đ",
+                  "Miễn phí vận chuyển đơn từ 499.000đ",
                   "Đổi trả trong 30 ngày",
                   "Giao hàng 2–5 ngày làm việc",
                 ].map((item) => (
@@ -328,6 +328,9 @@ export default async function ProductDetailPage({ params }: Props) {
                 const pDiscount = p.salePrice
                   ? Math.round((1 - p.salePrice / p.price) * 100)
                   : null;
+                const pImages: string[] = (() => {
+                  try { return JSON.parse(p.images as unknown as string); } catch { return []; }
+                })();
                 return (
                   <Link
                     key={p.id}
@@ -337,23 +340,24 @@ export default async function ProductDetailPage({ params }: Props) {
                   >
                     {/* Image */}
                     <div
-                      className="aspect-[2/3] mb-3 overflow-hidden relative"
+                      className="aspect-[2/3] mb-3 overflow-hidden relative bg-card"
                       style={{ borderRadius: "1px" }}
                     >
-                      <div
-                        className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
-                        style={{
-                          background:
-                            "linear-gradient(150deg, #EDE3D8 0%, #D8C3A5 50%, #B08F6A 100%)",
-                        }}
-                      />
-                      <div
-                        className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-                        style={{
-                          background:
-                            "radial-gradient(ellipse at 40% 30%, rgba(255,255,255,0.2) 0%, transparent 60%)",
-                        }}
-                      />
+                      {pImages[0] ? (
+                        <img
+                          src={pImages[0]}
+                          alt={p.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
+                          style={{
+                            background:
+                              "linear-gradient(150deg, #EDE3D8 0%, #D8C3A5 50%, #B08F6A 100%)",
+                          }}
+                        />
+                      )}
                       {pDiscount && (
                         <div
                           className="absolute top-2.5 left-2.5 text-xs font-medium px-1.5 py-0.5"
