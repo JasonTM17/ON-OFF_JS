@@ -25,6 +25,8 @@ export function ProductActions({ productId, productName, productSlug, price, ima
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
+  const atcRef = useRef<HTMLDivElement>(null);
   const addItem = useCartStore((s) => s.addItem);
   const { isInWishlist, addItem: addToWishlist, removeItem: removeFromWishlist, fetchWishlist } = useWishlistStore();
   const inWishlist = isInWishlist(productId);
@@ -32,6 +34,17 @@ export function ProductActions({ productId, productName, productSlug, price, ima
   useEffect(() => {
     fetchWishlist();
   }, [fetchWishlist]);
+
+  useEffect(() => {
+    const el = atcRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setStickyVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const selectedVariant = variants.find((v) => v.color === selectedColor && v.size === selectedSize);
   const inStock = selectedVariant ? selectedVariant.stock > 0 : true;
@@ -144,7 +157,7 @@ export function ProductActions({ productId, productName, productSlug, price, ima
       </div>
 
       {/* Add to cart + Wishlist */}
-      <div className="flex gap-3">
+      <div ref={atcRef} className="flex gap-3">
         <Button
           onClick={handleAdd}
           disabled={!selectedSize || !inStock}
@@ -163,6 +176,41 @@ export function ProductActions({ productId, productName, productSlug, price, ima
           />
         </button>
       </div>
+
+      {/* Sticky ATC bar */}
+      <AnimatePresence>
+        {stickyVisible && (
+          <motion.div
+            className="fixed bottom-0 left-0 right-0 z-40 bg-background border-t border-border shadow-lg"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "tween", duration: 0.22, ease: [0.32, 0, 0.67, 0] }}
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {image && <img src={image} alt={productName} className="w-12 h-14 object-cover shrink-0 hidden sm:block" />}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">{productName}</p>
+                <p className="text-xs text-muted">{formatPrice(price)}</p>
+              </div>
+              <button
+                onClick={handleAdd}
+                disabled={!selectedSize || !inStock}
+                className={`shrink-0 h-11 px-6 text-xs tracking-[0.12em] uppercase transition-colors duration-200 ${
+                  added
+                    ? "bg-emerald-700 text-white"
+                    : !selectedSize || !inStock
+                    ? "bg-muted/30 text-muted cursor-not-allowed"
+                    : "bg-foreground text-background hover:bg-muted"
+                }`}
+              >
+                {added ? "Đã thêm ✓" : !selectedSize ? "Chọn size" : !inStock ? "Hết hàng" : "Thêm vào giỏ"}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

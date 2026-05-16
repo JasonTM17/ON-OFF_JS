@@ -507,7 +507,7 @@ export function Header() {
               <Search size={18} />
             </button>
             <Link
-              href="/login"
+              href="/account"
               className="p-2 rounded-full text-muted hover:text-foreground hover:bg-accent/20 transition-colors duration-200"
               aria-label="Tài khoản"
             >
