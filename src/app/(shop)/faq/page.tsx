@@ -127,7 +127,7 @@ export default function FAQPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <span className="px-4 py-2 border border-border text-xs tracking-wide text-muted">
-              Hotline: 1900 xxxx
+              Hotline: 1900 272 737
             </span>
             <span className="px-4 py-2 border border-border text-xs tracking-wide text-muted">
               Email: hello@onoff.vn

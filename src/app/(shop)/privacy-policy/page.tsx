@@ -180,7 +180,7 @@ export default function PrivacyPolicyPage() {
           <div className="mt-4 p-5 border border-border space-y-2 text-sm text-muted">
             <p><strong className="text-foreground">ON/OFF Vietnam</strong></p>
             <p>Email: privacy@onoff.vn</p>
-            <p>Hotline: 1900 xxxx</p>
+            <p>Hotline: 1900 272 737</p>
             <p>Địa chỉ: 123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh</p>
           </div>
         </section>

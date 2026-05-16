@@ -42,7 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Payment gateway integration (VNPay, MoMo)
 - Email notifications (order confirmation, shipping updates)
-- Product reviews and ratings
 - Inventory management
 - Multi-language support (i18n)
 - Advanced analytics dashboard

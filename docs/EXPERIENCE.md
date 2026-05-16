@@ -1,6 +1,6 @@
 # Project Experience & Lessons Learned
 
-This document captures patterns, decisions, and lessons from building the ON/OFF e-commerce platform. Useful for future projects or AI-assisted development sessions.
+This document captures patterns, decisions, and lessons from building the ON/OFF e-commerce platform. Useful for onboarding and future development reference.
 
 ## Architecture Decisions
 

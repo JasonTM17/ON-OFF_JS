@@ -38,7 +38,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground mb-1">Hotline</h3>
-                    <p className="text-sm text-muted">1900 xxxx (miễn phí)</p>
+                    <p className="text-sm text-muted">1900 272 737 (miễn phí)</p>
                   </div>
                 </div>
 
@@ -59,7 +59,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground mb-1">Văn phòng</h3>
-                    <p className="text-sm text-muted">123 Nguyễn Huệ, Quận 1</p>
+                    <p className="text-sm text-muted">Lầu 3, 238 Nguyễn Trãi, Quận 1</p>
                     <p className="text-sm text-muted">TP. Hồ Chí Minh, Việt Nam</p>
                   </div>
                 </div>
@@ -92,10 +92,10 @@ export default function ContactPage() {
               <h2 className="font-serif text-xl font-light text-foreground mb-4">Cửa hàng</h2>
               <div className="space-y-4">
                 {[
-                  { name: "ON/OFF Nguyễn Huệ", addr: "123 Nguyễn Huệ, Q.1, TP.HCM" },
-                  { name: "ON/OFF Vincom Đồng Khởi", addr: "Tầng 2, Vincom Center, Q.1, TP.HCM" },
-                  { name: "ON/OFF Hoàn Kiếm", addr: "45 Tràng Tiền, Hoàn Kiếm, Hà Nội" },
-                  { name: "ON/OFF Aeon Mall", addr: "Tầng 1, Aeon Mall Tân Phú, TP.HCM" },
+                  { name: "ON/OFF Nguyễn Trãi", addr: "238 Nguyễn Trãi, Q.1, TP.HCM" },
+                  { name: "ON/OFF Vincom Đồng Khởi", addr: "Tầng B2, Vincom Center, 72 Lê Thánh Tôn, Q.1, TP.HCM" },
+                  { name: "ON/OFF Aeon Mall Bình Tân", addr: "Tầng 1, Aeon Mall Bình Tân, TP.HCM" },
+                  { name: "ON/OFF Vincom Bà Triệu", addr: "Tầng B1, Vincom Center, 191 Bà Triệu, Hà Nội" },
                 ].map((store) => (
                   <div key={store.name} className="p-4 border border-border">
                     <h3 className="text-sm font-semibold text-foreground mb-1">{store.name}</h3>

@@ -1,7 +1,15 @@
 {
-  "name": "onfit-ecommerce",
+  "name": "onoff-ecommerce",
   "version": "1.0.0",
+  "description": "Fashion e-commerce platform built with Next.js 15, TypeScript, Tailwind CSS 4, Prisma ORM",
   "author": "Nguyễn Sơn",
+  "license": "MIT",
+  "homepage": "https://onoff.vn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JasonTM17/ON-OFF_JS.git"
+  },
+  "keywords": ["ecommerce", "nextjs", "typescript", "tailwindcss", "prisma", "fashion"],
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -105,7 +105,7 @@ export default function ReturnPolicyPage() {
             <h2 className="font-serif text-xl font-light text-foreground mb-4">Quy trình đổi trả</h2>
             <div className="space-y-4">
               {[
-                { step: "01", title: "Liên hệ", desc: "Nhắn tin qua chat hoặc gọi hotline 1900 xxxx để yêu cầu đổi trả." },
+                { step: "01", title: "Liên hệ", desc: "Nhắn tin qua chat hoặc gọi hotline 1900 272 737 để yêu cầu đổi trả." },
                 { step: "02", title: "Xác nhận", desc: "Đội ngũ CSKH xác nhận yêu cầu và hướng dẫn gửi hàng trong vòng 24h." },
                 { step: "03", title: "Gửi hàng", desc: "Đóng gói sản phẩm cẩn thận và gửi về địa chỉ kho ON/OFF (miễn phí ship đổi trả)." },
                 { step: "04", title: "Xử lý", desc: "Kiểm tra sản phẩm và xử lý đổi/hoàn tiền trong 3–5 ngày làm việc." },

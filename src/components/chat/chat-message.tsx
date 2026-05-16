@@ -38,7 +38,7 @@ export function ChatMessage({ message, onQuickReply }: Props) {
             >
               <div className="relative w-full h-24 bg-zinc-50">
                 <Image
-                  src={p.images[0] || "/placeholder.jpg"}
+                  src={p.images[0] || "https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp"}
                   alt={p.name}
                   fill
                   className="object-cover"

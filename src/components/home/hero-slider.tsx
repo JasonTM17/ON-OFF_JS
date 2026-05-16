@@ -17,7 +17,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    image: "https://2885966831.e.cdneverest.net//catalog/category/nam-all_1.webp",
+    image: "https://2885966831.e.cdneverest.net/catalog/category/nam-all_1.webp",
     eyebrow: "BASIC Collection",
     heading: ["Đơn giản", "tinh tế"],
     sub: "Những thiết kế cơ bản không bao giờ lỗi thời — dành cho mọi ngày.",
@@ -26,7 +26,7 @@ const SLIDES = [
   },
   {
     id: 3,
-    image: "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
+    image: "https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp",
     eyebrow: "LOUNGE Collection",
     heading: ["Thư giãn", "theo phong cách"],
     sub: "Đồ mặc nhà sang trọng — từ sáng sớm đến tối muộn.",

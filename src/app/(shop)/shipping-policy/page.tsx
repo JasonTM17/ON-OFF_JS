@@ -126,7 +126,7 @@ export default function ShippingPolicyPage() {
           <section className="bg-card p-6 border border-border">
             <h2 className="font-serif text-lg font-light text-foreground mb-3">Cần hỗ trợ?</h2>
             <p className="text-sm text-muted leading-relaxed">
-              Liên hệ đội ngũ chăm sóc khách hàng qua hotline <strong className="text-foreground">1900 xxxx</strong> hoặc
+              Liên hệ đội ngũ chăm sóc khách hàng qua hotline <strong className="text-foreground">1900 272 737</strong> hoặc
               chat trực tiếp trên website. Thời gian hỗ trợ: 8:00 – 22:00 hàng ngày.
             </p>
           </section>

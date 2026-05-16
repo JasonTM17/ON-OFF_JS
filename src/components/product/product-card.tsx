@@ -6,6 +6,7 @@ import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Heart } from "lucide-react";
 import { useCartStore } from "@/store/cart";
+import { useWishlistStore } from "@/store/wishlist";
 
 interface ProductCardProps {
   product: {
@@ -24,8 +25,9 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [hovered, setHovered] = useState(false);
   const [quickAdded, setQuickAdded] = useState(false);
-  const [wishlisted, setWishlisted] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const { isInWishlist, addItem: addToWishlist, removeItem: removeFromWishlist } = useWishlistStore();
+  const wishlisted = isInWishlist(product.id);
 
   const colors = [...new Map(product.variants.map((v) => [v.color, v.colorHex])).entries()];
   const images: string[] = typeof product.images === "string"
@@ -62,7 +64,11 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setWishlisted((prev) => !prev);
+    if (wishlisted) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product.id);
+    }
   };
 
   return (

@@ -98,7 +98,7 @@ export default function AboutPage() {
             <div className="relative aspect-[2/3] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp"
+                src="https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp"
                 alt="ON/OFF collection"
                 className="absolute inset-0 w-full h-full object-cover"
               />

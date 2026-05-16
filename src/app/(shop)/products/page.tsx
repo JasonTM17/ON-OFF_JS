@@ -21,20 +21,18 @@ export const metadata: Metadata = {
 
 // CDN thumbnail images mapped by category slug (fallback to index-based)
 const CATEGORY_THUMBS: Record<string, string> = {
-  "quan-lot-nam":  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
-  "quan-lot-nu":   "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
-  "quan-ao-nu":    "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
-  "phu-kien-nam":  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
-  "ao-lot-nu":     "https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp",
-  "do-mac-nha":    "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
+  "do-lot-nam":  "https://2885966831.e.cdneverest.net/catalog/category/nam-quanlot_1.webp",
+  "do-lot-nu":   "https://2885966831.e.cdneverest.net/catalog/category/nu-quanlot_1.webp",
+  "do-mac-nha":  "https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp",
+  "phu-kien":    "https://2885966831.e.cdneverest.net/catalog/category/nam-phukien_1.webp",
 };
 const FALLBACK_THUMBS = [
-  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nam-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-quanao_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nam-phukien_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-aolot_2.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-all_1.webp",
 ];
 
 const PAGE_SIZE = 24;

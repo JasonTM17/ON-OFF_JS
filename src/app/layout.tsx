@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Đồ lót & đồ mặc nhà cao cấp Việt Nam — Chất liệu tự nhiên, thiết kế tối giản",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://2885966831.e.cdneverest.net/Simiconnector/BannerSlider/d/e/desktop_2.webp",
         width: 1200,
         height: 630,
         alt: "ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
     description:
       "Đồ lót & đồ mặc nhà cao cấp Việt Nam — Chất liệu tự nhiên, thiết kế tối giản",
-    images: ["/og-image.jpg"],
+    images: ["https://2885966831.e.cdneverest.net/Simiconnector/BannerSlider/d/e/desktop_2.webp"],
   },
   robots: {
     index: true,

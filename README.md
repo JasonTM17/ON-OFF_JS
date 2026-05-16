@@ -164,10 +164,14 @@ src/
 
 ## Demo Accounts
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@onoff.vn | admin123 |
-| User | user@onoff.vn | user123 |
+Seed the database first: `npx prisma db seed`
+
+| Role | Email |
+|------|-------|
+| Admin | admin@onoff.vn |
+| User | user@onoff.vn |
+
+Default passwords are set in `prisma/seed.ts`.
 
 ## Contributing
 

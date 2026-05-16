@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   ShoppingBag,
   User,
@@ -361,6 +361,7 @@ export function Header() {
   const [activeMega, setActiveMega] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pathname = usePathname();
   const totalItems = useCartStore((s) => s.totalItems());
   const wishlistCount = useWishlistStore((s) => s.items.length);
 
@@ -377,11 +378,10 @@ export function Header() {
     if (leaveTimer.current) clearTimeout(leaveTimer.current);
   };
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
     setMobileExpanded(null);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -514,7 +514,7 @@ export function Header() {
               <User size={18} />
             </Link>
             <Link
-              href="/account"
+              href="/wishlist"
               className="p-2 rounded-full text-muted hover:text-foreground hover:bg-accent/20 transition-colors duration-200 relative"
               aria-label="Yêu thích"
             >

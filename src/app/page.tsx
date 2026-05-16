@@ -48,10 +48,10 @@ async function getCategories() {
 
 // Curated lifestyle images for category cards
 const CATEGORY_IMAGES = [
-  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
-  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nam-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nu-quanao_1.webp",
+  "https://2885966831.e.cdneverest.net/catalog/category/nam-phukien_1.webp",
 ];
 
 export default async function HomePage() {
@@ -265,7 +265,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp"
+          src="https://2885966831.e.cdneverest.net/catalog/category/nu-aolot_2.webp"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
