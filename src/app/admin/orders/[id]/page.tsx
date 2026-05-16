@@ -152,11 +152,11 @@ export default async function AdminOrderDetailPage({
         <div className="border-t border-border p-4 space-y-2">
           <div className="flex justify-between text-xs text-muted">
             <span>Tạm tính</span>
-            <span>{formatPrice(order.subtotal || order.total)}</span>
+            <span>{formatPrice(order.total + (order.discount || 0))}</span>
           </div>
           <div className="flex justify-between text-xs text-muted">
             <span>Phí vận chuyển</span>
-            <span>{formatPrice(order.shippingFee || 0)}</span>
+            <span>{formatPrice(0)}</span>
           </div>
           {order.discount > 0 && (
             <div className="flex justify-between text-xs text-accent">
