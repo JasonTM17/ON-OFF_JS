@@ -31,6 +31,7 @@
   <img src="https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker" alt="Docker" />
   <img src="https://github.com/JasonTM17/ON-OFF_JS/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  <a href="https://onoff-seven.vercel.app"><img src="https://img.shields.io/badge/Vercel-Live-000?logo=vercel" alt="Vercel" /></a>
 </p>
 
 ---
