@@ -4,7 +4,6 @@ import { db } from "@/lib/db";
 export async function GET() {
   const products = await db.product.findMany({
     where: {
-      isActive: true,
       salePrice: { not: null },
     },
     orderBy: { updatedAt: "desc" },

@@ -22,7 +22,6 @@ export async function GET(request: Request) {
     where: {
       categoryId: product.categoryId,
       id: { not: product.id },
-      isActive: true,
     },
     take: 8,
     orderBy: { createdAt: "desc" },

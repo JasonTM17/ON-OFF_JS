@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const limit = parseInt(searchParams.get("limit") || "8");
 
   const products = await db.product.findMany({
-    where: { isActive: true, isNew: true },
+    where: { isNew: true },
     orderBy: { createdAt: "desc" },
     take: limit,
     select: {

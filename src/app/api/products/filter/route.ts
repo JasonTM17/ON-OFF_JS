@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const maxPrice = searchParams.get("maxPrice");
   const q = searchParams.get("q");
 
-  const where: Record<string, unknown> = { isActive: true };
+  const where: Record<string, unknown> = {};
 
   if (category) {
     where.category = { slug: category };
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
       orderBy.price = "desc";
       break;
     case "popular":
-      orderBy.soldCount = "desc";
+      orderBy.reviewCount = "desc";
       break;
     case "name-asc":
       orderBy.name = "asc";

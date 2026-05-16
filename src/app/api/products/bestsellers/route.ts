@@ -3,8 +3,8 @@ import { db } from "@/lib/db";
 
 export async function GET() {
   const products = await db.product.findMany({
-    where: { isActive: true },
-    orderBy: { soldCount: "desc" },
+    where: { isBestseller: true },
+    orderBy: { reviewCount: "desc" },
     take: 8,
     select: {
       id: true,
@@ -13,7 +13,6 @@ export async function GET() {
       price: true,
       salePrice: true,
       images: true,
-      soldCount: true,
     },
   });
 
