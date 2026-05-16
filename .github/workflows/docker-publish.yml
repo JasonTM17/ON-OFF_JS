@@ -18,7 +18,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: nguyenson1710/onoff-app
+          - image: nguyenson1710/onoff-frontend
+            dockerfile: Dockerfile
+          - image: nguyenson1710/onoff-backend
             dockerfile: Dockerfile
           - image: nguyenson1710/onoff-nginx
             dockerfile: Dockerfile.nginx

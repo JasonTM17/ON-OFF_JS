@@ -166,10 +166,13 @@ This starts the app on port `3000` behind an Nginx reverse proxy on port `80`.
 ### Docker Hub
 
 ```bash
-# App (Next.js)
-docker pull nguyenson1710/onoff-app:latest
+# Frontend (Next.js UI)
+docker pull nguyenson1710/onoff-frontend:latest
 
-# Nginx reverse proxy
+# Backend (API + Database)
+docker pull nguyenson1710/onoff-backend:latest
+
+# Nginx (Reverse Proxy)
 docker pull nguyenson1710/onoff-nginx:latest
 ```
 

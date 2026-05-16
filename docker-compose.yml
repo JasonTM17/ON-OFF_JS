@@ -1,18 +1,37 @@
 version: "3.9"
 
 services:
-  app:
+  frontend:
     build: .
-    image: nguyenson1710/onoff-app:latest
+    image: nguyenson1710/onoff-frontend:latest
     restart: unless-stopped
+    expose:
+      - "3000"
     environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - JWT_SECRET=${JWT_SECRET:-onfit-secret-key-2026}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-}
+
+  backend:
+    build: .
+    image: nguyenson1710/onoff-backend:latest
+    restart: unless-stopped
+    expose:
+      - "3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - HOSTNAME=0.0.0.0
       - DATABASE_URL=file:/app/prisma/dev.db
       - JWT_SECRET=${JWT_SECRET:-onfit-secret-key-2026}
       - N8N_WEBHOOK_URL=http://n8n:5678/webhook/chat
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-}
     volumes:
       - db-data:/app/prisma
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/search?q=test"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/api/search?q=test"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -28,8 +47,10 @@ services:
     ports:
       - "80:80"
     depends_on:
-      app:
+      backend:
         condition: service_healthy
+      frontend:
+        condition: service_started
 
   n8n:
     image: n8nio/n8n:latest
