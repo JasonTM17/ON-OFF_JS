@@ -41,5 +41,5 @@ jobs:
             ## Docker
 
             ```bash
-            docker pull jasontm17/onoff:${{ github.ref_name }}
+            docker pull nguyenson1710/onoff:${{ github.ref_name }}
             ```

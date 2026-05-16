@@ -34,3 +34,5 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://onoff.vn
+          DATABASE_URL: "file:./dev.db"
+          JWT_SECRET: "ci-test-secret-minimum-32-characters-long"

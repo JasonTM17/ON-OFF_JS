@@ -1,9 +1,13 @@
 node_modules/
 .next/
 .env
-.env.local
-prisma/dev.db
-prisma/dev.db-journal
+.env.*
+!.env.example
+prisma/*.db
+prisma/*.db-journal
+prisma/*.db-shm
+prisma/*.db-wal
+CLAUDE.md
 .omc/
 docs/superpowers/
 /tmp/
