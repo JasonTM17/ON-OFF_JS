@@ -15,6 +15,9 @@ const RATE_LIMIT_RULES: { pattern: RegExp; limit: number }[] = [
   { pattern: /^\/api\/chat(\/|$)/, limit: 20 },
   { pattern: /^\/api\/auth(\/|$)/, limit: 10 },
   { pattern: /^\/api\/orders(\/|$)/, limit: 30 },
+  { pattern: /^\/api\/coupons(\/|$)/, limit: 10 },
+  { pattern: /^\/api\/contact(\/|$)/, limit: 5 },
+  { pattern: /^\/api\/newsletter(\/|$)/, limit: 5 },
 ];
 
 const WINDOW_MS = 60_000; // 1 minute
