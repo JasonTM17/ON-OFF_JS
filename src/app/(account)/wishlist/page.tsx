@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { formatPrice } from "@/lib/utils";
-import { WishlistRemoveButton } from "./WishlistRemoveButton";
+import { WishlistCard } from "./WishlistCard";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +21,11 @@ export default async function WishlistPage() {
     where: { userId: session.userId },
     include: {
       items: {
-        include: { product: true },
+        include: {
+          product: {
+            include: { variants: true },
+          },
+        },
         orderBy: { createdAt: "desc" },
       },
     },
@@ -32,18 +34,18 @@ export default async function WishlistPage() {
   const items = wishlist?.items ?? [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Breadcrumb nav */}
-      <div className="flex items-center gap-3 mb-8 text-sm">
-        <Link href="/account" className="text-muted hover:text-foreground transition-colors">
+    <div className="max-w-6xl mx-auto px-4 py-10 sm:py-14">
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-3 mb-10 text-xs tracking-widest uppercase text-muted">
+        <Link href="/account" className="hover:text-foreground transition-colors">
           Tài khoản
         </Link>
-        <span className="text-muted">/</span>
-        <span>Yêu thích</span>
+        <span>/</span>
+        <span className="text-foreground">Yêu thích</span>
       </div>
 
       {/* Section nav */}
-      <nav className="flex gap-6 border-b border-border mb-8 text-sm">
+      <nav className="flex gap-8 border-b border-border mb-10 text-sm">
         <Link
           href="/account"
           className="pb-3 text-muted hover:text-foreground transition-colors"
@@ -61,75 +63,60 @@ export default async function WishlistPage() {
         </span>
       </nav>
 
-      <div className="flex items-baseline justify-between mb-6">
-        <h1 className="font-serif text-3xl">Yêu thích</h1>
+      {/* Heading */}
+      <div className="flex items-baseline justify-between mb-8">
+        <h1 className="font-serif text-3xl sm:text-4xl tracking-tight">Yêu thích</h1>
         {items.length > 0 && (
-          <span className="text-sm text-muted">{items.length} sản phẩm</span>
+          <span className="text-sm text-muted tabular-nums">
+            {items.length} sản phẩm
+          </span>
         )}
       </div>
 
       {items.length === 0 ? (
-        <div className="border border-border p-12 text-center">
-          <p className="text-muted text-sm mb-6">Bạn chưa lưu sản phẩm nào</p>
+        /* ── Empty state ── */
+        <div className="flex flex-col items-center justify-center py-24 text-center">
+          {/* Minimal heart illustration */}
+          <div className="mb-8 text-muted/30">
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 64 64"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M32 54S8 38 8 22a12 12 0 0 1 24 0 12 12 0 0 1 24 0c0 16-24 32-24 32Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <h2 className="font-serif text-2xl mb-3 tracking-tight">
+            Chưa có sản phẩm yêu thích
+          </h2>
+          <p className="text-sm text-muted mb-8 max-w-xs leading-relaxed">
+            Lưu những sản phẩm bạn yêu thích để dễ dàng tìm lại sau.
+          </p>
           <Link
             href="/products"
-            className="text-sm underline underline-offset-4 hover:text-muted transition-colors"
+            className="inline-flex items-center gap-2 border border-foreground px-8 py-3 text-xs tracking-[0.2em] uppercase font-medium hover:bg-foreground hover:text-background transition-colors duration-200"
           >
-            Khám phá bộ sưu tập
+            Khám phá sản phẩm
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {items.map((item) => {
-            const images = JSON.parse(item.product.images) as string[];
-            const image = images[0] ?? null;
-            const hasDiscount =
-              item.product.salePrice !== null &&
-              item.product.salePrice < item.product.price;
-
-            return (
-              <div key={item.id} className="group relative">
-                {/* Remove button */}
-                <WishlistRemoveButton productId={item.productId} />
-
-                {/* Image */}
-                <Link href={`/products/${item.product.slug}`} className="block">
-                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-3">
-                    {image ? (
-                      <Image
-                        src={image}
-                        alt={item.product.name}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-muted text-xs">
-                        Không có ảnh
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Info */}
-                  <div>
-                    <p className="text-sm font-medium leading-snug line-clamp-2 mb-1">
-                      {item.product.name}
-                    </p>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-sm">
-                        {formatPrice(item.product.salePrice ?? item.product.price)}
-                      </span>
-                      {hasDiscount && (
-                        <span className="text-xs text-muted line-through">
-                          {formatPrice(item.product.price)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+        /* ── Grid ── */
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10">
+          {items.map((item) => (
+            <WishlistCard
+              key={item.id}
+              itemId={item.id}
+              productId={item.productId}
+              product={item.product}
+            />
+          ))}
         </div>
       )}
     </div>
