@@ -21,6 +21,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 // ─── Brand tabs ────────────────────────────────────────────────────────────────
 const BRAND_TABS = [
@@ -289,7 +290,7 @@ function SearchOverlay({
     }
   }, [open]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (query.trim()) {
       router.push(`/products?q=${encodeURIComponent(query.trim())}`);
@@ -517,6 +518,7 @@ export function Header() {
 
           {/* Right icons */}
           <div className="flex items-center justify-end gap-1">
+            <ThemeToggle />
             <button
               onClick={() => setSearchOpen(true)}
               className="p-2 rounded-full text-muted hover:text-foreground hover:bg-accent/20 transition-colors duration-200"
