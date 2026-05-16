@@ -29,7 +29,7 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
               transition={{ delay: i * 0.1 }}
             >
               <Link href={`/products?category=${cat.slug}`} className="group block relative">
-                <div className="aspect-[3/4] overflow-hidden bg-card">
+                <div className="aspect-[2/3] overflow-hidden bg-card">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={cat.image}

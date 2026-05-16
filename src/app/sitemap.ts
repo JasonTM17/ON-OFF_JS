@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onfit.vn";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onoff.vn";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await db.product.findMany({

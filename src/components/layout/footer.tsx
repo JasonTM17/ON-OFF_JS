@@ -16,7 +16,7 @@ const FOOTER_LINKS = {
     { label: "Câu hỏi thường gặp", href: "/faq" },
     { label: "Liên hệ", href: "/contact" },
   ],
-  "Về ONFIT": [
+  "Về ON/OFF": [
     { label: "Câu chuyện thương hiệu", href: "/about" },
     { label: "Chất liệu", href: "/about" },
     { label: "Phát triển bền vững", href: "/about" },
@@ -33,7 +33,7 @@ export function Footer() {
           {/* Brand column */}
           <div className="col-span-2">
             <Link href="/" className="font-serif text-3xl tracking-wider text-background font-semibold inline-block mb-5">
-              ONFIT
+              ON/OFF
             </Link>
             <p className="text-sm leading-relaxed text-background/50 max-w-xs mb-6">
               Đồ lót & đồ mặc nhà cao cấp. Thiết kế tối giản, chất liệu thoáng mát, thoải mái mỗi ngày.
@@ -45,7 +45,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={14} strokeWidth={1.5} />
-                <span>hello@onfit.vn</span>
+                <span>hello@onoff.vn</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={14} strokeWidth={1.5} />
@@ -79,7 +79,7 @@ export function Footer() {
       <div className="border-t border-background/10">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-background/30">
-            &copy; 2026 ONFIT. All rights reserved.
+            &copy; 2026 ON/OFF. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-background/30">
             <Link href="/terms" className="hover:text-background/60 transition-colors">Điều khoản sử dụng</Link>

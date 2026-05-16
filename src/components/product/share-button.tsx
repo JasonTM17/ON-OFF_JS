@@ -13,7 +13,7 @@ export function ShareButton({ url, title }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const shareUrl = url || (typeof window !== "undefined" ? window.location.href : "");
-  const shareTitle = title || "ONFIT";
+  const shareTitle = title || "ON/OFF";
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shareUrl);

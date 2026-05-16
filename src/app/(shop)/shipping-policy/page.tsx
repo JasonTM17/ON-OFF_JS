@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Chính sách vận chuyển",
-  description: "Thông tin chi tiết về chính sách giao hàng và vận chuyển của ONFIT",
+  description: "Thông tin chi tiết về chính sách giao hàng và vận chuyển của ON/OFF",
 };
 
 export default function ShippingPolicyPage() {
@@ -26,7 +26,7 @@ export default function ShippingPolicyPage() {
           <section>
             <h2 className="font-serif text-xl font-light text-foreground mb-4">Phạm vi giao hàng</h2>
             <p className="text-sm text-muted leading-relaxed">
-              ONFIT giao hàng trên toàn quốc 63 tỉnh thành Việt Nam. Chúng tôi hợp tác với các đơn vị
+              ON/OFF giao hàng trên toàn quốc 63 tỉnh thành Việt Nam. Chúng tôi hợp tác với các đơn vị
               vận chuyển uy tín như GHN, GHTK, và J&T Express để đảm bảo đơn hàng đến tay bạn nhanh chóng
               và an toàn.
             </p>

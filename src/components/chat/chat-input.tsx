@@ -44,7 +44,7 @@ export function ChatInput({ onSend, disabled }: Props) {
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         onInput={handleInput}
-        placeholder="Nhắn tin cho ONFIT..."
+        placeholder="Nhắn tin cho ON/OFF..."
         rows={1}
         disabled={disabled}
         className="flex-1 resize-none rounded-xl border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 disabled:opacity-50 max-h-24 overflow-y-auto"

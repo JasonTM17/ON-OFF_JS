@@ -57,7 +57,7 @@ export function CompareDrawer() {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full aspect-[3/4] object-cover"
+                    className="w-full aspect-[2/3] object-cover"
                   />
                   <p className="text-xs mt-2 line-clamp-1">{item.name}</p>
                 </div>
@@ -65,7 +65,7 @@ export function CompareDrawer() {
               {Array.from({ length: 4 - items.length }).map((_, i) => (
                 <div
                   key={`empty-${i}`}
-                  className="border border-dashed border-border flex items-center justify-center aspect-[3/4]"
+                  className="border border-dashed border-border flex items-center justify-center aspect-[2/3]"
                 >
                   <span className="text-xs text-muted">Thêm sản phẩm</span>
                 </div>

@@ -70,7 +70,7 @@ export function HeroSlider() {
 
   return (
     <section
-      className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden bg-foreground"
+      className="relative w-full overflow-hidden bg-foreground" style={{ height: "clamp(520px, 72vh, 780px)" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

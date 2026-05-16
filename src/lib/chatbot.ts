@@ -59,7 +59,7 @@ function detectIntent(message: string): Intent {
 // ─── Size Guide ───────────────────────────────────────────────────────────────
 
 const SIZE_GUIDE = {
-  general: `📏 **Hướng dẫn chọn size ONFIT:**
+  general: `📏 **Hướng dẫn chọn size ON/OFF:**
 
 | Size | Chiều cao | Cân nặng |
 |------|-----------|----------|
@@ -268,7 +268,7 @@ export async function handleChat(
   switch (intent) {
     case "greeting":
       return {
-        reply: `👋 Xin chào! Tôi là trợ lý ảo của **ONFIT**.\n\nTôi có thể giúp bạn:\n• Tìm kiếm sản phẩm\n• Tư vấn chọn size\n• Tra cứu đơn hàng\n• Giải đáp thắc mắc về giao hàng, đổi trả`,
+        reply: `👋 Xin chào! Tôi là trợ lý ảo của **ON/OFF**.\n\nTôi có thể giúp bạn:\n• Tìm kiếm sản phẩm\n• Tư vấn chọn size\n• Tra cứu đơn hàng\n• Giải đáp thắc mắc về giao hàng, đổi trả`,
         quickReplies: ["Tìm sản phẩm", "Tư vấn size", "Tra cứu đơn hàng", "Chính sách giao hàng"],
       };
 

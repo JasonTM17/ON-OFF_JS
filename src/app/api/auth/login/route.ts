@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const token = await createToken({ userId: user.id, role: user.role });
 
     const response = NextResponse.json({ user: { id: user.id, email: user.email, name: user.name, role: user.role } });
-    response.cookies.set("token", token, { httpOnly: true, secure: false, sameSite: "lax", maxAge: 7 * 24 * 60 * 60 });
+    response.cookies.set("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", maxAge: 7 * 24 * 60 * 60 });
     return response;
   } catch (e) {
     if (e instanceof z.ZodError) {

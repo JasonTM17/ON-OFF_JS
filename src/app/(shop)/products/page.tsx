@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { ProductCard } from "@/components/product/product-card";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
 import { MobileFilterToggle } from "@/components/product/mobile-filter-toggle";
 
 export const dynamic = 'force-dynamic';
@@ -10,14 +10,34 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: "Tất cả sản phẩm",
   description:
-    "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Quần lót, áo lót, đồ mặc nhà cho nam và nữ. Chất liệu tự nhiên, thiết kế tối giản.",
+    "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ON/OFF — Quần lót, áo lót, đồ mặc nhà cho nam và nữ. Chất liệu tự nhiên, thiết kế tối giản.",
   openGraph: {
-    title: "Tất cả sản phẩm | ONFIT",
+    title: "Tất cả sản phẩm | ON/OFF",
     description:
-      "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Quần lót, áo lót, đồ mặc nhà cho nam và nữ.",
-    url: "https://onfit.vn/products",
+      "Khám phá toàn bộ bộ sưu tập đồ lót & đồ mặc nhà cao cấp ON/OFF — Quần lót, áo lót, đồ mặc nhà cho nam và nữ.",
+    url: "https://onoff.vn/products",
   },
 };
+
+// CDN thumbnail images mapped by category slug (fallback to index-based)
+const CATEGORY_THUMBS: Record<string, string> = {
+  "quan-lot-nam":  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
+  "quan-lot-nu":   "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
+  "quan-ao-nu":    "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
+  "phu-kien-nam":  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
+  "ao-lot-nu":     "https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp",
+  "do-mac-nha":    "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
+};
+const FALLBACK_THUMBS = [
+  "https://2885966831.e.cdneverest.net//catalog/category/nam-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanlot_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-quanao_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nam-phukien_1.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-aolot_2.webp",
+  "https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp",
+];
+
+const PAGE_SIZE = 24;
 
 interface Props {
   searchParams: Promise<{
@@ -26,6 +46,7 @@ interface Props {
     sort?: string;
     q?: string;
     brand?: string;
+    page?: string;
   }>;
 }
 
@@ -45,8 +66,9 @@ const GENDER_OPTIONS = [
 
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
-  const where: Record<string, unknown> = {};
+  const currentPage = Math.max(1, parseInt(params.page ?? "1", 10));
 
+  const where: Record<string, unknown> = {};
   if (params.category) {
     where.category = { slug: params.category };
   }
@@ -62,19 +84,20 @@ export default async function ProductsPage({ searchParams }: Props) {
 
   const orderBy: Record<string, string> = {};
   switch (params.sort) {
-    case "price-asc":  orderBy.price  = "asc";  break;
-    case "price-desc": orderBy.price  = "desc"; break;
-    case "rating":     orderBy.rating = "desc"; break;
+    case "price-asc":  orderBy.price    = "asc";  break;
+    case "price-desc": orderBy.price    = "desc"; break;
+    case "rating":     orderBy.rating   = "desc"; break;
     default:           orderBy.createdAt = "desc";
   }
 
-  const [products, categories] = await Promise.all([
+  const [products, totalCount, categories] = await Promise.all([
     db.product.findMany({
       where,
       include: { category: true, variants: true },
       orderBy,
-      take: 40,
+      take: PAGE_SIZE * currentPage,
     }),
+    db.product.count({ where }),
     db.category.findMany({ orderBy: { sortOrder: "asc" } }),
   ]);
 
@@ -83,21 +106,32 @@ export default async function ProductsPage({ searchParams }: Props) {
     activeCategory?.name ||
     (params.gender === "nam" ? "Nam" : params.gender === "nu" ? "Nữ" : "Tất cả sản phẩm");
 
-  // Build active filter chips
+  const hasMore = products.length < totalCount;
+
+  // Build next-page URL (keeps all current filters)
+  const nextPageParams = new URLSearchParams({
+    ...(params.category ? { category: params.category } : {}),
+    ...(params.gender   ? { gender:   params.gender   } : {}),
+    ...(params.sort     ? { sort:     params.sort     } : {}),
+    ...(params.q        ? { q:        params.q        } : {}),
+    page: String(currentPage + 1),
+  });
+
+  // Active filter chips
   const activeFilters: { label: string; removeHref: string }[] = [];
   if (params.category && activeCategory) {
     const sp = new URLSearchParams({
       ...(params.gender ? { gender: params.gender } : {}),
-      ...(params.sort ? { sort: params.sort } : {}),
-      ...(params.q ? { q: params.q } : {}),
+      ...(params.sort   ? { sort:   params.sort   } : {}),
+      ...(params.q      ? { q:      params.q      } : {}),
     });
     activeFilters.push({ label: activeCategory.name, removeHref: `/products?${sp}` });
   }
   if (params.gender) {
     const sp = new URLSearchParams({
       ...(params.category ? { category: params.category } : {}),
-      ...(params.sort ? { sort: params.sort } : {}),
-      ...(params.q ? { q: params.q } : {}),
+      ...(params.sort     ? { sort:     params.sort     } : {}),
+      ...(params.q        ? { q:        params.q        } : {}),
     });
     activeFilters.push({
       label: params.gender === "nam" ? "Nam" : params.gender === "nu" ? "Nữ" : params.gender,
@@ -128,7 +162,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </p>
               )}
             </div>
-            <p className="text-sm text-muted shrink-0">{products.length} sản phẩm</p>
+            <p className="text-sm text-muted shrink-0">{totalCount} sản phẩm</p>
           </div>
 
           {/* Active filter chips */}
@@ -155,6 +189,73 @@ export default async function ProductsPage({ searchParams }: Props) {
         </div>
       </div>
 
+      {/* ── Category thumbnail strip ── */}
+      {categories.length > 0 && (
+        <div className="border-b border-border bg-background">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex gap-0 overflow-x-auto scrollbar-hide -mx-1">
+              {/* "Tất cả" tile */}
+              <Link
+                href={`/products?${new URLSearchParams({
+                  ...(params.gender ? { gender: params.gender } : {}),
+                  ...(params.sort   ? { sort:   params.sort   } : {}),
+                })}`}
+                className={`group flex-shrink-0 flex flex-col items-center gap-2 px-4 py-4 transition-colors duration-150 ${
+                  !params.category
+                    ? "border-b-2 border-foreground"
+                    : "border-b-2 border-transparent hover:border-accent"
+                }`}
+              >
+                <div className="w-14 h-14 rounded-full overflow-hidden bg-accent/20 flex items-center justify-center border-2 border-border group-hover:border-foreground transition-colors duration-150">
+                  <span className="text-[10px] font-semibold tracking-wide text-muted group-hover:text-foreground transition-colors">ALL</span>
+                </div>
+                <span className={`text-[11px] tracking-wide whitespace-nowrap ${!params.category ? "font-semibold text-foreground" : "text-muted group-hover:text-foreground"}`}>
+                  Tất cả
+                </span>
+              </Link>
+
+              {categories.map((cat, i) => {
+                const thumb = CATEGORY_THUMBS[cat.slug] ?? FALLBACK_THUMBS[i % FALLBACK_THUMBS.length];
+                const isActive = params.category === cat.slug;
+                const href = `/products?${new URLSearchParams({
+                  category: cat.slug,
+                  ...(params.gender ? { gender: params.gender } : {}),
+                  ...(params.sort   ? { sort:   params.sort   } : {}),
+                })}`;
+                return (
+                  <Link
+                    key={cat.id}
+                    href={href}
+                    className={`group flex-shrink-0 flex flex-col items-center gap-2 px-4 py-4 transition-colors duration-150 ${
+                      isActive
+                        ? "border-b-2 border-foreground"
+                        : "border-b-2 border-transparent hover:border-accent"
+                    }`}
+                  >
+                    <div className={`w-14 h-14 rounded-full overflow-hidden border-2 transition-colors duration-150 ${
+                      isActive ? "border-foreground" : "border-border group-hover:border-foreground"
+                    }`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={thumb}
+                        alt={cat.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <span className={`text-[11px] tracking-wide whitespace-nowrap ${
+                      isActive ? "font-semibold text-foreground" : "text-muted group-hover:text-foreground"
+                    }`}>
+                      {cat.name}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* ── Sidebar ── */}
@@ -172,7 +273,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                       <Link
                         href={`/products?${new URLSearchParams({
                           ...(params.gender ? { gender: params.gender } : {}),
-                          ...(params.sort ? { sort: params.sort } : {}),
+                          ...(params.sort   ? { sort:   params.sort   } : {}),
                         })}`}
                         className={`text-sm transition-colors duration-150 ${
                           !params.category
@@ -189,7 +290,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                           href={`/products?${new URLSearchParams({
                             category: cat.slug,
                             ...(params.gender ? { gender: params.gender } : {}),
-                            ...(params.sort ? { sort: params.sort } : {}),
+                            ...(params.sort   ? { sort:   params.sort   } : {}),
                           })}`}
                           className={`text-sm transition-colors duration-150 flex items-center justify-between group ${
                             params.category === cat.slug
@@ -207,7 +308,6 @@ export default async function ProductsPage({ searchParams }: Props) {
                   </ul>
                 </div>
 
-                {/* Divider */}
                 <div className="h-px bg-border" />
 
                 {/* Gender */}
@@ -221,8 +321,8 @@ export default async function ProductsPage({ searchParams }: Props) {
                         <Link
                           href={`/products?${new URLSearchParams({
                             ...(params.category ? { category: params.category } : {}),
-                            ...(g.value ? { gender: g.value } : {}),
-                            ...(params.sort ? { sort: params.sort } : {}),
+                            ...(g.value         ? { gender:   g.value         } : {}),
+                            ...(params.sort     ? { sort:     params.sort     } : {}),
                           })}`}
                           className={`text-sm transition-colors duration-150 flex items-center justify-between ${
                             params.gender === g.value || (!params.gender && !g.value)
@@ -240,7 +340,6 @@ export default async function ProductsPage({ searchParams }: Props) {
                   </ul>
                 </div>
 
-                {/* Divider */}
                 <div className="h-px bg-border" />
 
                 {/* Sort */}
@@ -252,8 +351,8 @@ export default async function ProductsPage({ searchParams }: Props) {
                     {SORT_OPTIONS.map((s) => {
                       const href = `/products?${new URLSearchParams({
                         ...(params.category ? { category: params.category } : {}),
-                        ...(params.gender ? { gender: params.gender } : {}),
-                        ...(s.value ? { sort: s.value } : {}),
+                        ...(params.gender   ? { gender:   params.gender   } : {}),
+                        ...(s.value         ? { sort:     s.value         } : {}),
                       })}`;
                       const isActive = params.sort === s.value || (!params.sort && !s.value);
                       return (
@@ -298,11 +397,42 @@ export default async function ProductsPage({ searchParams }: Props) {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12">
+                  {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+
+                {/* Load-more footer */}
+                <div className="mt-16 flex flex-col items-center gap-5">
+                  <p className="text-xs text-muted tracking-wide">
+                    Hiển thị{" "}
+                    <span className="text-foreground font-medium">{products.length}</span>
+                    {" "}trên tổng số{" "}
+                    <span className="text-foreground font-medium">{totalCount}</span>
+                    {" "}sản phẩm
+                  </p>
+
+                  {/* Progress bar */}
+                  <div className="w-48 h-px bg-border relative overflow-hidden">
+                    <div
+                      className="absolute inset-y-0 left-0 bg-foreground transition-all duration-500"
+                      style={{ width: `${Math.min(100, (products.length / totalCount) * 100)}%` }}
+                    />
+                  </div>
+
+                  {hasMore && (
+                    <Link
+                      href={`/products?${nextPageParams}`}
+                      className="inline-flex items-center gap-2 px-10 h-11 border border-foreground text-xs tracking-[0.15em] uppercase text-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
+                    >
+                      Xem thêm
+                      <ChevronDown size={13} />
+                    </Link>
+                  )}
+                </div>
+              </>
             )}
           </div>
         </div>

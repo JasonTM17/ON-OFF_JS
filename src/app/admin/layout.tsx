@@ -13,7 +13,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <aside className="w-56 shrink-0 border-r border-border flex flex-col">
         <div className="px-4 py-5 border-b border-border">
           <Link href="/admin" className="font-serif text-lg tracking-wide">
-            ONFIT Admin
+            ON/OFF Admin
           </Link>
         </div>
         <div className="flex-1 px-2 py-4">

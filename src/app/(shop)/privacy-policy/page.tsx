@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Chính sách bảo mật",
-  description: "Chính sách bảo mật thông tin cá nhân của ONFIT — Cam kết bảo vệ dữ liệu khách hàng",
+  description: "Chính sách bảo mật thông tin cá nhân của ON/OFF — Cam kết bảo vệ dữ liệu khách hàng",
 };
 
 export default function PrivacyPolicyPage() {
@@ -178,8 +178,8 @@ export default function PrivacyPolicyPage() {
             Nếu có bất kỳ câu hỏi nào về chính sách bảo mật, vui lòng liên hệ:
           </p>
           <div className="mt-4 p-5 border border-border space-y-2 text-sm text-muted">
-            <p><strong className="text-foreground">ONFIT Vietnam</strong></p>
-            <p>Email: privacy@onfit.vn</p>
+            <p><strong className="text-foreground">ON/OFF Vietnam</strong></p>
+            <p>Email: privacy@onoff.vn</p>
             <p>Hotline: 1900 xxxx</p>
             <p>Địa chỉ: 123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh</p>
           </div>

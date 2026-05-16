@@ -49,7 +49,7 @@ export function QuickViewModal({ product, onClose, onAddToCart }: QuickViewModal
           onClick={(e) => e.stopPropagation()}
         >
           <div className="grid md:grid-cols-2 gap-0">
-            <div className="relative aspect-[3/4] bg-card">
+            <div className="relative aspect-[2/3] bg-card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={product.images[currentImage]}

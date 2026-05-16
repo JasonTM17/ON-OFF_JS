@@ -3,7 +3,7 @@ import { Mail, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 
 export const metadata = {
   title: "Liên hệ",
-  description: "Liên hệ ONFIT — Hotline, email, địa chỉ cửa hàng và form liên hệ trực tuyến",
+  description: "Liên hệ ON/OFF — Hotline, email, địa chỉ cửa hàng và form liên hệ trực tuyến",
 };
 
 export default function ContactPage() {
@@ -48,7 +48,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground mb-1">Email</h3>
-                    <p className="text-sm text-muted">hello@onfit.vn</p>
+                    <p className="text-sm text-muted">hello@onoff.vn</p>
                     <p className="text-xs text-muted mt-0.5">Phản hồi trong vòng 24h</p>
                   </div>
                 </div>
@@ -92,10 +92,10 @@ export default function ContactPage() {
               <h2 className="font-serif text-xl font-light text-foreground mb-4">Cửa hàng</h2>
               <div className="space-y-4">
                 {[
-                  { name: "ONFIT Nguyễn Huệ", addr: "123 Nguyễn Huệ, Q.1, TP.HCM" },
-                  { name: "ONFIT Vincom Đồng Khởi", addr: "Tầng 2, Vincom Center, Q.1, TP.HCM" },
-                  { name: "ONFIT Hoàn Kiếm", addr: "45 Tràng Tiền, Hoàn Kiếm, Hà Nội" },
-                  { name: "ONFIT Aeon Mall", addr: "Tầng 1, Aeon Mall Tân Phú, TP.HCM" },
+                  { name: "ON/OFF Nguyễn Huệ", addr: "123 Nguyễn Huệ, Q.1, TP.HCM" },
+                  { name: "ON/OFF Vincom Đồng Khởi", addr: "Tầng 2, Vincom Center, Q.1, TP.HCM" },
+                  { name: "ON/OFF Hoàn Kiếm", addr: "45 Tràng Tiền, Hoàn Kiếm, Hà Nội" },
+                  { name: "ON/OFF Aeon Mall", addr: "Tầng 1, Aeon Mall Tân Phú, TP.HCM" },
                 ].map((store) => (
                   <div key={store.name} className="p-4 border border-border">
                     <h3 className="text-sm font-semibold text-foreground mb-1">{store.name}</h3>

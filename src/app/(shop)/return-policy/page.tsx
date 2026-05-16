@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Chính sách đổi trả",
-  description: "Chính sách đổi trả hàng 30 ngày của ONFIT — Đổi trả dễ dàng, hoàn tiền nhanh chóng",
+  description: "Chính sách đổi trả hàng 30 ngày của ON/OFF — Đổi trả dễ dàng, hoàn tiền nhanh chóng",
 };
 
 export default function ReturnPolicyPage() {
@@ -26,7 +26,7 @@ export default function ReturnPolicyPage() {
           <section>
             <h2 className="font-serif text-xl font-light text-foreground mb-4">Thời gian đổi trả</h2>
             <p className="text-sm text-muted leading-relaxed">
-              ONFIT chấp nhận đổi trả trong vòng <strong className="text-foreground">30 ngày</strong> kể từ ngày
+              ON/OFF chấp nhận đổi trả trong vòng <strong className="text-foreground">30 ngày</strong> kể từ ngày
               bạn nhận được sản phẩm. Sau thời gian này, chúng tôi không thể xử lý yêu cầu đổi trả.
             </p>
           </section>
@@ -107,7 +107,7 @@ export default function ReturnPolicyPage() {
               {[
                 { step: "01", title: "Liên hệ", desc: "Nhắn tin qua chat hoặc gọi hotline 1900 xxxx để yêu cầu đổi trả." },
                 { step: "02", title: "Xác nhận", desc: "Đội ngũ CSKH xác nhận yêu cầu và hướng dẫn gửi hàng trong vòng 24h." },
-                { step: "03", title: "Gửi hàng", desc: "Đóng gói sản phẩm cẩn thận và gửi về địa chỉ kho ONFIT (miễn phí ship đổi trả)." },
+                { step: "03", title: "Gửi hàng", desc: "Đóng gói sản phẩm cẩn thận và gửi về địa chỉ kho ON/OFF (miễn phí ship đổi trả)." },
                 { step: "04", title: "Xử lý", desc: "Kiểm tra sản phẩm và xử lý đổi/hoàn tiền trong 3–5 ngày làm việc." },
               ].map((item) => (
                 <div key={item.step} className="flex gap-4 items-start">
@@ -145,7 +145,7 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section className="bg-card p-6 border border-border">
-            <h2 className="font-serif text-lg font-light text-foreground mb-3">Cam kết của ONFIT</h2>
+            <h2 className="font-serif text-lg font-light text-foreground mb-3">Cam kết của ON/OFF</h2>
             <p className="text-sm text-muted leading-relaxed">
               Chúng tôi luôn đặt sự hài lòng của khách hàng lên hàng đầu. Nếu bạn không hài lòng với
               sản phẩm vì bất kỳ lý do gì, hãy liên hệ ngay — chúng tôi sẽ tìm giải pháp tốt nhất cho bạn.

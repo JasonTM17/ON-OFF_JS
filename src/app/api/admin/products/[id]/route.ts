@@ -4,8 +4,9 @@ import { db } from "@/lib/db";
 import { slugify } from "@/lib/utils";
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await requireAdmin();
-  if (!session) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -23,8 +24,9 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await requireAdmin();
-  if (!session) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -52,8 +54,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 }
 
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await requireAdmin();
-  if (!session) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

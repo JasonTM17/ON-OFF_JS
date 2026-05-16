@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Chi tiết đơn hàng",
-  description: "Xem chi tiết và theo dõi trạng thái đơn hàng của bạn tại ONFIT.",
+  description: "Xem chi tiết và theo dõi trạng thái đơn hàng của bạn tại ON/OFF.",
   robots: { index: false, follow: false },
 };
 

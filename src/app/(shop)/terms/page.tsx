@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Điều khoản sử dụng",
-  description: "Điều khoản và điều kiện sử dụng website ONFIT",
+  description: "Điều khoản và điều kiện sử dụng website ON/OFF",
 };
 
 export default function TermsPage() {
@@ -26,7 +26,7 @@ export default function TermsPage() {
         <section>
           <h2 className="font-serif text-xl font-light text-foreground mb-4">1. Giới thiệu</h2>
           <p className="text-sm text-muted leading-relaxed">
-            Chào mừng bạn đến với ONFIT. Bằng việc truy cập và sử dụng website onfit.vn, bạn đồng ý
+            Chào mừng bạn đến với ON/OFF. Bằng việc truy cập và sử dụng website onoff.vn, bạn đồng ý
             tuân thủ các điều khoản và điều kiện dưới đây. Nếu không đồng ý, vui lòng không sử dụng
             dịch vụ của chúng tôi.
           </p>
@@ -67,7 +67,7 @@ export default function TermsPage() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-foreground mt-0.5">•</span>
-              ONFIT có quyền từ chối đơn hàng nếu phát hiện gian lận.
+              ON/OFF có quyền từ chối đơn hàng nếu phát hiện gian lận.
             </li>
             <li className="flex items-start gap-2">
               <span className="text-foreground mt-0.5">•</span>
@@ -80,7 +80,7 @@ export default function TermsPage() {
           <h2 className="font-serif text-xl font-light text-foreground mb-4">4. Sở hữu trí tuệ</h2>
           <p className="text-sm text-muted leading-relaxed">
             Tất cả nội dung trên website (hình ảnh, văn bản, logo, thiết kế) thuộc quyền sở hữu
-            của ONFIT Vietnam. Nghiêm cấm sao chép, phân phối hoặc sử dụng cho mục đích thương mại
+            của ON/OFF Vietnam. Nghiêm cấm sao chép, phân phối hoặc sử dụng cho mục đích thương mại
             mà không có sự đồng ý bằng văn bản.
           </p>
         </section>
@@ -90,7 +90,7 @@ export default function TermsPage() {
           <ul className="space-y-2.5 text-sm text-muted leading-relaxed">
             <li className="flex items-start gap-2">
               <span className="text-foreground mt-0.5">•</span>
-              ONFIT không chịu trách nhiệm cho thiệt hại gián tiếp phát sinh từ việc sử dụng website.
+              ON/OFF không chịu trách nhiệm cho thiệt hại gián tiếp phát sinh từ việc sử dụng website.
             </li>
             <li className="flex items-start gap-2">
               <span className="text-foreground mt-0.5">•</span>
@@ -128,7 +128,7 @@ export default function TermsPage() {
         <section>
           <h2 className="font-serif text-xl font-light text-foreground mb-4">7. Thay đổi điều khoản</h2>
           <p className="text-sm text-muted leading-relaxed">
-            ONFIT có quyền cập nhật điều khoản sử dụng bất kỳ lúc nào. Thay đổi sẽ có hiệu lực
+            ON/OFF có quyền cập nhật điều khoản sử dụng bất kỳ lúc nào. Thay đổi sẽ có hiệu lực
             ngay khi được đăng tải. Việc tiếp tục sử dụng website sau khi thay đổi đồng nghĩa với
             việc bạn chấp nhận điều khoản mới.
           </p>

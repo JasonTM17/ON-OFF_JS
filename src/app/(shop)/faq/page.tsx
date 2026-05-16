@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Câu hỏi thường gặp",
-  description: "Giải đáp các thắc mắc phổ biến về sản phẩm, đặt hàng, giao hàng và đổi trả tại ONFIT",
+  description: "Giải đáp các thắc mắc phổ biến về sản phẩm, đặt hàng, giao hàng và đổi trả tại ON/OFF",
 };
 
 const FAQ_SECTIONS = [
@@ -14,7 +14,7 @@ const FAQ_SECTIONS = [
         a: "Có, bạn có thể đặt hàng với tư cách khách. Tuy nhiên, tạo tài khoản giúp bạn theo dõi đơn hàng, tích điểm và nhận ưu đãi độc quyền.",
       },
       {
-        q: "ONFIT chấp nhận những phương thức thanh toán nào?",
+        q: "ON/OFF chấp nhận những phương thức thanh toán nào?",
         a: "Chúng tôi chấp nhận: COD (thanh toán khi nhận hàng), chuyển khoản ngân hàng, ví MoMo, ZaloPay, VNPay, và thẻ Visa/Mastercard.",
       },
       {
@@ -35,12 +35,12 @@ const FAQ_SECTIONS = [
         a: "Tham khảo bảng size chi tiết tại trang Hướng dẫn chọn size. Nếu bạn ở giữa 2 size, nên chọn size lớn hơn. Bạn cũng có thể nhắn tin cho chatbot để được tư vấn.",
       },
       {
-        q: "Chất liệu sản phẩm ONFIT có an toàn không?",
-        a: "Tất cả sản phẩm ONFIT đều đạt chứng nhận Oeko-Tex Standard 100 — đảm bảo không chứa chất gây hại cho da và sức khỏe.",
+        q: "Chất liệu sản phẩm ON/OFF có an toàn không?",
+        a: "Tất cả sản phẩm ON/OFF đều đạt chứng nhận Oeko-Tex Standard 100 — đảm bảo không chứa chất gây hại cho da và sức khỏe.",
       },
       {
         q: "Sản phẩm có bị co rút sau khi giặt không?",
-        a: "Sản phẩm ONFIT được xử lý chống co rút trước khi may. Tuy nhiên, nên giặt ở nhiệt độ dưới 40°C và không sấy khô ở nhiệt độ cao.",
+        a: "Sản phẩm ON/OFF được xử lý chống co rút trước khi may. Tuy nhiên, nên giặt ở nhiệt độ dưới 40°C và không sấy khô ở nhiệt độ cao.",
       },
       {
         q: "Tôi có thể đổi size miễn phí không?",
@@ -78,7 +78,7 @@ const FAQ_SECTIONS = [
       },
       {
         q: "Ai chịu phí ship khi đổi trả?",
-        a: "ONFIT chịu toàn bộ phí ship đổi trả nếu lỗi từ phía chúng tôi (sai sản phẩm, lỗi sản xuất). Đổi size theo ý muốn: miễn phí 1 lần.",
+        a: "ON/OFF chịu toàn bộ phí ship đổi trả nếu lỗi từ phía chúng tôi (sai sản phẩm, lỗi sản xuất). Đổi size theo ý muốn: miễn phí 1 lần.",
       },
     ],
   },
@@ -130,7 +130,7 @@ export default function FAQPage() {
               Hotline: 1900 xxxx
             </span>
             <span className="px-4 py-2 border border-border text-xs tracking-wide text-muted">
-              Email: hello@onfit.vn
+              Email: hello@onoff.vn
             </span>
           </div>
         </section>

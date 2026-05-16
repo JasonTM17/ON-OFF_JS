@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Thanh toán",
   description:
-    "Hoàn tất đơn hàng của bạn tại ONFIT — Giao hàng nhanh, đổi trả 30 ngày, thanh toán an toàn.",
+    "Hoàn tất đơn hàng của bạn tại ON/OFF — Giao hàng nhanh, đổi trả 30 ngày, thanh toán an toàn.",
   robots: { index: false, follow: false },
 };
 

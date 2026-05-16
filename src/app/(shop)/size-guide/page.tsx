@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Hướng dẫn chọn size",
-  description: "Bảng size ONFIT — Hướng dẫn đo và chọn size đồ lót, đồ mặc nhà phù hợp nhất",
+  description: "Bảng size ON/OFF — Hướng dẫn đo và chọn size đồ lót, đồ mặc nhà phù hợp nhất",
 };
 
 const MEN_SIZES = [

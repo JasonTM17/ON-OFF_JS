@@ -9,7 +9,6 @@ const orderSchema = z.object({
     size: z.string(),
     color: z.string(),
     quantity: z.number().int().min(1),
-    price: z.number().int(),
   })),
   addressId: z.string().optional(),
   address: z.object({
@@ -58,7 +57,11 @@ export async function POST(req: NextRequest) {
       addressId = addr.id;
     }
 
-    const total = data.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    const productIds = data.items.map((i) => i.productId);
+    const products = await db.product.findMany({ where: { id: { in: productIds } } });
+    const priceMap = Object.fromEntries(products.map((p) => [p.id, p.salePrice ?? p.price]));
+
+    const total = data.items.reduce((sum, i) => sum + (priceMap[i.productId] ?? 0) * i.quantity, 0);
     let discount = 0;
 
     if (data.couponCode) {
@@ -90,7 +93,7 @@ export async function POST(req: NextRequest) {
             size: i.size,
             color: i.color,
             quantity: i.quantity,
-            price: i.price,
+            price: priceMap[i.productId] ?? 0,
           })),
         },
       },

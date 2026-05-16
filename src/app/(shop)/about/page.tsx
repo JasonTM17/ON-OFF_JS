@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Leaf, Heart, Award, Recycle } from "lucide-react";
 
 export const metadata = {
-  title: "Về ONFIT",
-  description: "Câu chuyện thương hiệu ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+  title: "Về ON/OFF",
+  description: "Câu chuyện thương hiệu ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
 };
 
 const VALUES = [
@@ -63,7 +63,7 @@ export default function AboutPage() {
             <span className="italic text-accent">sang trọng</span>
           </h1>
           <p className="text-background/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            ONFIT ra đời từ niềm tin rằng mỗi ngày đều xứng đáng được bắt đầu với sự thoải mái
+            ON/OFF ra đời từ niềm tin rằng mỗi ngày đều xứng đáng được bắt đầu với sự thoải mái
             — từ lớp vải đầu tiên chạm vào da.
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-sm text-muted leading-relaxed">
                 <p>
-                  Chúng tôi không chạy theo xu hướng. ONFIT tập trung vào những gì thực sự quan trọng:
+                  Chúng tôi không chạy theo xu hướng. ON/OFF tập trung vào những gì thực sự quan trọng:
                   chất liệu tốt nhất, form dáng hoàn hảo, và sự thoải mái không thỏa hiệp.
                 </p>
                 <p>
@@ -90,16 +90,16 @@ export default function AboutPage() {
                   đến vị trí từng đường may — để đảm bảo bạn quên đi rằng mình đang mặc chúng.
                 </p>
                 <p>
-                  Từ phòng ngủ đến phòng khách, từ sáng sớm đến tối muộn — ONFIT đồng hành cùng bạn
+                  Từ phòng ngủ đến phòng khách, từ sáng sớm đến tối muộn — ON/OFF đồng hành cùng bạn
                   trong mọi khoảnh khắc riêng tư nhất.
                 </p>
               </div>
             </div>
-            <div className="relative aspect-[3/4] overflow-hidden">
+            <div className="relative aspect-[2/3] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://2885966831.e.cdneverest.net//catalog/category/nu-all_1.webp"
-                alt="ONFIT collection"
+                alt="ON/OFF collection"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>

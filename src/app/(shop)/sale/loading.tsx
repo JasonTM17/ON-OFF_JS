@@ -31,7 +31,7 @@ export default function SaleLoading() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-12">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i}>
-              <Skeleton className="aspect-[3/4] w-full rounded-none mb-3" />
+              <Skeleton className="aspect-[2/3] w-full rounded-none mb-3" />
               <Skeleton className="h-4 w-3/4 mb-1.5" />
               <Skeleton className="h-3 w-1/2 mb-1.5" />
               <div className="flex items-baseline gap-2">

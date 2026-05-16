@@ -138,19 +138,19 @@ function wrapEmail(content: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ONFIT</title>
+  <title>ON/OFF</title>
 </head>
 <body style="${baseStyle}">
   <div style="${containerStyle}">
     <div style="${headerStyle}">
-      <span style="${logoStyle}">ONFIT</span>
+      <span style="${logoStyle}">ON/OFF</span>
     </div>
     <div style="${bodyStyle}">
       ${content}
     </div>
     <div style="${footerStyle}">
-      <p style="margin: 0 0 4px;">© 2026 ONFIT. Tất cả quyền được bảo lưu.</p>
-      <p style="margin: 0;">Hà Nội, Việt Nam · onfit.vn</p>
+      <p style="margin: 0 0 4px;">© 2026 ON/OFF. Tất cả quyền được bảo lưu.</p>
+      <p style="margin: 0;">Hà Nội, Việt Nam · onoff.vn</p>
     </div>
   </div>
 </body>
@@ -182,7 +182,7 @@ export function orderConfirmation(order: OrderEmailData): string {
 
   const content = `
     <h1 style="${headingStyle}">Đặt hàng thành công!</h1>
-    <p style="${textStyle}">Cảm ơn bạn đã mua sắm tại ONFIT. Đơn hàng của bạn đã được xác nhận.</p>
+    <p style="${textStyle}">Cảm ơn bạn đã mua sắm tại ON/OFF. Đơn hàng của bạn đã được xác nhận.</p>
     <p style="${textStyle}">Mã đơn hàng: <strong>#${order.id.slice(-8).toUpperCase()}</strong></p>
     <hr style="${dividerStyle}" />
     <table style="${tableStyle}">
@@ -220,13 +220,13 @@ export function orderConfirmation(order: OrderEmailData): string {
 
 export function welcomeEmail(name: string): string {
   const content = `
-    <h1 style="${headingStyle}">Chào mừng đến với ONFIT, ${name}!</h1>
+    <h1 style="${headingStyle}">Chào mừng đến với ON/OFF, ${name}!</h1>
     <p style="${textStyle}">
       Tài khoản của bạn đã được tạo thành công. Khám phá bộ sưu tập thời trang mới nhất
-      và tận hưởng trải nghiệm mua sắm tuyệt vời tại ONFIT.
+      và tận hưởng trải nghiệm mua sắm tuyệt vời tại ON/OFF.
     </p>
     <hr style="${dividerStyle}" />
-    <p style="${textStyle}">Với tài khoản ONFIT, bạn có thể:</p>
+    <p style="${textStyle}">Với tài khoản ON/OFF, bạn có thể:</p>
     <ul style="font-size:14px; color:#555555; padding-left:20px; margin:0 0 20px;">
       <li style="margin-bottom:6px;">Theo dõi đơn hàng theo thời gian thực</li>
       <li style="margin-bottom:6px;">Lưu địa chỉ giao hàng yêu thích</li>
@@ -234,9 +234,9 @@ export function welcomeEmail(name: string): string {
       <li style="margin-bottom:6px;">Nhận ưu đãi độc quyền dành cho thành viên</li>
     </ul>
     <p style="margin: 0 0 24px;">
-      <a href="https://onfit.vn/products" style="${buttonStyle}">Khám phá ngay</a>
+      <a href="https://onoff.vn/products" style="${buttonStyle}">Khám phá ngay</a>
     </p>
-    <p style="${textStyle}">Nếu bạn cần hỗ trợ, hãy liên hệ với chúng tôi qua email support@onfit.vn.</p>
+    <p style="${textStyle}">Nếu bạn cần hỗ trợ, hãy liên hệ với chúng tôi qua email support@onoff.vn.</p>
   `;
 
   return wrapEmail(content);

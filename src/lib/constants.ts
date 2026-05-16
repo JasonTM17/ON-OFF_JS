@@ -1,6 +1,6 @@
-export const SITE_NAME = "ONFIT";
+export const SITE_NAME = "ON/OFF";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://onfit.vn";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://onoff.vn";
 
 export const FREE_SHIPPING_THRESHOLD = 500_000; // VND
 export const MAX_CART_QUANTITY = 10;
@@ -41,7 +41,7 @@ export const PAYMENT_METHODS = [
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]["value"];
 
 export const SOCIAL_LINKS = {
-  facebook: "https://facebook.com/onfit.vn",
-  instagram: "https://instagram.com/onfit.vn",
-  tiktok: "https://tiktok.com/@onfit.vn",
+  facebook: "https://facebook.com/onoff.vn",
+  instagram: "https://instagram.com/onoff.vn",
+  tiktok: "https://tiktok.com/@onoff.vn",
 } as const;

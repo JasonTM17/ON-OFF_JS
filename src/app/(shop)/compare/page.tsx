@@ -166,7 +166,7 @@ function CompareContent() {
                     <td key={product.id} className="py-5 px-3 align-top">
                       <div className="relative">
                         <Link href={`/products/${product.slug}`}>
-                          <div className="relative aspect-[3/4] w-full max-w-[160px] bg-card overflow-hidden">
+                          <div className="relative aspect-[2/3] w-full max-w-[160px] bg-card overflow-hidden">
                             {product.images[0] ? (
                               <Image
                                 src={product.images[0]}

@@ -38,15 +38,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const description =
     product.description ||
-    `Mua ${product.name} tại ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam. Chất liệu tự nhiên, thiết kế tối giản.`;
+    `Mua ${product.name} tại ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam. Chất liệu tự nhiên, thiết kế tối giản.`;
 
   return {
     title: product.name,
     description,
     openGraph: {
-      title: `${product.name} | ONFIT`,
+      title: `${product.name} | ON/OFF`,
       description,
-      url: `https://onfit.vn/products/${product.slug}`,
+      url: `https://onoff.vn/products/${product.slug}`,
       type: "website",
       images: images[0]
         ? [{ url: images[0], alt: product.name, width: 800, height: 1067 }]
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.name} | ONFIT`,
+      title: `${product.name} | ON/OFF`,
       description,
       images: images[0] ? [images[0]] : [],
     },
@@ -96,20 +96,20 @@ export default async function ProductDetailPage({ params }: Props) {
     image: images,
     description:
       product.description ||
-      `Mua ${product.name} tại ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam.`,
+      `Mua ${product.name} tại ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam.`,
     brand: {
       "@type": "Brand",
-      name: "ONFIT",
+      name: "ON/OFF",
     },
     offers: {
       "@type": "Offer",
-      url: `https://onfit.vn/products/${product.slug}`,
+      url: `https://onoff.vn/products/${product.slug}`,
       priceCurrency: "VND",
       price: product.salePrice ?? product.price,
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
-        name: "ONFIT",
+        name: "ON/OFF",
       },
     },
     ...(product.reviewCount > 0 && {
@@ -335,7 +335,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   >
                     {/* Image */}
                     <div
-                      className="aspect-[3/4] mb-3 overflow-hidden relative"
+                      className="aspect-[2/3] mb-3 overflow-hidden relative"
                       style={{ borderRadius: "1px" }}
                     >
                       <div

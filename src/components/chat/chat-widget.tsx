@@ -11,7 +11,7 @@ import { TypingIndicator } from "./typing-indicator";
 const WELCOME_MESSAGE = {
   id: "welcome",
   role: "bot" as const,
-  content: "👋 Xin chào! Tôi là trợ lý ảo của **ONFIT**. Tôi có thể giúp bạn tìm sản phẩm, tư vấn size, hoặc giải đáp thắc mắc.",
+  content: "👋 Xin chào! Tôi là trợ lý ảo của **ON/OFF**. Tôi có thể giúp bạn tìm sản phẩm, tư vấn size, hoặc giải đáp thắc mắc.",
   quickReplies: ["Tìm sản phẩm", "Tư vấn size", "Chính sách giao hàng", "Tra cứu đơn hàng"],
   createdAt: 0,
 };
@@ -71,7 +71,7 @@ export function ChatWidget() {
                   <MessageCircle className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold">ONFIT Assistant</p>
+                  <p className="text-sm font-semibold">ON/OFF Assistant</p>
                   <p className="text-xs text-zinc-400">Luôn sẵn sàng hỗ trợ</p>
                 </div>
               </div>

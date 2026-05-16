@@ -1,29 +1,15 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db"
-import { cookies } from "next/headers";
-import { jwtVerify } from "jose";
-
-async function getUser() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  if (!token) return null;
-  try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET || "secret");
-    const { payload } = await jwtVerify(token, secret);
-    return payload.sub as string;
-  } catch {
-    return null;
-  }
-}
+import { db } from "@/lib/db";
+import { getSession } from "@/lib/auth";
 
 export async function GET() {
-  const userId = await getUser();
-  if (!userId) {
+  const session = await getSession();
+  if (!session) {
     return NextResponse.json({ error: "Chưa đăng nhập" }, { status: 401 });
   }
 
   const addresses = await db.address.findMany({
-    where: { userId },
+    where: { userId: session.userId },
     orderBy: { isDefault: "desc" },
   });
 
@@ -31,8 +17,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const userId = await getUser();
-  if (!userId) {
+  const session = await getSession();
+  if (!session) {
     return NextResponse.json({ error: "Chưa đăng nhập" }, { status: 401 });
   }
 
@@ -45,14 +31,14 @@ export async function POST(request: Request) {
 
   if (isDefault) {
     await db.address.updateMany({
-      where: { userId },
+      where: { userId: session.userId },
       data: { isDefault: false },
     });
   }
 
   const address = await db.address.create({
     data: {
-      userId,
+      userId: session.userId,
       fullName,
       phone,
       province,

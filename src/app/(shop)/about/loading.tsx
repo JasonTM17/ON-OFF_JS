@@ -27,7 +27,7 @@ export default function AboutLoading() {
                 <Skeleton className="h-3.5 w-3/4" />
               </div>
             </div>
-            <Skeleton className="aspect-[3/4] w-full rounded-none" />
+            <Skeleton className="aspect-[2/3] w-full rounded-none" />
           </div>
         </div>
       </section>

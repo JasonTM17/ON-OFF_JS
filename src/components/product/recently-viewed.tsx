@@ -44,7 +44,7 @@ export function RecentlyViewed() {
               href={`/products/${p.slug}`}
               className="group shrink-0 w-32"
             >
-              <div className="aspect-[3/4] bg-card overflow-hidden mb-2">
+              <div className="aspect-[2/3] bg-card overflow-hidden mb-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.image}

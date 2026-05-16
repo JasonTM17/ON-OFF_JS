@@ -8,14 +8,14 @@ import { CountdownTimer } from "./_components/countdown-timer";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Khuyến mãi | ONFIT",
+  title: "Khuyến mãi | ON/OFF",
   description:
-    "Ưu đãi có thời hạn — Khám phá các sản phẩm đồ lót & đồ mặc nhà ONFIT đang giảm giá. Chất liệu tự nhiên, thiết kế tối giản, giá tốt nhất.",
+    "Ưu đãi có thời hạn — Khám phá các sản phẩm đồ lót & đồ mặc nhà ON/OFF đang giảm giá. Chất liệu tự nhiên, thiết kế tối giản, giá tốt nhất.",
   openGraph: {
-    title: "Khuyến mãi | ONFIT",
+    title: "Khuyến mãi | ON/OFF",
     description:
-      "Ưu đãi có thời hạn — Khám phá các sản phẩm đồ lót & đồ mặc nhà ONFIT đang giảm giá.",
-    url: "https://onfit.vn/sale",
+      "Ưu đãi có thời hạn — Khám phá các sản phẩm đồ lót & đồ mặc nhà ON/OFF đang giảm giá.",
+    url: "https://onoff.vn/sale",
   },
 };
 
@@ -90,7 +90,7 @@ export default async function SalePage() {
                   href={`/products/${product.slug}`}
                   className="group block"
                 >
-                  <div className="relative aspect-[3/4] bg-card overflow-hidden mb-3">
+                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-3">
                     {img ? (
                       <Image
                         src={img}

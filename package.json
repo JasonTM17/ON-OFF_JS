@@ -43,11 +43,17 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@next/eslint-plugin-next": "^16.2.6",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.15.17",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "eslint": "^10.4.0",
+    "eslint-config-next": "^16.2.6",
     "playwright": "^1.60.0",
     "postcss": "^8.5.3",
     "prisma": "^6.8.2",

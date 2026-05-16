@@ -12,15 +12,15 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: {
-    absolute: "ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+    absolute: "ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
   },
   description:
-    "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
+    "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ON/OFF — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
   openGraph: {
-    title: "ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
+    title: "ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam",
     description:
-      "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ONFIT — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
-    url: "https://onfit.vn",
+      "Khám phá bộ sưu tập đồ lót & đồ mặc nhà cao cấp ON/OFF — Chất liệu tự nhiên, thiết kế tối giản, thoải mái suốt ngày dài.",
+    url: "https://onoff.vn",
     type: "website",
   },
 };
@@ -69,7 +69,7 @@ export default async function HomePage() {
       <div className="border-b border-border overflow-x-auto">
         <div className="flex min-w-max mx-auto">
           {[
-            { label: "ONFIT", sub: "Premium Collection", href: "/products?brand=onfit" },
+            { label: "ON/OFF", sub: "Premium Collection", href: "/products?brand=onfit" },
             { label: "BASIC", sub: "Everyday Essentials", href: "/products?brand=basic" },
             { label: "LOUNGE", sub: "Comfort Wear", href: "/products?brand=lounge" },
           ].map((brand, i) => (
@@ -123,7 +123,7 @@ export default async function HomePage() {
                     href={`/products/${product.slug}`}
                     className={`group block ${isLarge ? "lg:col-span-2 lg:row-span-2" : ""}`}
                   >
-                    <div className={`relative overflow-hidden bg-card ${isLarge ? "aspect-[3/4]" : "aspect-[3/4]"}`}>
+                    <div className={`relative overflow-hidden bg-card ${isLarge ? "aspect-[2/3]" : "aspect-[2/3]"}`}>
                       {/* Primary image */}
                       {img1 && (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -199,7 +199,7 @@ export default async function HomePage() {
               <Link
                 key={cat.id}
                 href={`/products?category=${cat.slug}`}
-                className="group relative aspect-[3/4] overflow-hidden bg-accent/20"
+                className="group relative aspect-[2/3] overflow-hidden bg-accent/20"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -271,7 +271,7 @@ export default async function HomePage() {
                   className="group block"
                 >
                   {/* Image with swap */}
-                  <div className="relative aspect-[3/4] bg-card overflow-hidden mb-4">
+                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-4">
                     {img1 ? (
                       <>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -383,7 +383,7 @@ export default async function HomePage() {
               href="/about"
               className="inline-flex items-center gap-3 px-10 h-12 border border-background text-background text-xs tracking-[0.15em] uppercase hover:bg-background hover:text-foreground transition-colors duration-300"
             >
-              Về ONFIT
+              Về ON/OFF
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -420,7 +420,7 @@ export default async function HomePage() {
         <div className="absolute bottom-[-20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-accent/8 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-lg mx-auto text-center">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-5">Cộng đồng ONFIT</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-5">Cộng đồng ON/OFF</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-background mb-4 leading-tight">
             Nhận ưu đãi<br />
             <span className="italic text-accent">độc quyền</span>

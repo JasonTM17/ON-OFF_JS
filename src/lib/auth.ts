@@ -3,8 +3,12 @@ import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "onfit-dev-secret-change-in-production"
+  process.env.JWT_SECRET || "onoff-dev-secret-change-in-production"
 );
+
+if (!process.env.JWT_SECRET && process.env.NODE_ENV === "production") {
+  throw new Error("JWT_SECRET environment variable is required in production");
+}
 
 export async function hashPassword(password: string) {
   return bcrypt.hash(password, 10);

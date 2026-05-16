@@ -59,8 +59,8 @@ export default function LoginPage() {
         </p>
         <div className="mt-8 p-4 bg-accent/10 text-xs text-muted">
           <p className="font-medium mb-1">Tài khoản demo:</p>
-          <p>Admin: admin@onfit.vn / admin123</p>
-          <p>User: user@onfit.vn / user123</p>
+          <p>Admin: admin@onoff.vn / admin123</p>
+          <p>User: user@onoff.vn / user123</p>
         </div>
       </div>
     </div>

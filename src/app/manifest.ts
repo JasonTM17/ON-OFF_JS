@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ONFIT",
-    short_name: "ONFIT",
+    name: "ON/OFF",
+    short_name: "ON/OFF",
     description: "Thời trang ON/OFF — phong cách sống hiện đại",
     start_url: "/",
     display: "standalone",

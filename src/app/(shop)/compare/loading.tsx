@@ -28,7 +28,7 @@ export default function CompareLoading() {
                 {Array.from({ length: 3 }).map((_, colIdx) => (
                   <td key={colIdx} className="py-5 px-3 align-top">
                     {rowIdx === 0 ? (
-                      <Skeleton className="aspect-[3/4] w-full max-w-[160px] rounded-none" />
+                      <Skeleton className="aspect-[2/3] w-full max-w-[160px] rounded-none" />
                     ) : rowIdx === 7 ? (
                       <Skeleton className="h-10 w-full rounded-none" />
                     ) : (

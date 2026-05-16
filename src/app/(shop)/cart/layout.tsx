@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Giỏ hàng",
   description:
-    "Xem và quản lý giỏ hàng của bạn tại ONFIT — Đồ lót & đồ mặc nhà cao cấp Việt Nam.",
+    "Xem và quản lý giỏ hàng của bạn tại ON/OFF — Đồ lót & đồ mặc nhà cao cấp Việt Nam.",
   robots: { index: false, follow: false },
 };
 

@@ -23,7 +23,7 @@ import { useWishlistStore } from "@/store/wishlist";
 
 // ─── Brand tabs ────────────────────────────────────────────────────────────────
 const BRAND_TABS = [
-  { label: "ONFIT", href: "/products?brand=onfit" },
+  { label: "ON/OFF", href: "/products?brand=onfit" },
   { label: "BASIC", href: "/products?brand=basic" },
   { label: "LOUNGE", href: "/products?brand=lounge" },
 ];
@@ -460,7 +460,7 @@ export function Header() {
             href="/"
             className="font-serif text-2xl tracking-[0.15em] font-semibold text-foreground hover:text-muted transition-colors duration-200"
           >
-            ONFIT
+            ON/OFF
           </Link>
 
           {/* Desktop nav */}

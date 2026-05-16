@@ -15,7 +15,7 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
 
   if (!images.length) {
     return (
-      <div className="aspect-[3/4] bg-card flex items-center justify-center">
+      <div className="aspect-[2/3] bg-card flex items-center justify-center">
         <span className="text-muted text-sm">Không có hình ảnh</span>
       </div>
     );
@@ -25,7 +25,7 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
     <div className="space-y-3">
       {/* Main image */}
       <div
-        className="relative aspect-[3/4] bg-card overflow-hidden cursor-zoom-in group"
+        className="relative aspect-[2/3] bg-card overflow-hidden cursor-zoom-in group"
         onClick={() => setZoomed(true)}
       >
         <AnimatePresence mode="wait">

@@ -71,7 +71,7 @@ export function FlashSaleBanner({ endTime, products }: FlashSaleBannerProps) {
               href={`/products/${product.slug}`}
               className="group block border border-border hover:border-foreground/30 transition-colors"
             >
-              <div className="aspect-[3/4] overflow-hidden bg-background">
+              <div className="aspect-[2/3] overflow-hidden bg-background">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={product.image}

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Đăng nhập",
   description:
-    "Đăng nhập vào tài khoản ONFIT để theo dõi đơn hàng và nhận ưu đãi độc quyền.",
+    "Đăng nhập vào tài khoản ON/OFF để theo dõi đơn hàng và nhận ưu đãi độc quyền.",
   robots: { index: false, follow: false },
 };
 

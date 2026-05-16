@@ -217,7 +217,7 @@ export default async function AccountPage() {
                   href={`/products/${item.product.slug}`}
                   className="group"
                 >
-                  <div className="relative aspect-[3/4] bg-card overflow-hidden mb-2">
+                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-2">
                     {image ? (
                       <Image
                         src={image}

@@ -6,14 +6,14 @@ import { db } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Bộ sưu tập | ONFIT",
+  title: "Bộ sưu tập | ON/OFF",
   description:
-    "Khám phá các bộ sưu tập đồ lót & đồ mặc nhà ONFIT — Thiết kế tối giản, chất liệu tự nhiên dành cho nam và nữ.",
+    "Khám phá các bộ sưu tập đồ lót & đồ mặc nhà ON/OFF — Thiết kế tối giản, chất liệu tự nhiên dành cho nam và nữ.",
   openGraph: {
-    title: "Bộ sưu tập | ONFIT",
+    title: "Bộ sưu tập | ON/OFF",
     description:
-      "Khám phá các bộ sưu tập đồ lót & đồ mặc nhà ONFIT — Thiết kế tối giản, chất liệu tự nhiên.",
-    url: "https://onfit.vn/collections",
+      "Khám phá các bộ sưu tập đồ lót & đồ mặc nhà ON/OFF — Thiết kế tối giản, chất liệu tự nhiên.",
+    url: "https://onoff.vn/collections",
   },
 };
 

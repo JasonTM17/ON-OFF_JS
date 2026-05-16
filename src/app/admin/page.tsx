@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Quản trị",
-  description: "Trang quản trị ONFIT — Quản lý sản phẩm, đơn hàng và khách hàng.",
+  description: "Trang quản trị ON/OFF — Quản lý sản phẩm, đơn hàng và khách hàng.",
   robots: { index: false, follow: false },
 };
 

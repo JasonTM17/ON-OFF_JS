@@ -94,7 +94,7 @@ export default async function WishlistPage() {
 
                 {/* Image */}
                 <Link href={`/products/${item.product.slug}`} className="block">
-                  <div className="relative aspect-[3/4] bg-card overflow-hidden mb-3">
+                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-3">
                     {image ? (
                       <Image
                         src={image}
