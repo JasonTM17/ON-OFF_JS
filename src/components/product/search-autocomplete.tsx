@@ -4,13 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Search, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPrice } from "@/lib/utils";
 
 interface SearchResult {
   id: string;
   name: string;
   slug: string;
   price: number;
-  image: string;
+  salePrice: number | null;
+  images: string[];
 }
 
 export function SearchAutocomplete() {
@@ -44,10 +46,10 @@ export function SearchAutocomplete() {
     debounceRef.current = setTimeout(async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/products/search?q=${encodeURIComponent(value.trim())}&limit=5`);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(value.trim())}`);
         if (res.ok) {
           const data = await res.json();
-          setResults(data.products || data);
+          setResults(data.results || []);
           setOpen(true);
         }
       } catch {
@@ -57,9 +59,6 @@ export function SearchAutocomplete() {
       }
     }, 300);
   };
-
-  const formatPrice = (n: number) =>
-    new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 }).format(n);
 
   return (
     <div ref={ref} className="relative w-full max-w-md">
@@ -94,17 +93,17 @@ export function SearchAutocomplete() {
                 onClick={() => { setOpen(false); setQuery(""); }}
                 className="flex items-center gap-3 px-3 py-2.5 hover:bg-card transition-colors"
               >
-                {product.image && (
+                {product.images[0] && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={product.image}
+                    src={product.images[0]}
                     alt=""
                     className="w-10 h-12 object-cover shrink-0"
                   />
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-foreground line-clamp-1">{product.name}</p>
-                  <p className="text-xs text-muted">{formatPrice(product.price)}</p>
+                  <p className="text-xs text-muted">{formatPrice(product.salePrice ?? product.price)}</p>
                 </div>
               </Link>
             ))}

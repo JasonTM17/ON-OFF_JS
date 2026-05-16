@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
+import CancelOrderButton from "./CancelOrderButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -223,6 +224,8 @@ export default async function OrderDetailPage({
       <p className="text-xs text-muted mt-6">
         Đặt lúc {new Date(order.createdAt).toLocaleString("vi-VN")}
       </p>
+
+      {order.status === "PENDING" && <CancelOrderButton orderId={order.id} />}
     </div>
   );
 }

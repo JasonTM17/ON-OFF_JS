@@ -9,10 +9,7 @@ export async function GET(req: NextRequest) {
 
   const products = await db.product.findMany({
     where: {
-      OR: [
-        { name: { contains: q } },
-        { description: { contains: q } },
-      ],
+      name: { contains: q },
     },
     select: {
       id: true,
@@ -22,7 +19,7 @@ export async function GET(req: NextRequest) {
       salePrice: true,
       images: true,
     },
-    take: 10,
+    take: 8,
     orderBy: { createdAt: "desc" },
   });
 
@@ -31,8 +28,9 @@ export async function GET(req: NextRequest) {
       id: p.id,
       name: p.name,
       slug: p.slug,
-      price: p.salePrice || p.price,
-      image: JSON.parse(p.images)[0] ?? null,
+      price: p.price,
+      salePrice: p.salePrice,
+      images: JSON.parse(p.images as string) as string[],
     })),
   });
 }

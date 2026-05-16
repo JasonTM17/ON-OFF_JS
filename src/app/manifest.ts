@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ON/OFF",
     short_name: "ON/OFF",
-    description: "Thời trang ON/OFF — phong cách sống hiện đại",
+    description: "Đồ lót & đồ mặc nhà cao cấp — Chất liệu tự nhiên, thiết kế tối giản",
     start_url: "/",
     display: "standalone",
     orientation: "portrait",
@@ -14,15 +14,15 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "vi",
     icons: [
       {
-        src: "/icons/icon-192x192.png",
+        src: "/icons/icon-192x192.svg",
         sizes: "192x192",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "maskable",
       },
       {
-        src: "/icons/icon-512x512.png",
+        src: "/icons/icon-512x512.svg",
         sizes: "512x512",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "any",
       },
     ],
