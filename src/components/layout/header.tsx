@@ -23,7 +23,7 @@ import { useWishlistStore } from "@/store/wishlist";
 
 // ─── Brand tabs ────────────────────────────────────────────────────────────────
 const BRAND_TABS = [
-  { label: "ON/OFF", href: "/products?brand=onfit" },
+  { label: "ON/OFF", href: "/products?brand=onoff" },
   { label: "BASIC", href: "/products?brand=basic" },
   { label: "LOUNGE", href: "/products?brand=lounge" },
 ];

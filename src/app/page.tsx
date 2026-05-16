@@ -225,6 +225,27 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ─── PROMOTIONAL BANNER ────────────────────────────────────────── */}
+      <section className="px-6 lg:px-12 py-8">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/sale" className="block group relative overflow-hidden rounded-lg">
+            <div className="bg-gradient-to-r from-rose-50 to-amber-50 dark:from-rose-950/30 dark:to-amber-950/30 p-8 md:p-12 flex items-center justify-between">
+              <div>
+                <p className="text-[10px] tracking-[0.4em] uppercase text-rose-600 dark:text-rose-400 mb-2">Ưu đãi đặc biệt</p>
+                <h3 className="font-serif text-2xl md:text-3xl font-light text-foreground mb-2">
+                  Summer Essential Pack
+                </h3>
+                <p className="text-sm text-muted max-w-md">Mua 3 tặng 1 — Áp dụng cho tất cả sản phẩm Basic Collection</p>
+              </div>
+              <div className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-rose-600 dark:text-rose-400 group-hover:gap-3 transition-all">
+                Mua ngay
+                <ArrowRight size={14} />
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
       {/* ─── MỚI VỀ ───────────────────────────────────────────────────────── */}
       {newArrivals.length > 0 && (
         <section className="py-24 px-6 lg:px-12">
