@@ -160,11 +160,11 @@ export default async function ProductDetailPage({ params }: Props) {
             </li>
             <li>
               <Link
-                href={`/products?category=${product.category.slug}`}
+                href="/products"
                 className="transition-colors duration-200 uppercase tracking-widest"
                 style={{ color: "#7A5C45" }}
               >
-                {product.category.name}
+                Sản phẩm
               </Link>
             </li>
             <li style={{ color: "#D8C3A5" }}>
