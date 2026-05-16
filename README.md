@@ -29,6 +29,11 @@
 
 ## Screenshots
 
+<p align="center">
+  <img src="docs/screenshots/homepage-scroll.gif" alt="Homepage Scroll Demo" width="720"/>
+  <br/><em>Homepage scroll experience</em>
+</p>
+
 <table>
   <tr>
     <td><img src="docs/screenshots/homepage.png" alt="Homepage" width="400"/></td>
@@ -55,8 +60,6 @@
     <td align="center"><em>Responsive mobile design</em></td>
   </tr>
 </table>
-
-> To generate screenshots: `npm run dev` then visit each page and capture.
 
 ---
 

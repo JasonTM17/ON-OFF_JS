@@ -9,7 +9,14 @@
     "type": "git",
     "url": "https://github.com/JasonTM17/ON-OFF_JS.git"
   },
-  "keywords": ["ecommerce", "nextjs", "typescript", "tailwindcss", "prisma", "fashion"],
+  "keywords": [
+    "ecommerce",
+    "nextjs",
+    "typescript",
+    "tailwindcss",
+    "prisma",
+    "fashion"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -62,7 +69,9 @@
     "@typescript-eslint/parser": "^8.59.3",
     "eslint": "^10.4.0",
     "eslint-config-next": "^16.2.6",
+    "gif-encoder-2": "^1.0.5",
     "playwright": "^1.60.0",
+    "pngjs": "^7.0.0",
     "postcss": "^8.5.3",
     "prisma": "^6.8.2",
     "tailwindcss": "^4.1.7",
