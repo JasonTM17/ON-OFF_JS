@@ -3,7 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { Toaster } from "@/components/ui/toaster";
+import { ToastProvider } from "@/components/ui/toaster";
 import { PromoBar } from "@/components/layout/promo-bar";
 import { ClientProviders } from "@/components/layout/client-providers";
 
@@ -59,12 +59,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" className={`${inter.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
-        <PromoBar />
-        <Header />
-        <main className="flex-1 page-enter">{children}</main>
-        <Footer />
-        <Toaster />
-        <ClientProviders />
+        <ToastProvider>
+          <PromoBar />
+          <Header />
+          <main className="flex-1 page-enter">{children}</main>
+          <Footer />
+          <ClientProviders />
+        </ToastProvider>
       </body>
     </html>
   );
