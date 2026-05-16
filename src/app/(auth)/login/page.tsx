@@ -57,11 +57,13 @@ export default function LoginPage() {
           Chưa có tài khoản?{" "}
           <Link href="/register" className="underline hover:text-foreground">Đăng ký</Link>
         </p>
-        <div className="mt-8 p-4 bg-accent/10 text-xs text-muted">
-          <p className="font-medium mb-1">Tài khoản demo:</p>
-          <p>Admin: admin@onoff.vn / admin123</p>
-          <p>User: user@onoff.vn / user123</p>
-        </div>
+        {process.env.NODE_ENV === "development" && (
+          <div className="mt-8 p-4 bg-accent/10 text-xs text-muted">
+            <p className="font-medium mb-1">Tài khoản demo:</p>
+            <p>Admin: admin@onoff.vn / admin123</p>
+            <p>User: user@onoff.vn / user123</p>
+          </div>
+        )}
       </div>
     </div>
   );

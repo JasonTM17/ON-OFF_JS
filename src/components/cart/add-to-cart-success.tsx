@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingBag, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface AddToCartSuccessProps {
   visible: boolean;
@@ -55,12 +56,9 @@ export function AddToCartSuccess({ visible, onClose, product }: AddToCartSuccess
               </div>
 
               <div className="flex gap-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-16 h-20 object-cover shrink-0"
-                />
+                <div className="relative w-16 h-20 shrink-0">
+                  <Image src={product.image} alt={product.name} width={64} height={80} className="object-cover" />
+                </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-foreground line-clamp-2">{product.name}</p>
                   <p className="text-xs text-muted mt-1">{product.size} · {product.color}</p>

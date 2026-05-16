@@ -225,7 +225,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {colors.slice(0, 6).map(([name, hex]) => (
               <span
                 key={name}
-                className="w-3 h-3 rounded-full border border-border shadow-sm transition-transform duration-150 hover:scale-125"
+                className="w-5 h-5 rounded-full border border-border shadow-sm transition-transform duration-150 hover:scale-125"
                 style={{ backgroundColor: hex }}
                 title={name}
               />

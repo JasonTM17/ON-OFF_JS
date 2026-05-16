@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { ToastProvider } from "@/components/ui/toaster";
 import { PromoBar } from "@/components/layout/promo-bar";
 import { ClientProviders } from "@/components/layout/client-providers";
+import { FloatingWidgets } from "@/components/layout/floating-widgets";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-sans", display: "swap" });
 const playfair = Playfair_Display({ subsets: ["latin", "vietnamese"], variable: "--font-serif", display: "swap" });
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main className="flex-1 page-enter">{children}</main>
           <Footer />
+          <FloatingWidgets />
           <ClientProviders />
         </ToastProvider>
       </body>

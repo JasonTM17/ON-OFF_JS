@@ -109,6 +109,57 @@ export default async function HomePage() {
       {/* ─── HERO SLIDER ──────────────────────────────────────────────────── */}
       <HeroSlider />
 
+      {/* ─── BRAND SHOWCASE ──────────────────────────────────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-3">
+        {[
+          {
+            name: "ONOFF",
+            tagline: "Everyday Comfort — Thoải mái tự nhiên cho mọi khoảnh khắc",
+            href: "/products?brand=onoff",
+            image: "https://2885966831.e.cdneverest.net/catalog/category/nam-quanlot_1.webp",
+          },
+          {
+            name: "BASICON",
+            tagline: "Calm Living — Tĩnh tại, tinh tế, tối giản",
+            href: "/products?brand=basicon",
+            image: "https://2885966831.e.cdneverest.net/catalog/category/nu-quanao_1.webp",
+          },
+          {
+            name: "RE:ON",
+            tagline: "Active Energy — Năng lượng vận động nguyên bản",
+            href: "/products?brand=reon",
+            image: "https://2885966831.e.cdneverest.net/catalog/category/nam-phukien_1.webp",
+          },
+        ].map((brand) => (
+          <Link
+            key={brand.name}
+            href={brand.href}
+            className="group relative aspect-[3/4] md:aspect-auto md:h-[600px] overflow-hidden block"
+          >
+            <Image
+              src={brand.image}
+              alt={brand.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-foreground/10" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8">
+              <h2 className="font-serif text-4xl md:text-5xl font-light text-background uppercase tracking-widest">
+                {brand.name}
+              </h2>
+              <p className="text-background/70 text-xs tracking-wide text-center max-w-[200px] leading-relaxed">
+                {brand.tagline}
+              </p>
+            </div>
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+              <span className="text-background/80 text-[10px] tracking-[0.3em] uppercase group-hover:text-background transition-colors">
+                XEM THÊM
+              </span>
+            </div>
+          </Link>
+        ))}
+      </section>
 
       {/* ─── SẢN PHẨM BÁN CHẠY ───────────────────────────────────────────── */}
       {bestsellers.length > 0 && (

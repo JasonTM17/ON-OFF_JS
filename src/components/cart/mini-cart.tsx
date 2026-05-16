@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingBag, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface MiniCartItem {
   id: string;
@@ -68,9 +69,8 @@ export function MiniCart({ items, open, onClose, onRemove }: MiniCartProps) {
                 <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-3">
-                      <div className="w-16 h-20 bg-card shrink-0 overflow-hidden">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <div className="relative w-16 h-20 bg-card shrink-0 overflow-hidden">
+                        <Image src={item.image} alt={item.name} width={64} height={80} className="object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm line-clamp-1">{item.name}</p>

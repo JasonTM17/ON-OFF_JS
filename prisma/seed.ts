@@ -145,7 +145,7 @@ async function main() {
       minOrder: 300000,
       maxDiscount: 100000,
       usageLimit: 1000,
-      expiresAt: new Date("2025-12-31"),
+      expiresAt: new Date("2026-12-31"),
     },
   });
   await prisma.coupon.create({
@@ -155,7 +155,7 @@ async function main() {
       type: "FIXED",
       minOrder: 500000,
       usageLimit: 500,
-      expiresAt: new Date("2025-12-31"),
+      expiresAt: new Date("2026-12-31"),
     },
   });
 

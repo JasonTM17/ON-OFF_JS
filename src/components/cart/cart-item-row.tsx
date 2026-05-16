@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Trash2, Minus, Plus } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface CartItem {
   id: string;
@@ -33,9 +34,8 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
       exit={{ opacity: 0, x: -20 }}
     >
       <Link href={`/products/${item.slug}`} className="shrink-0">
-        <div className="w-20 h-24 bg-card overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+        <div className="relative w-20 h-24 bg-card overflow-hidden">
+          <Image src={item.image} alt={item.name} width={80} height={96} className="object-cover" />
         </div>
       </Link>
 
