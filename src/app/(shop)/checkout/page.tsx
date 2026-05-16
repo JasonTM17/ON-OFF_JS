@@ -7,6 +7,7 @@ import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import Image from "next/image";
 import { Loader2, ChevronDown, Tag, X } from "lucide-react";
 import { PaymentSelector } from "@/components/checkout/payment-selector";
 
@@ -172,8 +173,7 @@ export default function CheckoutPage() {
               <div key={`${item.productId}-${item.size}-${item.color}`} className="flex gap-3">
                 <div className="w-14 h-[84px] bg-accent/20 shrink-0 overflow-hidden">
                   {item.image && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <Image src={item.image} alt={item.name} width={56} height={84} className="w-full h-full object-cover" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { db } from "@/lib/db";
 import { ProductCard } from "@/components/product/product-card";
 import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
@@ -304,12 +305,12 @@ export default async function ProductsPage({ searchParams }: Props) {
                     <div className={`w-14 h-14 rounded-full overflow-hidden border-2 transition-colors duration-150 ${
                       isActive ? "border-foreground" : "border-border group-hover:border-foreground"
                     }`}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={thumb}
                         alt={cat.name}
+                        width={64}
+                        height={64}
                         className="w-full h-full object-cover"
-                        loading="lazy"
                       />
                     </div>
                     <span className={`text-[11px] tracking-wide whitespace-nowrap ${

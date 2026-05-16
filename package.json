@@ -1,6 +1,6 @@
 {
   "name": "onoff-ecommerce",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Fashion e-commerce platform built with Next.js 15, TypeScript, Tailwind CSS 4, Prisma ORM",
   "author": "Nguyễn Sơn",
   "license": "MIT",

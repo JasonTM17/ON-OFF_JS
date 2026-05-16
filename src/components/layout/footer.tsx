@@ -101,6 +101,14 @@ export function Footer() {
                 </a>
               ))}
             </div>
+
+            {/* App download QR */}
+            <div className="mt-8">
+              <h4 className="text-[11px] tracking-[0.15em] uppercase text-background/30 mb-4 font-medium">Tải ứng dụng</h4>
+              <div className="w-24 h-24 border border-border flex items-center justify-center text-background/30 text-xs">
+                QR
+              </div>
+            </div>
           </div>
 
           {/* Link columns */}
@@ -144,9 +152,14 @@ export function Footer() {
               </span>
             ))}
           </div>
-          <div className="flex items-center gap-6 text-xs text-background/30">
-            <Link href="/terms" className="hover:text-background/60 transition-colors">Điều khoản</Link>
-            <Link href="/privacy-policy" className="hover:text-background/60 transition-colors">Bảo mật</Link>
+          <div className="flex items-center gap-4">
+            <span className="text-[10px] tracking-wide uppercase border border-background/20 text-background/40 px-2 py-1 leading-tight">
+              Đã đăng ký Bộ Công Thương
+            </span>
+            <div className="flex items-center gap-6 text-xs text-background/30">
+              <Link href="/terms" className="hover:text-background/60 transition-colors">Điều khoản</Link>
+              <Link href="/privacy-policy" className="hover:text-background/60 transition-colors">Bảo mật</Link>
+            </div>
           </div>
         </div>
       </div>

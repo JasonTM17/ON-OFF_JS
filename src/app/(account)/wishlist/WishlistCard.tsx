@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ShoppingBag, X } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -106,25 +107,23 @@ export function WishlistCard({ productId, product }: WishlistCardProps) {
         <div className="relative aspect-[2/3] bg-card overflow-hidden mb-3">
           {img1 ? (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={img1}
                 alt={product.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                fill
+                className={`object-cover transition-opacity duration-500 ${
                   hovered && hasSecondImage ? "opacity-0" : "opacity-100"
                 }`}
-                loading="lazy"
               />
               {hasSecondImage && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={img2 as string}
                   alt=""
                   aria-hidden="true"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                  fill
+                  className={`object-cover transition-opacity duration-500 ${
                     hovered ? "opacity-100" : "opacity-0"
                   }`}
-                  loading="lazy"
                 />
               )}
             </>

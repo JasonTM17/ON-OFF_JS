@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 
@@ -155,10 +156,11 @@ function CartDrawer({
                         onClick={onClose}
                         className="shrink-0 w-20 h-24 bg-card overflow-hidden"
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={item.image}
                           alt={item.name}
+                          width={80}
+                          height={96}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </Link>
@@ -434,82 +436,87 @@ export function Header() {
         </div>
 
         {/* ── Main bar ── */}
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2 -ml-2 text-foreground hover:text-muted transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {mobileOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <X size={20} />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Menu size={20} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
-
-          {/* Logo */}
-          <Link
-            href="/"
-            className="font-serif text-2xl tracking-[0.15em] font-semibold text-foreground hover:text-muted transition-colors duration-200"
-          >
-            ON/OFF
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => {
-              const hasMega = Boolean(MEGA_MENU[link.label]);
-              return (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={() => handleNavEnter(link.label)}
-                  onMouseLeave={handleNavLeave}
-                >
-                  <Link
-                    href={link.href}
-                    className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-200 py-1 border-b-2 ${
-                      activeMega === link.label
-                        ? "text-foreground border-foreground"
-                        : "text-muted border-transparent hover:text-foreground hover:border-accent"
-                    }`}
+        <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-3 items-center">
+          {/* Left: mobile hamburger + desktop nav */}
+          <div className="flex items-center gap-6">
+            {/* Mobile hamburger */}
+            <button
+              className="lg:hidden p-2 -ml-2 text-foreground hover:text-muted transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
                   >
-                    {link.label}
-                    {hasMega && (
-                      <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${
-                          activeMega === link.label ? "rotate-180" : ""
-                        }`}
-                      />
-                    )}
-                  </Link>
-                </div>
-              );
-            })}
-          </nav>
+                    <X size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Menu size={20} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+
+            {/* Desktop nav */}
+            <nav className="hidden lg:flex items-center gap-6">
+              {NAV_LINKS.map((link) => {
+                const hasMega = Boolean(MEGA_MENU[link.label]);
+                return (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => handleNavEnter(link.label)}
+                    onMouseLeave={handleNavLeave}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-200 py-1 border-b-2 ${
+                        activeMega === link.label
+                          ? "text-foreground border-foreground"
+                          : "text-muted border-transparent hover:text-foreground hover:border-accent"
+                      }`}
+                    >
+                      {link.label}
+                      {hasMega && (
+                        <ChevronDown
+                          size={13}
+                          className={`transition-transform duration-200 ${
+                            activeMega === link.label ? "rotate-180" : ""
+                          }`}
+                        />
+                      )}
+                    </Link>
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Center: Logo */}
+          <div className="flex justify-center">
+            <Link
+              href="/"
+              className="font-serif text-xl tracking-[0.15em] font-semibold text-foreground hover:text-muted transition-colors duration-200"
+            >
+              ON/OFF
+            </Link>
+          </div>
 
           {/* Right icons */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center justify-end gap-1">
             <button
               onClick={() => setSearchOpen(true)}
               className="p-2 rounded-full text-muted hover:text-foreground hover:bg-accent/20 transition-colors duration-200"
