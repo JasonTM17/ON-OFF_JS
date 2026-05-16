@@ -5,9 +5,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingBag, Heart } from "lucide-react";
+import { ShoppingBag, Heart, Eye } from "lucide-react";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
+import { QuickViewModal } from "@/components/product/quick-view-modal";
 
 interface ProductCardProps {
   product: {
@@ -26,6 +27,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [hovered, setHovered] = useState(false);
   const [quickAdded, setQuickAdded] = useState(false);
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const { isInWishlist, addItem: addToWishlist, removeItem: removeFromWishlist } = useWishlistStore();
   const wishlisted = isInWishlist(product.id);
@@ -72,7 +74,33 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   };
 
+  const handleQuickView = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setQuickViewOpen(true);
+  };
+
+  const handleAddToCartFromModal = (productId: string, size: string, color: string) => {
+    const variant = product.variants.find(
+      (v) => (size ? v.size === size : true) && (color ? v.color === color : true) && v.stock > 0
+    ) ?? product.variants.find((v) => v.stock > 0);
+    if (!variant) return;
+    addItem({
+      productId,
+      name: product.name,
+      price: product.salePrice ?? product.price,
+      image: img1 || "",
+      size: variant.size,
+      color: variant.color,
+      colorHex: variant.colorHex,
+      quantity: 1,
+      slug: product.slug,
+    });
+    setQuickViewOpen(false);
+  };
+
   return (
+    <>
     <Link
       href={`/products/${product.slug}`}
       className="group block product-card"
@@ -141,15 +169,15 @@ export function ProductCard({ product }: ProductCardProps) {
           />
         </button>
 
-        {/* Quick-add button — slides up from bottom */}
+        {/* Quick-add + quick-view buttons — slides up from bottom */}
         <div
-          className={`absolute bottom-0 left-0 right-0 transition-transform duration-300 ease-out ${
+          className={`absolute bottom-0 left-0 right-0 transition-transform duration-300 ease-out flex ${
             hovered ? "translate-y-0" : "translate-y-full"
           }`}
         >
           <button
             onClick={handleQuickAdd}
-            className={`w-full py-3.5 flex items-center justify-center gap-2.5 text-[10px] tracking-[0.25em] uppercase font-medium transition-colors duration-200 ${
+            className={`flex-1 py-3.5 flex items-center justify-center gap-2.5 text-[10px] tracking-[0.25em] uppercase font-medium transition-colors duration-200 ${
               quickAdded
                 ? "bg-muted text-white"
                 : "bg-foreground/95 text-background hover:bg-foreground backdrop-blur-sm"
@@ -158,6 +186,13 @@ export function ProductCard({ product }: ProductCardProps) {
           >
             <ShoppingBag size={12} />
             {quickAdded ? "Đã thêm vào giỏ ✓" : "Thêm vào giỏ"}
+          </button>
+          <button
+            onClick={handleQuickView}
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-foreground/80 text-background hover:bg-foreground transition-colors duration-200 backdrop-blur-sm border-l border-background/20"
+            aria-label="Xem nhanh"
+          >
+            <Eye size={14} />
           </button>
         </div>
       </div>
@@ -202,5 +237,20 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
     </Link>
+    <QuickViewModal
+      product={quickViewOpen ? {
+        id: product.id,
+        name: product.name,
+        slug: product.slug,
+        price: product.price,
+        salePrice: product.salePrice ?? undefined,
+        images,
+        sizes: [...new Set(product.variants.map((v) => v.size))],
+        colors: [...new Map(product.variants.map((v) => [v.color, { name: v.color, hex: v.colorHex }])).values()],
+      } : null}
+      onClose={() => setQuickViewOpen(false)}
+      onAddToCart={handleAddToCartFromModal}
+    />
+    </>
   );
 }

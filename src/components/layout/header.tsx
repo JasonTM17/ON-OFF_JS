@@ -42,6 +42,17 @@ const MEGA_MENU: Record<string, { label: string; href: string }[]> = {
     { label: "Bodysuit", href: "/products?gender=nu&category=bodysuit" },
     { label: "Set đồ lót", href: "/products?gender=nu&category=set-do-lot" },
   ],
+  "Đồ mặc nhà": [
+    { label: "Pyjama", href: "/products?category=pyjama" },
+    { label: "Áo choàng tắm", href: "/products?category=ao-choang-tam" },
+    { label: "Đồ ngủ", href: "/products?category=do-ngu" },
+    { label: "Đồ mặc nhà bộ", href: "/products?category=do-mac-nha-bo" },
+  ],
+  "Phụ kiện": [
+    { label: "Vớ/Tất", href: "/products?category=vo-tat" },
+    { label: "Khẩu trang", href: "/products?category=khau-trang" },
+    { label: "Túi", href: "/products?category=tui" },
+  ],
 };
 
 const NAV_LINKS = [

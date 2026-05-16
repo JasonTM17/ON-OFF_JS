@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Loader2, CheckCircle, ChevronDown, Tag, X } from "lucide-react";
+import { Loader2, ChevronDown, Tag, X } from "lucide-react";
 import { PaymentSelector } from "@/components/checkout/payment-selector";
 
 interface AppliedCoupon {
@@ -17,8 +18,8 @@ interface AppliedCoupon {
 }
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { items, totalPrice, clearCart } = useCartStore();
-  const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState({
@@ -40,24 +41,11 @@ export default function CheckoutPage() {
   const discount = appliedCoupon?.discountAmount ?? 0;
   const grandTotal = total + shipping - discount;
 
-  if (items.length === 0 && !submitted) {
+  if (items.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
         <p className="font-serif text-3xl mb-4">Giỏ hàng trống</p>
         <Button asChild><Link href="/products">Mua sắm ngay</Link></Button>
-      </div>
-    );
-  }
-
-  if (submitted) {
-    return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
-        <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-6">
-          <CheckCircle size={28} className="text-emerald-700" strokeWidth={1.5} />
-        </div>
-        <h1 className="font-serif text-3xl mb-3">Đặt hàng thành công!</h1>
-        <p className="text-muted text-sm mb-8 max-w-md">Cảm ơn bạn đã mua hàng. Chúng tôi sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.</p>
-        <Button asChild><Link href="/products">Tiếp tục mua sắm</Link></Button>
       </div>
     );
   }
@@ -116,8 +104,9 @@ export default function CheckoutPage() {
         }),
       });
       if (res.ok) {
+        const order = await res.json();
         clearCart();
-        setSubmitted(true);
+        router.push(`/checkout/success?orderId=${order.id}&paymentMethod=${form.paymentMethod}`);
       } else {
         const data = await res.json();
         setError(data.error || "Đặt hàng thất bại. Vui lòng thử lại.");

@@ -1,13 +1,22 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, Package, ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Đặt hàng thành công",
-  robots: { index: false },
+const PAYMENT_LABELS: Record<string, string> = {
+  cod: "Thanh toán khi nhận hàng",
+  bank: "Chuyển khoản ngân hàng",
+  momo: "Ví MoMo",
+  card: "Thẻ tín dụng",
 };
 
 export default function OrderSuccessPage() {
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get("orderId");
+  const paymentMethod = searchParams.get("paymentMethod") ?? "cod";
+  const paymentLabel = PAYMENT_LABELS[paymentMethod] ?? paymentMethod;
+
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center">
       <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6">
@@ -26,13 +35,19 @@ export default function OrderSuccessPage() {
           <span className="text-xs tracking-wide text-muted">THÔNG TIN ĐƠN HÀNG</span>
         </div>
         <div className="space-y-2 text-sm">
+          {orderId && (
+            <div className="flex justify-between">
+              <span className="text-muted">Mã đơn hàng</span>
+              <span className="font-medium">#{orderId}</span>
+            </div>
+          )}
           <div className="flex justify-between">
             <span className="text-muted">Trạng thái</span>
             <span className="text-green-600 font-medium">Đã tiếp nhận</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted">Phương thức</span>
-            <span>COD</span>
+            <span>{paymentLabel}</span>
           </div>
         </div>
         <p className="text-xs text-muted mt-4 pt-4 border-t border-border">
