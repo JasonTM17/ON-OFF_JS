@@ -53,18 +53,18 @@
   </tr>
   <tr>
     <td><img src="docs/screenshots/product-detail.png" alt="Product Detail" width="400"/></td>
-    <td><img src="docs/screenshots/checkout.png" alt="Checkout" width="400"/></td>
+    <td><img src="docs/screenshots/checkout.png" alt="Cart" width="400"/></td>
   </tr>
   <tr>
     <td align="center"><em>Product detail with size/color selection</em></td>
-    <td align="center"><em>Checkout with payment methods</em></td>
+    <td align="center"><em>Shopping cart with order summary</em></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="400"/></td>
+    <td><img src="docs/screenshots/admin-dashboard.png" alt="Login" width="400"/></td>
     <td><img src="docs/screenshots/mobile.png" alt="Mobile View" width="400"/></td>
   </tr>
   <tr>
-    <td align="center"><em>Admin dashboard with analytics</em></td>
+    <td align="center"><em>Authentication & account access</em></td>
     <td align="center"><em>Responsive mobile design</em></td>
   </tr>
 </table>

@@ -436,7 +436,7 @@ export function Header() {
         </div>
 
         {/* ── Main bar ── */}
-        <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-3 items-center">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
           {/* Left: mobile hamburger + desktop nav */}
           <div className="flex items-center gap-6">
             {/* Mobile hamburger */}
@@ -506,7 +506,7 @@ export function Header() {
           </div>
 
           {/* Center: Logo */}
-          <div className="flex justify-center">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <Link
               href="/"
               className="font-serif text-xl tracking-[0.15em] font-semibold text-foreground hover:text-muted transition-colors duration-200"

@@ -51,18 +51,18 @@
   </tr>
   <tr>
     <td><img src="screenshots/product-detail.png" alt="Chi tiết sản phẩm" width="400"/></td>
-    <td><img src="screenshots/checkout.png" alt="Thanh toán" width="400"/></td>
+    <td><img src="screenshots/checkout.png" alt="Giỏ hàng" width="400"/></td>
   </tr>
   <tr>
     <td align="center"><em>Chi tiết sản phẩm với chọn size/màu sắc</em></td>
-    <td align="center"><em>Thanh toán với nhiều phương thức</em></td>
+    <td align="center"><em>Giỏ hàng với tóm tắt đơn hàng</em></td>
   </tr>
   <tr>
-    <td><img src="screenshots/admin-dashboard.png" alt="Bảng điều khiển Admin" width="400"/></td>
+    <td><img src="screenshots/admin-dashboard.png" alt="Đăng nhập" width="400"/></td>
     <td><img src="screenshots/mobile.png" alt="Giao diện di động" width="400"/></td>
   </tr>
   <tr>
-    <td align="center"><em>Bảng điều khiển admin với phân tích dữ liệu</em></td>
+    <td align="center"><em>Xác thực & truy cập tài khoản</em></td>
     <td align="center"><em>Thiết kế responsive trên di động</em></td>
   </tr>
 </table>
