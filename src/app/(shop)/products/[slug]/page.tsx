@@ -4,6 +4,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { ProductCard } from "@/components/product/product-card";
 import { ProductActions } from "@/components/product/product-actions";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductTabs, StarRating } from "@/components/product/product-tabs";
@@ -310,82 +311,9 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-              {related.map((p) => {
-                const pColors = [...new Map(p.variants.map((v) => [v.color, v.colorHex])).entries()];
-                const pDiscount = p.salePrice
-                  ? Math.round((1 - p.salePrice / p.price) * 100)
-                  : null;
-                const pImages: string[] = (() => {
-                  try { return JSON.parse(p.images as unknown as string); } catch { return []; }
-                })();
-                return (
-                  <Link
-                    key={p.id}
-                    href={`/products/${p.slug}`}
-                    className="group block"
-                    aria-label={p.name}
-                  >
-                    {/* Image */}
-                    <div
-                      className="aspect-[2/3] mb-3 overflow-hidden relative bg-card rounded-[1px]"
-                    >
-                      {pImages[0] ? (
-                        <img
-                          src={pImages[0]}
-                          alt={p.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div
-                          className="absolute inset-0 transition-transform duration-500 group-hover:scale-105 bg-gradient-to-br from-accent/40 via-accent to-muted"
-                        />
-                      )}
-                      {pDiscount && (
-                        <div
-                          className="absolute top-2.5 left-2.5 text-xs font-medium px-1.5 py-0.5 bg-foreground text-background rounded-[1px]"
-                        >
-                          -{pDiscount}%
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Info */}
-                    <h3
-                      className="text-sm font-medium line-clamp-1 mb-1 transition-colors duration-200 group-hover:opacity-70 text-foreground"
-                    >
-                      {p.name}
-                    </h3>
-
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-sm font-medium text-foreground">
-                        {formatPrice(p.salePrice || p.price)}
-                      </span>
-                      {p.salePrice && (
-                        <span className="text-xs line-through text-accent">
-                          {formatPrice(p.price)}
-                        </span>
-                      )}
-                    </div>
-
-                    {pColors.length > 0 && (
-                      <div className="flex gap-1.5">
-                        {pColors.map(([name, hex]) => (
-                          <span
-                            key={name}
-                            className="w-3 h-3 rounded-full"
-                            style={{
-                              backgroundColor: hex,
-                              boxShadow: "0 0 0 1px rgba(0,0,0,0.12)",
-                            }}
-                            title={name}
-                            aria-label={name}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </Link>
-                );
-              })}
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
             </div>
           </section>
         )}
