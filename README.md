@@ -27,6 +27,39 @@
 
 ---
 
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/homepage.png" alt="Homepage" width="400"/></td>
+    <td><img src="docs/screenshots/products.png" alt="Product Catalog" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Homepage with brand showcase</em></td>
+    <td align="center"><em>Product catalog with filters</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/product-detail.png" alt="Product Detail" width="400"/></td>
+    <td><img src="docs/screenshots/checkout.png" alt="Checkout" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Product detail with size/color selection</em></td>
+    <td align="center"><em>Checkout with payment methods</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="400"/></td>
+    <td><img src="docs/screenshots/mobile.png" alt="Mobile View" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Admin dashboard with analytics</em></td>
+    <td align="center"><em>Responsive mobile design</em></td>
+  </tr>
+</table>
+
+> To generate screenshots: `npm run dev` then visit each page and capture.
+
+---
+
 ## Overview
 
 ON/OFF is a full-featured fashion e-commerce platform specializing in underwear, loungewear, and fashion accessories. Built with modern web technologies for performance, accessibility, and a premium shopping experience.
