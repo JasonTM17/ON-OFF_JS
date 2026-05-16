@@ -9,10 +9,12 @@ const chatSchema = z.object({
   sessionId: z.string().optional(),
 });
 
-const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || "http://localhost:5678/webhook/chat";
+const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
 const N8N_TIMEOUT = 5000;
 
 async function tryN8nAI(message: string, sessionId: string, userId?: string) {
+  if (!N8N_WEBHOOK_URL) return null;
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), N8N_TIMEOUT);
 

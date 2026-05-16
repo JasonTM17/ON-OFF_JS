@@ -5,6 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle, AlertCircle, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// ─── Imperative API (callable from Zustand stores, utils, etc.) ────────────────
+let _imperativeToast: ((t: Omit<Toast, "id">) => void) | null = null;
+
+/** Call from anywhere — Zustand stores, server actions, utilities. */
+export function toast(t: Omit<Toast, "id">) {
+  _imperativeToast?.(t);
+}
+
 // ─── Types ─────────────────────────────────────────────────────────────────────
 export type ToastVariant = "default" | "success" | "error" | "info";
 
@@ -104,17 +112,23 @@ function ToastItem({ t, onDismiss }: { t: Toast; onDismiss: (id: string) => void
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const toast = useCallback((t: Omit<Toast, "id">) => {
+  const addToast = useCallback((t: Omit<Toast, "id">) => {
     const id = Math.random().toString(36).slice(2);
     setToasts((prev) => [...prev, { ...t, id }]);
   }, []);
+
+  // Register imperative handler so toast() works outside React
+  useEffect(() => {
+    _imperativeToast = addToast;
+    return () => { _imperativeToast = null; };
+  }, [addToast]);
 
   const dismiss = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
   return (
-    <ToastContext.Provider value={{ toast, dismiss }}>
+    <ToastContext.Provider value={{ toast: addToast, dismiss }}>
       {children}
       <div
         className="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none"

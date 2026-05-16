@@ -12,6 +12,7 @@ export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCartStore();
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     fullName: "", phone: "", email: "",
     province: "", district: "", ward: "", street: "",
@@ -47,6 +48,7 @@ export default function CheckoutPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
     try {
       const res = await fetch("/api/orders", {
         method: "POST",
@@ -57,7 +59,6 @@ export default function CheckoutPage() {
             size: item.size,
             color: item.color,
             quantity: item.quantity,
-            price: item.price,
           })),
           address: {
             fullName: form.fullName,
@@ -76,10 +77,10 @@ export default function CheckoutPage() {
         setSubmitted(true);
       } else {
         const data = await res.json();
-        alert(data.error || "Đặt hàng thất bại. Vui lòng thử lại.");
+        setError(data.error || "Đặt hàng thất bại. Vui lòng thử lại.");
       }
     } catch {
-      alert("Lỗi kết nối. Vui lòng thử lại.");
+      setError("Lỗi kết nối. Vui lòng thử lại.");
     } finally {
       setIsLoading(false);
     }
@@ -171,6 +172,9 @@ export default function CheckoutPage() {
               "Đặt hàng"
             )}
           </Button>
+          {error && (
+            <p className="text-sm text-red-600 mt-3 text-center">{error}</p>
+          )}
         </div>
       </form>
     </div>

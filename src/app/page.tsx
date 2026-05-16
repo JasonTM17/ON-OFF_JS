@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { db } from "@/lib/db";
-import { formatPrice } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Truck, RotateCcw, Shield, Headphones, ArrowRight } from "lucide-react";
+import { Truck, RotateCcw, Gem, ShieldCheck, ArrowRight } from "lucide-react";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { HeroSlider } from "@/components/home/hero-slider";
+import { ProductCard } from "@/components/product/product-card";
 
 export const dynamic = 'force-dynamic';
 
@@ -25,19 +24,21 @@ export const metadata: Metadata = {
   },
 };
 
-async function getFeaturedProducts() {
+async function getBestsellers() {
   return db.product.findMany({
-    where: { isFeatured: true },
+    where: { isBestseller: true },
+    orderBy: { reviewCount: "desc" },
     include: { category: true, variants: true },
     take: 8,
   });
 }
 
-async function getNewProducts() {
+async function getNewArrivals() {
   return db.product.findMany({
     where: { isNew: true },
+    orderBy: { createdAt: "desc" },
     include: { category: true, variants: true },
-    take: 4,
+    take: 8,
   });
 }
 
@@ -54,9 +55,9 @@ const CATEGORY_IMAGES = [
 ];
 
 export default async function HomePage() {
-  const [products, newProducts, categories] = await Promise.all([
-    getFeaturedProducts(),
-    getNewProducts(),
+  const [bestsellers, newArrivals, categories] = await Promise.all([
+    getBestsellers(),
+    getNewArrivals(),
     getCategories(),
   ]);
 
@@ -87,19 +88,20 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ─── NEW ARRIVALS ─────────────────────────────────────────────────── */}
-      {newProducts.length > 0 && (
+      {/* ─── SẢN PHẨM BÁN CHẠY ───────────────────────────────────────────── */}
+      {bestsellers.length > 0 && (
         <section className="py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-12">
               <div>
-                <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-3">Mới nhất</p>
+                <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-3">Được chọn nhiều nhất</p>
                 <h2 className="font-serif text-4xl md:text-5xl font-light text-foreground">
-                  Hàng mới về
+                  Sản phẩm<br />
+                  <span className="italic text-muted">bán chạy</span>
                 </h2>
               </div>
               <Link
-                href="/products?sort=newest"
+                href="/products?sort=bestseller"
                 className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted hover:text-foreground transition-colors group"
               >
                 Xem tất cả
@@ -107,68 +109,16 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            {/* 4-col asymmetric grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {newProducts.map((product, i) => {
-                const images: string[] = typeof product.images === "string"
-                  ? JSON.parse(product.images)
-                  : product.images;
-                const img1 = images[0];
-                const img2 = images[1] || images[0];
-                const isLarge = i === 0;
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-12">
+              {bestsellers.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
 
-                return (
-                  <Link
-                    key={product.id}
-                    href={`/products/${product.slug}`}
-                    className={`group block ${isLarge ? "lg:col-span-2 lg:row-span-2" : ""}`}
-                  >
-                    <div className={`relative overflow-hidden bg-card ${isLarge ? "aspect-[2/3]" : "aspect-[2/3]"}`}>
-                      {/* Primary image */}
-                      {img1 && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={img1}
-                          alt={product.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
-                        />
-                      )}
-                      {/* Hover image */}
-                      {img2 && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={img2}
-                          alt=""
-                          aria-hidden="true"
-                          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 scale-105 group-hover:scale-100 transition-transform"
-                        />
-                      )}
-                      {!img1 && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/40" />
-                      )}
-
-                      {/* NEW badge */}
-                      <span className="absolute top-3 left-3 px-2 py-1 bg-foreground text-background text-[9px] tracking-[0.2em] uppercase">
-                        Mới
-                      </span>
-
-                      {/* Hover overlay */}
-                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end px-4 pb-4">
-                        <span className="text-background text-[10px] tracking-[0.2em] uppercase">Xem chi tiết</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-3">
-                      <h3 className="text-sm font-medium text-foreground line-clamp-1 group-hover:text-muted transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm text-muted mt-0.5">
-                        {formatPrice(product.salePrice ?? product.price)}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
+            <div className="mt-12 text-center md:hidden">
+              <Button asChild variant="outline" className="border-foreground text-foreground">
+                <Link href="/products?sort=bestseller">Xem tất cả</Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -233,132 +183,41 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── FEATURED PRODUCTS ────────────────────────────────────────────── */}
-      <section className="py-24 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-3">Nổi bật</p>
-              <h2 className="font-serif text-4xl md:text-5xl font-light text-foreground">
-                Được yêu thích<br />
-                <span className="italic text-muted">nhất tuần này</span>
-              </h2>
+      {/* ─── MỚI VỀ ───────────────────────────────────────────────────────── */}
+      {newArrivals.length > 0 && (
+        <section className="py-24 px-6 lg:px-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-3">Vừa cập bến</p>
+                <h2 className="font-serif text-4xl md:text-5xl font-light text-foreground">
+                  Mới về<br />
+                  <span className="italic text-muted">bộ sưu tập</span>
+                </h2>
+              </div>
+              <Link
+                href="/products?sort=newest"
+                className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted hover:text-foreground transition-colors group"
+              >
+                Xem tất cả
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
-            <Link
-              href="/products"
-              className="hidden md:flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted hover:text-foreground transition-colors group"
-            >
-              Xem tất cả
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-12">
+              {newArrivals.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            <div className="mt-12 text-center md:hidden">
+              <Button asChild variant="outline" className="border-foreground text-foreground">
+                <Link href="/products?sort=newest">Xem tất cả</Link>
+              </Button>
+            </div>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-12">
-            {products.map((product) => {
-              const colors = [
-                ...new Map(product.variants.map((v) => [v.color, v.colorHex])).entries(),
-              ];
-              const images: string[] = typeof product.images === "string"
-                ? JSON.parse(product.images)
-                : product.images;
-              const img1 = images[0];
-              const img2 = images[1] || images[0];
-
-              return (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.slug}`}
-                  className="group block"
-                >
-                  {/* Image with swap */}
-                  <div className="relative aspect-[2/3] bg-card overflow-hidden mb-4">
-                    {img1 ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={img1}
-                          alt={product.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
-                          loading="lazy"
-                        />
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={img2}
-                          alt=""
-                          aria-hidden="true"
-                          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                          loading="lazy"
-                        />
-                      </>
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/40" />
-                    )}
-
-                    {/* Badges */}
-                    <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                      {product.isNew && (
-                        <Badge variant="new">Mới</Badge>
-                      )}
-                      {product.isBestseller && !product.isNew && (
-                        <Badge variant="bestseller">Bán chạy</Badge>
-                      )}
-                    </div>
-                    {product.salePrice && (
-                      <Badge variant="sale" className="absolute top-3 right-3">
-                        -{Math.round((1 - product.salePrice / product.price) * 100)}%
-                      </Badge>
-                    )}
-
-                    {/* Quick-view bar */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-foreground/90 py-3 text-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <span className="text-background text-[10px] tracking-[0.25em] uppercase">Xem nhanh</span>
-                    </div>
-                  </div>
-
-                  {/* Info */}
-                  <h3 className="font-sans text-sm font-medium text-foreground line-clamp-1 mb-1.5 group-hover:text-muted transition-colors">
-                    {product.name}
-                  </h3>
-
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-sm text-foreground">
-                      {formatPrice(product.salePrice ?? product.price)}
-                    </span>
-                    {product.salePrice && (
-                      <span className="text-xs text-muted/60 line-through">
-                        {formatPrice(product.price)}
-                      </span>
-                    )}
-                  </div>
-
-                  {colors.length > 0 && (
-                    <div className="flex gap-1.5 mt-2.5">
-                      {colors.slice(0, 6).map(([name, hex]) => (
-                        <span
-                          key={name}
-                          className="w-3.5 h-3.5 rounded-full border border-border shadow-sm"
-                          style={{ backgroundColor: hex }}
-                          title={name}
-                        />
-                      ))}
-                      {colors.length > 6 && (
-                        <span className="text-[10px] text-muted self-center">+{colors.length - 6}</span>
-                      )}
-                    </div>
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Mobile CTA */}
-          <div className="mt-12 text-center md:hidden">
-            <Button asChild variant="outline" className="border-foreground text-foreground">
-              <Link href="/products">Xem tất cả sản phẩm</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ─── EDITORIAL BANNER ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
@@ -390,22 +249,45 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── BRAND PROMISES ───────────────────────────────────────────────── */}
-      <section className="py-16 px-6 lg:px-12 bg-background border-y border-border">
+      {/* ─── CAM KẾT CỦA ON/OFF ───────────────────────────────────────────── */}
+      <section className="py-20 px-6 lg:px-12 bg-background border-y border-border">
         <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-3">Tiêu chuẩn của chúng tôi</p>
+            <h2 className="font-serif text-3xl md:text-4xl font-light text-foreground">
+              Cam kết của <span className="italic text-muted">ON/OFF</span>
+            </h2>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
             {[
-              { icon: Truck,      title: "Miễn phí vận chuyển", desc: "Đơn hàng từ 500.000₫" },
-              { icon: RotateCcw,  title: "Đổi trả 30 ngày",     desc: "Không cần lý do" },
-              { icon: Shield,     title: "Chất liệu an toàn",   desc: "Chứng nhận Oeko-Tex" },
-              { icon: Headphones, title: "Hỗ trợ 24/7",         desc: "Chat & hotline" },
+              {
+                icon: Truck,
+                title: "Miễn phí vận chuyển",
+                desc: "Đơn hàng từ 500.000₫",
+              },
+              {
+                icon: RotateCcw,
+                title: "Đổi trả 30 ngày",
+                desc: "Không cần lý do",
+              },
+              {
+                icon: Gem,
+                title: "Chất liệu cao cấp",
+                desc: "Chứng nhận Oeko-Tex",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Thanh toán an toàn",
+                desc: "Mã hoá SSL 256-bit",
+              },
             ].map((item) => (
-              <div key={item.title} className="flex flex-col items-center text-center px-6 py-8 gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/30 flex items-center justify-center">
-                  <item.icon size={18} className="text-muted" strokeWidth={1.5} />
+              <div key={item.title} className="flex flex-col items-center text-center px-6 py-8 gap-4">
+                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                  <item.icon size={20} className="text-foreground/70" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-semibold tracking-wide text-foreground mb-1">{item.title}</h4>
+                  <h4 className="text-xs font-semibold tracking-wide text-foreground mb-1.5">{item.title}</h4>
                   <p className="text-[11px] text-muted leading-relaxed">{item.desc}</p>
                 </div>
               </div>

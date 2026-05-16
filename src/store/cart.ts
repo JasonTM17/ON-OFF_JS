@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartItem } from "@/types";
+import { toast } from "@/components/ui/toaster";
 
 interface CartStore {
   items: CartItem[];
@@ -35,6 +36,11 @@ export const useCartStore = create<CartStore>()(
         } else {
           set({ items: [...items, item] });
         }
+        toast({
+          title: "Đã thêm vào giỏ hàng",
+          description: `${item.name} — ${item.size} / ${item.color}`,
+          variant: "success",
+        });
       },
 
       removeItem: (productId, size, color) => {
