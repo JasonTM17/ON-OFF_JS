@@ -4,7 +4,6 @@
   "description": "Fashion e-commerce platform built with Next.js 15, TypeScript, Tailwind CSS 4, Prisma ORM",
   "author": "Nguyễn Sơn",
   "license": "MIT",
-  "homepage": "https://onoff.vn",
   "repository": {
     "type": "git",
     "url": "https://github.com/JasonTM17/ON-OFF_JS.git"
@@ -75,5 +74,9 @@
     "tailwindcss": "^4.1.7",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   }
 }
