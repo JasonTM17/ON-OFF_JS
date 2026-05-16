@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -49,14 +49,14 @@ export async function GET(request: Request) {
   }
 
   const [products, total] = await Promise.all([
-    prisma.product.findMany({
+    db.product.findMany({
       where,
       orderBy,
       skip: (page - 1) * limit,
       take: limit,
       include: { category: { select: { name: true, slug: true } } },
     }),
-    prisma.product.count({ where }),
+    db.product.count({ where }),
   ]);
 
   const parsed = products.map((p) => ({

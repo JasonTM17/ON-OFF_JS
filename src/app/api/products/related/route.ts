@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Thiếu tham số slug" }, { status: 400 });
   }
 
-  const product = await prisma.product.findUnique({
+  const product = await db.product.findUnique({
     where: { slug },
     include: { category: true, variants: true },
   });
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Không tìm thấy sản phẩm" }, { status: 404 });
   }
 
-  const related = await prisma.product.findMany({
+  const related = await db.product.findMany({
     where: {
       categoryId: product.categoryId,
       id: { not: product.id },

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 
@@ -22,7 +22,7 @@ export async function GET() {
     return NextResponse.json({ error: "Chưa đăng nhập" }, { status: 401 });
   }
 
-  const reviews = await prisma.review.findMany({
+  const reviews = await db.review.findMany({
     where: { userId },
     include: {
       product: {
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Dữ liệu không hợp lệ" }, { status: 400 });
   }
 
-  const existing = await prisma.review.findFirst({
+  const existing = await db.review.findFirst({
     where: { userId, productId },
   });
 
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Bạn đã đánh giá sản phẩm này" }, { status: 409 });
   }
 
-  const review = await prisma.review.create({
+  const review = await db.review.create({
     data: {
       userId,
       productId,

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db"
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 
@@ -22,7 +22,7 @@ export async function GET() {
     return NextResponse.json({ error: "Chưa đăng nhập" }, { status: 401 });
   }
 
-  const addresses = await prisma.address.findMany({
+  const addresses = await db.address.findMany({
     where: { userId },
     orderBy: { isDefault: "desc" },
   });
@@ -44,13 +44,13 @@ export async function POST(request: Request) {
   }
 
   if (isDefault) {
-    await prisma.address.updateMany({
+    await db.address.updateMany({
       where: { userId },
       data: { isDefault: false },
     });
   }
 
-  const address = await prisma.address.create({
+  const address = await db.address.create({
     data: {
       userId,
       fullName,

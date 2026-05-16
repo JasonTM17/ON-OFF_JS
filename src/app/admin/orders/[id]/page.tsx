@@ -110,7 +110,7 @@ export default async function AdminOrderDetailPage({
           </div>
           <p className="text-sm">{order.paymentMethod || "COD"}</p>
           <p className="text-xs text-muted mt-1">
-            {order.isPaid ? "Đã thanh toán" : "Chưa thanh toán"}
+            {order.status === "DELIVERED" ? "Đã thanh toán" : "Chưa thanh toán"}
           </p>
         </div>
       </div>

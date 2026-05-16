@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db"
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 
@@ -27,7 +27,7 @@ export async function DELETE(
 
   const { id } = await params;
 
-  const address = await prisma.address.findFirst({
+  const address = await db.address.findFirst({
     where: { id, userId },
   });
 
@@ -35,7 +35,7 @@ export async function DELETE(
     return NextResponse.json({ error: "Không tìm thấy địa chỉ" }, { status: 404 });
   }
 
-  await prisma.address.delete({ where: { id } });
+  await db.address.delete({ where: { id } });
 
   return NextResponse.json({ success: true });
 }
@@ -52,7 +52,7 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  const address = await prisma.address.findFirst({
+  const address = await db.address.findFirst({
     where: { id, userId },
   });
 
@@ -61,13 +61,13 @@ export async function PATCH(
   }
 
   if (body.isDefault) {
-    await prisma.address.updateMany({
+    await db.address.updateMany({
       where: { userId },
       data: { isDefault: false },
     });
   }
 
-  const updated = await prisma.address.update({
+  const updated = await db.address.update({
     where: { id },
     data: body,
   });
