@@ -393,6 +393,13 @@ export function Header() {
         )}
       </AnimatePresence>
 
+      {/* ── Announcement bar ── */}
+      <div className="bg-foreground text-background text-center py-2 px-4">
+        <p className="text-[11px] tracking-wide">
+          Miễn phí vận chuyển cho đơn hàng từ <strong>499.000đ</strong> | Đổi trả trong <strong>30 ngày</strong>
+        </p>
+      </div>
+
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-md border-b border-border">
         {/* ── Brand tabs bar ── */}
         <div className="border-b border-border/60">
